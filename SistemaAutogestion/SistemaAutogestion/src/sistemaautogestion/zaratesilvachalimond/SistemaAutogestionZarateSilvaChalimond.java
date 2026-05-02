@@ -1,5 +1,8 @@
 package sistemaautogestion.zaratesilvachalimond;
 
+import sistemaautogestion.zaratesilvachalimond.modelos.*;
+import sistemaautogestion.zaratesilvachalimond.interfaces.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,14 +179,14 @@ public class SistemaAutogestionZarateSilvaChalimond {
     
     private static void reporteGeneral(Estudiante alumno) {
         System.out.println("\n1. Reporte Situacion General (Demostracion de Polimorfismo)");
-        List<Consultable> consultables = new ArrayList<>();
-        consultables.add(alumno); // El estudiante implementa Consultable
+        List<IConsultable> consultables = new ArrayList<>();
+        consultables.add(alumno); // El estudiante implementa IConsultable
         for (InscripcionMateria ins : alumno.getMaterias()) {
-            consultables.add(ins.getMateria()); // Materia implementa Consultable
+            consultables.add(ins.getMateria()); // Materia implementa IConsultable
         }
         
         System.out.println("Iterando Consultables...");
-        for (Consultable c : consultables) {
+        for (IConsultable c : consultables) {
             System.out.println("-----------------");
             c.mostrarResumen();
         }
@@ -246,7 +249,7 @@ public class SistemaAutogestionZarateSilvaChalimond {
     }
     
     private static void reporteRanking(Estudiante alumno) {
-        System.out.println("\n4. Ranking de Materias (BONUS Interface Rankeable)");
+        System.out.println("\n4. Ranking de Materias (BONUS Interface IRankeable)");
         if (alumno.getMaterias().isEmpty()) {
             System.out.println("No hay materias inscriptas.");
             return;
@@ -264,3 +267,4 @@ public class SistemaAutogestionZarateSilvaChalimond {
         }
     }
 }
+
