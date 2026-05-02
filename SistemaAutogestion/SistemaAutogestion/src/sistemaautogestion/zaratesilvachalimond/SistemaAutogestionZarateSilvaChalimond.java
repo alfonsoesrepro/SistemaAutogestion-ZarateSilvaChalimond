@@ -34,8 +34,8 @@ public class SistemaAutogestionZarateSilvaChalimond {
 
             switch (opcion) {         
                 case 1:
-                    // TODO (Agustina): Ver perfil del estudiante (Llamar a mostrarResumen)
-                    System.out.println(">> TODO: Agustina implementar esto <<");
+                    System.out.println("\n--- PERFIL DEL ESTUDIANTE ---");
+                    alumno.mostrarResumen();
                     break;
                 case 2:
                     menuMaterias(alumno, sc);         
