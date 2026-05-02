@@ -41,8 +41,41 @@ public class SistemaAutogestionZarateSilvaChalimond {
                     menuMaterias(alumno, sc);         
                     break;
                 case 3:
-                    // TODO (Agustina): Registrar asistencia pidiendo codigo y presente/ausente
-                    System.out.println(">> TODO: Agustina implementar esto <<");
+                    System.out.println("\n--- REGISTRAR ASISTENCIA ---");
+                    System.out.print("Codigo de la materia: ");
+                    String codigoAsist = sc.nextLine();
+                    InscripcionMateria insAsist = alumno.getInscripcion(codigoAsist);
+
+                    if (insAsist == null) {
+                        System.out.println("No estas inscripto en una materia con ese codigo.");
+                        break;
+                    }
+
+                    System.out.print("Estuviste presente? (1 = Si, 0 = No): ");
+                    int presenteInt;
+                    try {
+                        presenteInt = Integer.parseInt(sc.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Opcion invalida.");
+                        break;
+                    }
+
+                    if (presenteInt != 0 && presenteInt != 1) {
+                        System.out.println("Opcion invalida. Debe ser 1 o 0.");
+                        break;
+                    }
+
+                    boolean estuvoPresente = (presenteInt == 1);
+                    insAsist.registrarAsistencia(estuvoPresente);
+
+                    double porcentaje = insAsist.getPorcentajeAsistencia();
+                    System.out.println("Asistencia actualizada: " + porcentaje + "%");
+
+                    if (porcentaje < 75) {
+                        System.out.println("ALERTA CRITICA: Tu asistencia bajo del 75%. Quedaste LIBRE.");
+                    } else if (porcentaje < 80) {
+                        System.out.println("ADVERTENCIA: Tu asistencia es menor al 80% (zona de riesgo).");
+                    }
                     break;
                 case 4:
                     System.out.println("\n--- REGISTRAR CALIFICACION ---");
