@@ -45,8 +45,38 @@ public class SistemaAutogestionZarateSilvaChalimond {
                     System.out.println(">> TODO: Agustina implementar esto <<");
                     break;
                 case 4:
-                    // TODO (Agustina): Registrar calificacion pidiendo codigo y nota
-                    System.out.println(">> TODO: Agustina implementar esto <<");
+                    System.out.println("\n--- REGISTRAR CALIFICACION ---");
+                    System.out.print("Codigo de la materia: ");
+                    String codigoNota = sc.nextLine();
+                    InscripcionMateria insNota = alumno.getInscripcion(codigoNota);
+
+                    if (insNota == null) {
+                        System.out.println("No estas inscripto en una materia con ese codigo.");
+                        break;
+                    }
+
+                    System.out.print("Ingrese la nota (0 a 10): ");
+                    double nota;
+                    try {
+                        nota = Double.parseDouble(sc.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Nota invalida. Debe ser un numero.");
+                        break;
+                    }
+
+                    int cantidadAntes = insNota.getNotas().size();
+                    insNota.agregarNota(nota);
+                    int cantidadDespues = insNota.getNotas().size();
+
+                    if (cantidadDespues > cantidadAntes) {
+                        System.out.println("Nota registrada correctamente.");
+                        System.out.println("Promedio actualizado: " + insNota.getPromedio());
+                        if (nota >= 6) {
+                            System.out.println("Aprobaste este parcial/TP.");
+                        } else {
+                            System.out.println("No aprobaste este parcial/TP.");
+                        }
+                    }
                     break;
                 case 5:
                     menuReportes(alumno);
