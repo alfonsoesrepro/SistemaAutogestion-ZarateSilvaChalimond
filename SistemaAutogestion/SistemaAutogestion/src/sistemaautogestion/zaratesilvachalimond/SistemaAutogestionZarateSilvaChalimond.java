@@ -152,8 +152,48 @@ public class SistemaAutogestionZarateSilvaChalimond {
                     listarMaterias(alumno);
                     break;
                 case 4:
-                    // TODO (Agustina): Implementar llamada a buscarMateria usando sobrecarga
-                    System.out.println(">> TODO: Agustina implementar esto <<");
+                    System.out.println("\n--- BUSCAR MATERIA ---");
+                    System.out.println("1. Por nombre (busqueda parcial)");
+                    System.out.println("2. Por cuatrimestre");
+                    System.out.print("Opcion: ");
+                    int tipoBusqueda;
+                    try {
+                        tipoBusqueda = Integer.parseInt(sc.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Opcion invalida.");
+                        break;
+                    }
+
+                    ArrayList<Materia> encontradas = new ArrayList<>();
+                    if (tipoBusqueda == 1) {
+                        System.out.print("Ingrese parte del nombre: ");
+                        String nombreBuscado = sc.nextLine();
+                        encontradas = alumno.buscarMateria(nombreBuscado);
+                    } else if (tipoBusqueda == 2) {
+                        System.out.print("Ingrese cuatrimestre (1 o 2): ");
+                        int cuatriBuscado;
+                        try {
+                            cuatriBuscado = Integer.parseInt(sc.nextLine());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Cuatrimestre invalido.");
+                            break;
+                        }
+                        encontradas = alumno.buscarMateria(cuatriBuscado);
+                    } else {
+                        System.out.println("Opcion invalida.");
+                        break;
+                    }
+
+                    if (encontradas.isEmpty()) {
+                        System.out.println("No se encontraron materias.");
+                    } else {
+                        System.out.println("Materias encontradas:");
+                        for (Materia m : encontradas) {
+                            System.out.println("---");
+                            m.mostrarResumen();
+                        }
+                        System.out.println("---");
+                    }
                     break;
                 case 0:
                     break;

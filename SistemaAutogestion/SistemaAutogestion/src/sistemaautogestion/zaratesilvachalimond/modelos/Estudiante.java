@@ -79,6 +79,29 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
         }
         return buscarMateriaRecursiva(codigoMateria, index + 1);
     }
+
+    // POO: Sobrecarga de metodos - buscarMateria por nombre parcial
+    public ArrayList<Materia> buscarMateria(String nombreParcial) {
+        ArrayList<Materia> resultado = new ArrayList<>();
+        String busqueda = nombreParcial.toLowerCase();
+        for (InscripcionMateria ins : materias) {
+            if (ins.getMateria().getNombre().toLowerCase().contains(busqueda)) {
+                resultado.add(ins.getMateria());
+            }
+        }
+        return resultado;
+    }
+
+    // POO: Sobrecarga de metodos - buscarMateria por cuatrimestre
+    public ArrayList<Materia> buscarMateria(int cuatrimestre) {
+        ArrayList<Materia> resultado = new ArrayList<>();
+        for (InscripcionMateria ins : materias) {
+            if (ins.getMateria().getCuatrimestre() == cuatrimestre) {
+                resultado.add(ins.getMateria());
+            }
+        }
+        return resultado;
+    }
     
     public ArrayList<Materia> getMateriasCriticas() {
         double porcentaje;
