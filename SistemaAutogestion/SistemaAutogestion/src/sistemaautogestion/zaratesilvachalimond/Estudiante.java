@@ -53,6 +53,10 @@ public class Estudiante extends PersonaAcademica implements Consultable {
     }
     
     public double getPromedioGeneral() {
+        if (materias.isEmpty()) {
+            return 0.0;
+        }
+
         double promedio = 0.0;
         
         for (InscripcionMateria ins : materias) {

@@ -46,11 +46,11 @@ public class InscripcionMateria implements Evaluable {
     }
     
     public void agregarNota(double nota) {
-        if (nota >= 0 && nota <= 10) {
+        if (nota >= 0 && nota <= 10 && notas.size() < 5) { //C: alfo te me olvidaste que eran solo 5 x materia, tu no te preocupe papi
             notas.add(nota);
         }
         else {
-            System.out.println("Nota invalida."); // Te falla?
+            System.out.println("Nota invalida o límite de notas (5) alcanzado."); // Te falla?
         }
     }
     
