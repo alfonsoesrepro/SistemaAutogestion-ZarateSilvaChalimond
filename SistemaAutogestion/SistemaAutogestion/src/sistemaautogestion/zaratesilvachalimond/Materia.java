@@ -55,4 +55,9 @@ public class Materia implements Consultable{
         System.out.println(cuatrimestre);
         System.out.println(anio);
     }
+    
+    // Método para POO Avanzada (Bonus)
+    public double getPorcentajeRegularidad() {
+        return 75.0;
+    }
 }

@@ -56,14 +56,26 @@ public class Estudiante extends PersonaAcademica implements Consultable {
         if (materias.isEmpty()) {
             return 0.0;
         }
-
-        double promedio = 0.0;
-        
-        for (InscripcionMateria ins : materias) {
-            promedio += ins.getPromedio();
+        return getSumaPromediosRecursivo(0) / materias.size();
+    }
+    
+    // Método recursivo para sumar promedios (Bonus)
+    private double getSumaPromediosRecursivo(int index) {
+        if (index >= materias.size()) {
+            return 0.0;
         }
-        
-        return promedio / materias.size();
+        return materias.get(index).getPromedio() + getSumaPromediosRecursivo(index + 1);
+    }
+    
+    // POO: Recursividad - Búsqueda de materia por código (Bonus)
+    public Materia buscarMateriaRecursiva(String codigoMateria, int index) {
+        if (index >= materias.size()) {
+            return null;
+        }
+        if (materias.get(index).getMateria().getCodigo().equals(codigoMateria)) {
+            return materias.get(index).getMateria();
+        }
+        return buscarMateriaRecursiva(codigoMateria, index + 1);
     }
     
     public ArrayList<Materia> getMateriasCriticas() {

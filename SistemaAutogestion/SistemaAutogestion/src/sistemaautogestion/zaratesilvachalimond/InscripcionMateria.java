@@ -3,7 +3,7 @@ package sistemaautogestion.zaratesilvachalimond;
 
 import java.util.ArrayList;
 
-public class InscripcionMateria implements Evaluable {
+public class InscripcionMateria implements Evaluable, Rankeable {
     // Atributos/Campos
     private Materia materia;
     private int totalClases;
@@ -61,12 +61,17 @@ public class InscripcionMateria implements Evaluable {
     public @Override String getCondicion() {
         double asistencia = getPorcentajeAsistencia();
         
-        if (asistencia >= 75) {
+        if (asistencia >= materia.getPorcentajeRegularidad()) {
             return "Regular";
         }
         else {
             return "Libre"; // Sos un re hdp diría el profe Edgardo
         }
+    }
+    
+    @Override
+    public double getPuntajeRanking() {
+        return (getPromedio() * 0.6) + (getPorcentajeAsistencia() * 0.4);
     }
     
     public @Override double getPromedio() {
