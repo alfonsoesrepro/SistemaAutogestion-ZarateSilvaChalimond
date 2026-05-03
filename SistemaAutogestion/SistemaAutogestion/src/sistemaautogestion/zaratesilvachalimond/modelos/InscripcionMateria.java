@@ -5,7 +5,7 @@ import sistemaautogestion.zaratesilvachalimond.interfaces.*;
 
 import java.util.ArrayList;
 
-public class InscripcionMateria implements IEvaluable, IRankeable {
+public class InscripcionMateria implements IEvaluable, Rankeable {
     // Atributos/Campos
     private Materia materia;
     private int totalClases;
@@ -38,13 +38,8 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     
     // MÃ©todos
     public void registrarAsistencia(boolean presente) {
-        for (int i = 0; i < totalClases; i++) { /* Â¿Se registran todas las 
-                                        asistencias o solo una? AYUDAME LOCO.*/
-            if (presente) {
-                clasesAsistidas++; /* Si resulta ser de a una por vez, 
-                                       solo se usa este if, sin bucle.*/
-            }
-        }
+        totalClases++;
+        if (presente) clasesAsistidas++;
     }
     
     public void agregarNota(double nota) {
@@ -57,7 +52,8 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     }
     
     public double getPorcentajeAsistencia() {
-        return (clasesAsistidas * 100) / totalClases;
+        if (totalClases == 0) return 0.0;
+        return (clasesAsistidas * 100.0) / totalClases;
     }
     
     public @Override String getCondicion() {
