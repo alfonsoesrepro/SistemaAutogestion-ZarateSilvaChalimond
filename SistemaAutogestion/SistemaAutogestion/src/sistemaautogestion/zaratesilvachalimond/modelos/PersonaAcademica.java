@@ -16,19 +16,15 @@ public abstract class PersonaAcademica { //<-- SÃ­ soy
     
     // Getters con validaciÃ³n y setters
     public String getNombre() {
-        if (nombre.equals("")) {
+        if (nombre == null || nombre.trim().isEmpty()) {
             return "Nombre desconocido.";
         }
         else {
             return nombre;
         }
-        /* VersiÃ³n compacta con operador ternario: 
-        return (nombre == "") ? "Nombre desconocido" : nombre; 
-        
-        Igual no me funcionÃ³ xd */
     }
     public String getLegajo() {
-        if (legajo == null) {
+        if (legajo == null || legajo.trim().isEmpty()) {
             return "Legajo desconocido.";
         }
         else {

@@ -110,7 +110,7 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
         for (InscripcionMateria ins : materias) {
             porcentaje = ins.getPorcentajeAsistencia();
             
-            if (porcentaje >= 75 && porcentaje <= 85) {
+            if (porcentaje >= 75 && porcentaje < 80) { // Zona de riesgo (menor a 80%)
                 materiasRiesgo.add(ins.getMateria());
             }
         }
@@ -119,7 +119,7 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
     }
     
     public @Override void mostrarResumen() {/* No puedo repetir el mismo chiste, 
-                                                                         o sÃ­?*/
+                                                                         o si­?*/
         System.out.println(getNombre());
         System.out.println(getLegajo());
         System.out.println(carrera);

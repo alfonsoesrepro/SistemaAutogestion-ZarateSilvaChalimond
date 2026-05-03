@@ -5,7 +5,7 @@ import sistemaautogestion.zaratesilvachalimond.interfaces.*;
 
 import java.util.ArrayList;
 
-public class InscripcionMateria implements IEvaluable, Rankeable {
+public class InscripcionMateria implements IEvaluable, IRankeable {
     // Atributos/Campos
     private Materia materia;
     private int totalClases;
@@ -63,7 +63,7 @@ public class InscripcionMateria implements IEvaluable, Rankeable {
             return "Regular";
         }
         else {
-            return "Libre"; // Sos un re hdp dirÃ­a el profe Edgardo
+            return "Libre"; // Sos un re hdp dirí­a el profe Edgardo
         }
     }
     

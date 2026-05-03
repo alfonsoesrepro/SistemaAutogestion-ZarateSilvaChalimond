@@ -9,7 +9,7 @@ public class Materia implements IConsultable{
     private String nombre;
     private String codigo;
     private int cuatrimestre;
-    private int anio; // TenÃ­a muchas ganas de sacar la 'i' pero me resistÃ­.
+    private int anio; // Tení­a muchas ganas de sacar la 'i' pero me resistí­.
     
     // Constructores (sobrecargas)
     public Materia() {
@@ -44,7 +44,7 @@ public class Materia implements IConsultable{
             this.cuatrimestre = cuatrimestreP;
         }
         else {
-            System.out.println("Numero de cuatrimestre invalido.");/* HacÃ© algo 
+            System.out.println("Numero de cuatrimestre invalido.");/* Hacé algo 
                                                                    bien porfa.*/
         }
     }

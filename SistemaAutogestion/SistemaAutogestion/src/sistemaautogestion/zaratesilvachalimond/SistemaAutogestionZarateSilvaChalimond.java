@@ -222,21 +222,24 @@ public class SistemaAutogestionZarateSilvaChalimond {
             return;
         }
         
-        System.out.print("Cuatrimestre (1 o 2): ");
-        int cuatri = 0;
-        try { cuatri = Integer.parseInt(sc.nextLine()); } catch(Exception e) {}
+        System.out.print("Es una materia anual? (s/n): ");
+        String esAnual = sc.nextLine();
         
-        if (cuatri != 1 && cuatri != 2) {
-            System.out.println("Error: Cuatrimestre invalido.");
-            return;
+        int cuatri = 0;
+        if (!esAnual.equalsIgnoreCase("s")) {
+            System.out.print("Cuatrimestre (1 o 2): ");
+            try { cuatri = Integer.parseInt(sc.nextLine()); } catch(Exception e) {}
+            
+            if (cuatri != 1 && cuatri != 2) {
+                System.out.println("Error: Cuatrimestre invalido.");
+                return;
+            }
         }
         
         System.out.print("Anio: ");
         int anio = 0;
         try { anio = Integer.parseInt(sc.nextLine()); } catch(Exception e) {}
         
-        System.out.print("Es una materia anual? (s/n): ");
-        String esAnual = sc.nextLine();
         Materia nuevaMateria;
         
         // BONUS: Instanciar Cuatrimestral o Anual (Polimorfismo)
