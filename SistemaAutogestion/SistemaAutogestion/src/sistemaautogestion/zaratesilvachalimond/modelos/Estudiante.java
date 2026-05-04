@@ -55,10 +55,10 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
     }
     
     public double getPromedioGeneral() {
-        if (materias.isEmpty()) {
+        if (materias == null || materias.isEmpty() || materias.size() == 0) {
             return 0.0;
         }
-        return getSumaPromediosRecursivo(0) / materias.size();
+        return getSumaPromediosRecursivo(0) / (double) materias.size();
     }
     
     // MÃ©todo recursivo para sumar promedios (Bonus)
@@ -118,11 +118,8 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
         return materiasRiesgo;
     }
     
-    public @Override void mostrarResumen() {/* No puedo repetir el mismo chiste, 
-                                                                         o si­?*/
-        System.out.println(getNombre());
-        System.out.println(getLegajo());
-        System.out.println(carrera);
-        System.out.println(anioIngreso);
+    public @Override void mostrarResumen() {
+        System.out.println("Estudiante: " + getNombre() + " [Legajo: " + getLegajo() + "]");
+        System.out.println(" -> Carrera: " + carrera + " | Ingreso: " + anioIngreso);
     }
 }

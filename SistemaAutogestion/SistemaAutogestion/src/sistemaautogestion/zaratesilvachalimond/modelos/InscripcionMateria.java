@@ -52,8 +52,10 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     }
     
     public double getPorcentajeAsistencia() {
-        if (totalClases == 0) return 0.0;
-        return (clasesAsistidas * 100.0) / totalClases;
+        if (this.totalClases <= 0) {
+            return 0.0;
+        }
+        return ((double) this.clasesAsistidas * 100.0) / (double) this.totalClases;
     }
     
     public @Override String getCondicion() {
@@ -73,7 +75,7 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     }
     
     public @Override double getPromedio() {
-        if (notas.isEmpty()) {
+        if (notas == null || notas.isEmpty() || notas.size() == 0) {
             return 0.0;
         }
         
@@ -82,7 +84,7 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
             suma = suma + nota;
         }
         
-        return suma / notas.size();
+        return suma / (double) notas.size();
     }
     
     public @Override boolean estaAprobada() {

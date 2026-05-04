@@ -51,11 +51,9 @@ public class Materia implements IConsultable{
     public void setAnio(int anioP) {this.anio = anioP;}
     
     // MÃ©todo implementado de la interface Consultable
-    public @Override void mostrarResumen() { // *sonido de lÃ¡tigo*
-        System.out.println(nombre);
-        System.out.println(codigo);
-        System.out.println(cuatrimestre);
-        System.out.println(anio);
+    public @Override void mostrarResumen() { // *sonido de látigo*
+        System.out.println("Materia: " + nombre + " [" + codigo + "]");
+        System.out.println(" -> Dictado: Cuatrimestre " + cuatrimestre + " | Anio: " + anio);
     }
     
     // MÃ©todo para POO Avanzada (Bonus)
