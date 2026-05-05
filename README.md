@@ -90,7 +90,7 @@ Los tres integrantes utilizaron IA como herramienta de asistencia durante el des
 |---|---|
 | **Florencia Agustina Zarate** | Claude Code (Anthropic) |
 | **Cesar Nicolas Chalimond** | Antigravity (IDE) y Gemini 2.5 Pro (agente) |
-| **Alfonso Silva** | ChatGPT y Gemini 2.5 Pro |
+| **Alfonso Silva** | ChatGPT y Claude (Anthropic) |
 
 ## Estado del proyecto
 
