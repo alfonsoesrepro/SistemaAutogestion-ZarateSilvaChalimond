@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Estudiante extends PersonaAcademica implements IConsultable {
     // Atributos/Campos
-    private String carrera; // Â¿Termino la carrera o la carrera termina conmigo?
+    private String carrera;
     private int anioIngreso;
     private ArrayList<InscripcionMateria> materias;
     
@@ -36,11 +36,11 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
         materias.add(ins);
     }
     
-    public void darDeBaja(String codigoMateria) { // Me doy de baja de la life.
+    public void darDeBaja(String codigoMateria) { 
         for (InscripcionMateria ins : materias) {
             if (codigoMateria.equals(ins.getMateria().getCodigo())) {
                 materias.remove(ins);
-                break; //Eso necesito ahora mismo.
+                break; 
             }
         }
     }

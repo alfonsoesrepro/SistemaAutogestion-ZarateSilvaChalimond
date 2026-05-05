@@ -42,8 +42,9 @@ public class SistemaAutogestionZarateSilvaChalimond {
                     break;
                 case 3:
                     System.out.println("\n--- REGISTRAR ASISTENCIA ---");
-                    System.out.print("Codigo de la materia: ");
+                    System.out.print("Codigo de la materia (0 para volver): ");
                     String codigoAsist = sc.nextLine();
+                    if (codigoAsist.equals("0")) break;
                     InscripcionMateria insAsist = alumno.getInscripcion(codigoAsist);
 
                     if (insAsist == null) {
@@ -79,8 +80,9 @@ public class SistemaAutogestionZarateSilvaChalimond {
                     break;
                 case 4:
                     System.out.println("\n--- REGISTRAR CALIFICACION ---");
-                    System.out.print("Codigo de la materia: ");
+                    System.out.print("Codigo de la materia (0 para volver): ");
                     String codigoNota = sc.nextLine();
+                    if (codigoNota.equals("0")) break;
                     InscripcionMateria insNota = alumno.getInscripcion(codigoNota);
 
                     if (insNota == null) {
@@ -123,7 +125,7 @@ public class SistemaAutogestionZarateSilvaChalimond {
         } while (opcion != 0); 
     }
     
-    // ===== ZONA NAO: GESTION DE MATERIAS Y REPORTES =====
+    // ===== ZONA CESAR: GESTION DE MATERIAS Y REPORTES =====
     
     private static void menuMaterias(Estudiante alumno, Scanner sc) {
         int opc = -1;
@@ -155,6 +157,7 @@ public class SistemaAutogestionZarateSilvaChalimond {
                     System.out.println("\n--- BUSCAR MATERIA ---");
                     System.out.println("1. Por nombre (busqueda parcial)");
                     System.out.println("2. Por cuatrimestre");
+                    System.out.println("0. Volver");
                     System.out.print("Opcion: ");
                     int tipoBusqueda;
                     try {
@@ -163,6 +166,8 @@ public class SistemaAutogestionZarateSilvaChalimond {
                         System.out.println("Opcion invalida.");
                         break;
                     }
+
+                    if (tipoBusqueda == 0) break;
 
                     ArrayList<Materia> encontradas = new ArrayList<>();
                     if (tipoBusqueda == 1) {
@@ -205,8 +210,9 @@ public class SistemaAutogestionZarateSilvaChalimond {
     
     private static void inscribirMateria(Estudiante alumno, Scanner sc) {
         System.out.println("\n--- INSCRIPCION ---");
-        System.out.print("Nombre de la materia: ");
+        System.out.print("Nombre de la materia (0 para volver): ");
         String nombre = sc.nextLine();
+        if (nombre.equals("0")) return;
         
         System.out.print("Codigo de la materia (3 a 10 caracteres): ");
         String codigo = sc.nextLine();
@@ -254,8 +260,9 @@ public class SistemaAutogestionZarateSilvaChalimond {
     }
     
     private static void darDeBajaMateria(Estudiante alumno, Scanner sc) {
-        System.out.print("Ingrese el codigo de la materia a dar de baja: ");
+        System.out.print("Ingrese el codigo de la materia a dar de baja (0 para volver): ");
         String codigo = sc.nextLine();
+        if (codigo.equals("0")) return;
         if (alumno.buscarMateriaRecursiva(codigo, 0) != null) {
             alumno.darDeBaja(codigo);
             System.out.println("Materia dada de baja correctamente.");

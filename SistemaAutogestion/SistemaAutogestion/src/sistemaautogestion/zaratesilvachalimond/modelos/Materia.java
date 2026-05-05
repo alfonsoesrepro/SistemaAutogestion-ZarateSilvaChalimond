@@ -9,7 +9,7 @@ public class Materia implements IConsultable{
     private String nombre;
     private String codigo;
     private int cuatrimestre;
-    private int anio; // Tení­a muchas ganas de sacar la 'i' pero me resistí­.
+    private int anio; 
     
     // Constructores (sobrecargas)
     public Materia() {
@@ -33,7 +33,7 @@ public class Materia implements IConsultable{
     public void setNombre(String nombreP) {this.nombre = nombreP;}
     public void setCodigo(String codigoP) {
         if (codigoP.equals(codigo)) {
-            System.out.println("Codigo ya existente."); // Ya lo cargaste bro.
+            System.out.println("Codigo ya existente.");
         }
         else {
             this.codigo = codigoP;
@@ -44,8 +44,7 @@ public class Materia implements IConsultable{
             this.cuatrimestre = cuatrimestreP;
         }
         else {
-            System.out.println("Numero de cuatrimestre invalido.");/* Hacé algo 
-                                                                   bien porfa.*/
+            System.out.println("Numero de cuatrimestre invalido.");
         }
     }
     public void setAnio(int anioP) {this.anio = anioP;}

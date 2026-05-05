@@ -1,5 +1,4 @@
 package sistemaautogestion.zaratesilvachalimond.modelos;
-
 import sistemaautogestion.zaratesilvachalimond.interfaces.*;
 
 public class MateriaAnual extends Materia {

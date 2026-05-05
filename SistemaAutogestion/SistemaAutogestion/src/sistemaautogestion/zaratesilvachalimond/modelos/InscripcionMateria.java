@@ -10,7 +10,7 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     private Materia materia;
     private int totalClases;
     private int clasesAsistidas;
-    private ArrayList<Double> notas; // Las notas arriba y el perreo abajo.
+    private ArrayList<Double> notas; 
     
     // Constructores (sobrecargas)
     public InscripcionMateria() {
@@ -43,11 +43,11 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     }
     
     public void agregarNota(double nota) {
-        if (nota >= 0 && nota <= 10 && notas.size() < 5) { //C: alfo te me olvidaste que eran solo 5 x materia, tu no te preocupe papi
+        if (nota >= 0 && nota <= 10 && notas.size() < 5) { 
             notas.add(nota);
         }
         else {
-            System.out.println("Nota invalida o lÃ­mite de notas (5) alcanzado."); // Te falla?
+            System.out.println("Nota invalida o lÃ­mite de notas (5) alcanzado."); 
         }
     }
     
@@ -65,7 +65,7 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
             return "Regular";
         }
         else {
-            return "Libre"; // Sos un re hdp dirí­a el profe Edgardo
+            return "Libre"; 
         }
     }
     
