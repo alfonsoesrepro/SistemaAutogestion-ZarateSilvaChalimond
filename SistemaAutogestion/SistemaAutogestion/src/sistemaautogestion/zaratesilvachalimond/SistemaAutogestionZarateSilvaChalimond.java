@@ -11,25 +11,35 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.UIManager;
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.FlatDraculaIJTheme;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 
 public class SistemaAutogestionZarateSilvaChalimond {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex) {
-            System.out.println("No se pudo cargar FlatLaf: " + ex.getMessage());
-        }
+            UIManager.setLookAndFeel(new FlatDraculaIJTheme());
 
+            Font interRegular = Font.createFont(
+                    Font.TRUETYPE_FONT,
+                    SistemaAutogestionZarateSilvaChalimond.class.getResourceAsStream("/resources/Inter-Regular.otf")
+            ).deriveFont(13f);
+
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(interRegular);
+            UIManager.put("defaultFont", interRegular);
+
+        } catch (Exception ex) {
+            System.out.println("No se pudo cargar FlatLaf o Inter: " + ex.getMessage());
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaPrincipal().setVisible(true);
             }
         });
     }
-
     // ===== ZONA CESAR: GESTION DE MATERIAS Y REPORTES =====
+
     private static void menuMaterias(Estudiante alumno, Scanner sc) {
         int opc = -1;
         do {

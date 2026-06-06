@@ -29,36 +29,163 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelSidebar = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
+        lblInicio = new javax.swing.JLabel();
+        lblReportes = new javax.swing.JLabel();
+        lblCerrar = new javax.swing.JLabel();
+        lblMiPerfil = new javax.swing.JLabel();
+        separador1 = new javax.swing.JSeparator();
+        separador2 = new javax.swing.JSeparator();
+        separador3 = new javax.swing.JSeparator();
+        separador4 = new javax.swing.JSeparator();
         panelCentral = new javax.swing.JPanel();
+        panelReportes = new javax.swing.JPanel();
+        panelMiPerfil = new javax.swing.JPanel();
+        panelInicio = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de autogestión estudiantil");
 
-        panelSidebar.setBackground(new java.awt.Color(30, 60, 90));
+        panelSidebar.setBackground(new java.awt.Color(22, 22, 26));
+        panelSidebar.setPreferredSize(new java.awt.Dimension(180, 600));
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setText("Autogestión alumnos");
+        lblTitulo.setAlignmentX(0.5F);
+
+        lblInicio.setBackground(new java.awt.Color(255, 255, 254));
+        lblInicio.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblInicio.setText("Inicio");
+        lblInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblReportes.setBackground(new java.awt.Color(255, 255, 254));
+        lblReportes.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblReportes.setText("Mi perfil");
+        lblReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblCerrar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        lblCerrar.setForeground(new java.awt.Color(114, 117, 126));
+        lblCerrar.setText("Cerrar sesión");
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblMiPerfil.setBackground(new java.awt.Color(255, 255, 254));
+        lblMiPerfil.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblMiPerfil.setText("Reportes");
+        lblMiPerfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        separador1.setBackground(new java.awt.Color(127, 90, 240));
+        separador1.setForeground(new java.awt.Color(40, 40, 40));
+
+        separador2.setBackground(new java.awt.Color(148, 161, 178));
+        separador2.setForeground(new java.awt.Color(40, 40, 40));
+
+        separador3.setForeground(new java.awt.Color(40, 40, 40));
+
+        separador4.setForeground(new java.awt.Color(40, 40, 40));
 
         javax.swing.GroupLayout panelSidebarLayout = new javax.swing.GroupLayout(panelSidebar);
         panelSidebar.setLayout(panelSidebarLayout);
         panelSidebarLayout.setHorizontalGroup(
             panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addComponent(separador1)
+            .addComponent(separador2)
+            .addComponent(separador3)
+            .addComponent(separador4, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSidebarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblCerrar)
+                .addGap(55, 55, 55))
+            .addGroup(panelSidebarLayout.createSequentialGroup()
+                .addGroup(panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSidebarLayout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(lblReportes))
+                    .addGroup(panelSidebarLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(lblMiPerfil))
+                    .addGroup(panelSidebarLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(lblInicio))
+                    .addGroup(panelSidebarLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblTitulo)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         panelSidebarLayout.setVerticalGroup(
             panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGroup(panelSidebarLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lblTitulo)
+                .addGap(49, 49, 49)
+                .addComponent(lblInicio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblReportes)
+                .addGap(16, 16, 16)
+                .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMiPerfil)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(separador3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 327, Short.MAX_VALUE)
+                .addComponent(separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCerrar)
+                .addGap(14, 14, 14))
         );
 
         getContentPane().add(panelSidebar, java.awt.BorderLayout.LINE_START);
 
-        javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
-        panelCentral.setLayout(panelCentralLayout);
-        panelCentralLayout.setHorizontalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 763, Short.MAX_VALUE)
+        panelCentral.setBackground(new java.awt.Color(36, 38, 41));
+        panelCentral.setToolTipText("");
+        panelCentral.setLayout(new java.awt.CardLayout());
+
+        panelReportes.setBackground(new java.awt.Color(22, 22, 26));
+
+        javax.swing.GroupLayout panelReportesLayout = new javax.swing.GroupLayout(panelReportes);
+        panelReportes.setLayout(panelReportesLayout);
+        panelReportesLayout.setHorizontalGroup(
+            panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
         );
-        panelCentralLayout.setVerticalGroup(
-            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+        panelReportesLayout.setVerticalGroup(
+            panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 434, Short.MAX_VALUE)
         );
+
+        panelCentral.add(panelReportes, "card4");
+
+        panelMiPerfil.setBackground(new java.awt.Color(22, 22, 26));
+
+        javax.swing.GroupLayout panelMiPerfilLayout = new javax.swing.GroupLayout(panelMiPerfil);
+        panelMiPerfil.setLayout(panelMiPerfilLayout);
+        panelMiPerfilLayout.setHorizontalGroup(
+            panelMiPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 523, Short.MAX_VALUE)
+        );
+        panelMiPerfilLayout.setVerticalGroup(
+            panelMiPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 478, Short.MAX_VALUE)
+        );
+
+        panelCentral.add(panelMiPerfil, "card3");
+
+        panelInicio.setBackground(new java.awt.Color(22, 22, 26));
+
+        javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
+        panelInicio.setLayout(panelInicioLayout);
+        panelInicioLayout.setHorizontalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 523, Short.MAX_VALUE)
+        );
+        panelInicioLayout.setVerticalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 478, Short.MAX_VALUE)
+        );
+
+        panelCentral.add(panelInicio, "card2");
 
         getContentPane().add(panelCentral, java.awt.BorderLayout.CENTER);
 
@@ -91,7 +218,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblInicio;
+    private javax.swing.JLabel lblMiPerfil;
+    private javax.swing.JLabel lblReportes;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panelCentral;
+    private javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelMiPerfil;
+    private javax.swing.JPanel panelReportes;
     private javax.swing.JPanel panelSidebar;
+    private javax.swing.JSeparator separador1;
+    private javax.swing.JSeparator separador2;
+    private javax.swing.JSeparator separador3;
+    private javax.swing.JSeparator separador4;
     // End of variables declaration//GEN-END:variables
 }
