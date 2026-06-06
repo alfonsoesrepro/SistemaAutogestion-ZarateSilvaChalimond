@@ -1,5 +1,6 @@
 package sistemaautogestion.zaratesilvachalimond;
 
+import sistemaautogestion.zaratesilvachalimond.vista.VentanaPrincipal;
 import sistemaautogestion.zaratesilvachalimond.modelos.*;
 import sistemaautogestion.zaratesilvachalimond.interfaces.*;
 

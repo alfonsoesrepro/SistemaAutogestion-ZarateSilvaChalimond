@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package sistemaautogestion.zaratesilvachalimond;
+package sistemaautogestion.zaratesilvachalimond.vista;
 
 /**
  *
@@ -28,18 +28,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        panelSidebar = new javax.swing.JPanel();
+        panelCentral = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de autogestión estudiantil");
+
+        panelSidebar.setBackground(new java.awt.Color(30, 60, 90));
+
+        javax.swing.GroupLayout panelSidebarLayout = new javax.swing.GroupLayout(panelSidebar);
+        panelSidebar.setLayout(panelSidebarLayout);
+        panelSidebarLayout.setHorizontalGroup(
+            panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        panelSidebarLayout.setVerticalGroup(
+            panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
+
+        getContentPane().add(panelSidebar, java.awt.BorderLayout.LINE_START);
+
+        javax.swing.GroupLayout panelCentralLayout = new javax.swing.GroupLayout(panelCentral);
+        panelCentral.setLayout(panelCentralLayout);
+        panelCentralLayout.setHorizontalGroup(
+            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 763, Short.MAX_VALUE)
+        );
+        panelCentralLayout.setVerticalGroup(
+            panelCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(panelCentral, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -70,5 +91,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel panelCentral;
+    private javax.swing.JPanel panelSidebar;
     // End of variables declaration//GEN-END:variables
 }
