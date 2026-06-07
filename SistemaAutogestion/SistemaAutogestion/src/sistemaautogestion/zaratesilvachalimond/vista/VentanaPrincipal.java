@@ -54,12 +54,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
         );
+
         resaltarMenu(lblInicio);
     }
 
     private void resaltarMenu(javax.swing.JLabel seleccionado) {
         java.awt.Color normal = new java.awt.Color(148, 161, 178);
-        java.awt.Color activo = new java.awt.Color(127,90,240);
+        java.awt.Color activo = new java.awt.Color(127, 90, 240);
 
         lblInicio.setForeground(normal);
         lblMisMaterias.setForeground(normal);
@@ -143,6 +144,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblPromedioStatsTag = new javax.swing.JLabel();
         lblPromedioStats = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuArchivo = new javax.swing.JMenu();
+        menuReportes = new javax.swing.JMenu();
+        menuItemCerrar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de autogestión estudiantil");
@@ -236,7 +241,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblReportes)
                 .addGap(18, 18, 18)
                 .addComponent(sep3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
                 .addComponent(sep4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCerrar)
@@ -353,7 +358,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblTituloDesaprobadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlInicio, "panelInicio");
@@ -600,7 +605,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlMisMateriasLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlMisMaterias, "panelMisMaterias");
@@ -812,12 +817,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlReportes, "panelReportes");
 
         getContentPane().add(pnlCentral, java.awt.BorderLayout.CENTER);
+
+        menuArchivo.setText("Archivo");
+        jMenuBar1.add(menuArchivo);
+
+        menuReportes.setText("Reportes");
+        jMenuBar1.add(menuReportes);
+
+        menuItemCerrar.setText("Cerrar");
+        jMenuBar1.add(menuItemCerrar);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -881,6 +897,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnNota;
     private javax.swing.JPanel cardperfil;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -916,6 +933,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTituloEstadisticas;
     private javax.swing.JLabel lblTituloSeccionGeneral;
     private javax.swing.JList<String> listaMaterias;
+    private javax.swing.JMenu menuArchivo;
+    private javax.swing.JMenu menuItemCerrar;
+    private javax.swing.JMenu menuReportes;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JPanel pnlEstadisticaAprobados;
     private javax.swing.JPanel pnlInicio;
