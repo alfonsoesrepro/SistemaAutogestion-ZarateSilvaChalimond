@@ -77,16 +77,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         scpMateriasDesaprobadas = new javax.swing.JScrollPane();
         listaMaterias = new javax.swing.JList<>();
         lblTituloDesaprobadas = new javax.swing.JLabel();
-        scpMateriasAprobadas = new javax.swing.JScrollPane();
-        listaMaterias1 = new javax.swing.JList<>();
-        lblTituloAprobadas = new javax.swing.JLabel();
         pnlMisMaterias = new javax.swing.JPanel();
         tabbedMaterias = new javax.swing.JTabbedPane();
         tabMaterias = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMaterias = new javax.swing.JTable();
         btnInscribir = new javax.swing.JButton();
-        btnDarDeBaja = new javax.swing.JButton();
+        btnDarBajaMateria = new javax.swing.JButton();
         tabAsistencia = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAsistencia = new javax.swing.JTable();
@@ -96,6 +93,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tblNotas = new javax.swing.JTable();
         btnNota = new javax.swing.JButton();
         pnlReportes = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        lblTituloSeccionGeneral = new javax.swing.JLabel();
+        lblPromedioTag = new javax.swing.JLabel();
+        lblRegularesTag = new javax.swing.JLabel();
+        lblLibresTag = new javax.swing.JLabel();
+        lblRiesgoTag = new javax.swing.JLabel();
+        lblPromedio = new javax.swing.JLabel();
+        lblRegulares = new javax.swing.JLabel();
+        lblLibres = new javax.swing.JLabel();
+        lblRiesgo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblTituloEstadisticas = new javax.swing.JLabel();
+        lblMaxTag = new javax.swing.JLabel();
+        lblMax = new javax.swing.JLabel();
+        lblMinTag = new javax.swing.JLabel();
+        lblMin = new javax.swing.JLabel();
+        lblPromedioStatsTag = new javax.swing.JLabel();
+        lblPromedioStats = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de autogestión estudiantil");
@@ -106,7 +121,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pnlSidebar.setPreferredSize(new java.awt.Dimension(180, 600));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setForeground(new java.awt.Color(114, 117, 126));
         lblTitulo.setText("Autogestión alumnos");
         lblTitulo.setAlignmentX(0.5F);
 
@@ -153,14 +168,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
-                        .addComponent(lblCerrar)
-                        .addGap(55, 55, 55))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
                         .addComponent(lblMisMaterias)
                         .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
                         .addComponent(lblReportes)
                         .addGap(61, 61, 61))))
+            .addComponent(sep3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(pnlSidebarLayout.createSequentialGroup()
                 .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlSidebarLayout.createSequentialGroup()
@@ -168,9 +181,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(lblInicio))
                     .addGroup(pnlSidebarLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(lblTitulo)))
+                        .addComponent(lblTitulo))
+                    .addGroup(pnlSidebarLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(lblCerrar)))
                 .addContainerGap(17, Short.MAX_VALUE))
-            .addComponent(sep3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         pnlSidebarLayout.setVerticalGroup(
             pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +222,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         cardperfil.setBackground(new java.awt.Color(22, 22, 26));
         cardperfil.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        cardperfil.setForeground(new java.awt.Color(127, 90, 240));
+        cardperfil.setForeground(new java.awt.Color(22, 22, 26));
 
         lblNombreTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNombreTag.setForeground(new java.awt.Color(255, 255, 254));
@@ -237,8 +252,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cardperfil.setLayout(cardperfilLayout);
         cardperfilLayout.setHorizontalGroup(
             cardperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardperfilLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+            .addGroup(cardperfilLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addGroup(cardperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cardperfilLayout.createSequentialGroup()
                         .addGroup(cardperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,31 +267,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(lblAnioTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAnio)))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
         cardperfilLayout.setVerticalGroup(
             cardperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardperfilLayout.createSequentialGroup()
-                .addGap(0, 23, Short.MAX_VALUE)
+            .addGroup(cardperfilLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addGroup(cardperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombreTag)
                     .addComponent(lblNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(cardperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCarreraTag)
                     .addComponent(lblCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(cardperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAnioTag)
                     .addComponent(lblAnio))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblTituloPerfil.setBackground(new java.awt.Color(255, 255, 254));
         lblTituloPerfil.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTituloPerfil.setForeground(new java.awt.Color(255, 255, 254));
+        lblTituloPerfil.setForeground(new java.awt.Color(114, 117, 126));
         lblTituloPerfil.setText("Mi perfil");
 
+        listaMaterias.setBackground(new java.awt.Color(22, 22, 26));
         listaMaterias.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -286,20 +302,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         lblTituloDesaprobadas.setBackground(new java.awt.Color(255, 255, 254));
         lblTituloDesaprobadas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTituloDesaprobadas.setForeground(new java.awt.Color(255, 255, 254));
+        lblTituloDesaprobadas.setForeground(new java.awt.Color(114, 117, 126));
         lblTituloDesaprobadas.setText("Materias en riesgo");
-
-        listaMaterias1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        scpMateriasAprobadas.setViewportView(listaMaterias1);
-
-        lblTituloAprobadas.setBackground(new java.awt.Color(255, 255, 254));
-        lblTituloAprobadas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTituloAprobadas.setForeground(new java.awt.Color(255, 255, 254));
-        lblTituloAprobadas.setText("Materias aprobadas");
 
         javax.swing.GroupLayout pnlInicioLayout = new javax.swing.GroupLayout(pnlInicio);
         pnlInicio.setLayout(pnlInicioLayout);
@@ -307,38 +311,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInicioLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblTituloAprobadas)
+                .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloPerfil)
                     .addGroup(pnlInicioLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblTituloDesaprobadas)
-                    .addComponent(scpMateriasAprobadas)
-                    .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTituloDesaprobadas)
+                            .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         pnlInicioLayout.setVerticalGroup(
             pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInicioLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(lblTituloPerfil)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTituloDesaprobadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTituloAprobadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scpMateriasAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlInicio, "panelInicio");
 
         pnlMisMaterias.setBackground(new java.awt.Color(22, 22, 26));
+
+        tabbedMaterias.setBackground(new java.awt.Color(22, 22, 26));
+
+        tabMaterias.setBackground(new java.awt.Color(22, 22, 26));
+        tabMaterias.setLayout(null);
 
         tblMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -353,43 +357,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblMaterias);
 
+        tabMaterias.add(jScrollPane3);
+        jScrollPane3.setBounds(15, 20, 436, 260);
+
         btnInscribir.setBackground(new java.awt.Color(127, 90, 240));
         btnInscribir.setText("+ Inscribirse a una materia");
         btnInscribir.addActionListener(this::btnInscribirActionPerformed);
+        tabMaterias.add(btnInscribir);
+        btnInscribir.setBounds(20, 290, 240, 40);
 
-        btnDarDeBaja.setText("Dar de baja una materia");
-        btnDarDeBaja.setBorderPainted(false);
-        btnDarDeBaja.addActionListener(this::btnDarDeBajaActionPerformed);
-
-        javax.swing.GroupLayout tabMateriasLayout = new javax.swing.GroupLayout(tabMaterias);
-        tabMaterias.setLayout(tabMateriasLayout);
-        tabMateriasLayout.setHorizontalGroup(
-            tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabMateriasLayout.createSequentialGroup()
-                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabMateriasLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInscribir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDarDeBaja))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabMateriasLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-        tabMateriasLayout.setVerticalGroup(
-            tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabMateriasLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDarDeBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(btnInscribir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        btnDarBajaMateria.setBackground(new java.awt.Color(22, 22, 26));
+        btnDarBajaMateria.setText("Dar de baja una materia");
+        btnDarBajaMateria.setAutoscrolls(true);
+        btnDarBajaMateria.addActionListener(this::btnDarBajaMateriaActionPerformed);
+        tabMaterias.add(btnDarBajaMateria);
+        btnDarBajaMateria.setBounds(270, 290, 180, 40);
 
         tabbedMaterias.addTab("Materias", tabMaterias);
+
+        tabAsistencia.setBackground(new java.awt.Color(22, 22, 26));
 
         tblAsistencia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -421,8 +407,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(tabAsistenciaLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAsistencia)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAsistencia))
                 .addContainerGap())
         );
         tabAsistenciaLayout.setVerticalGroup(
@@ -431,11 +417,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         tabbedMaterias.addTab("Asistencia", tabAsistencia);
+
+        tabNotas.setBackground(new java.awt.Color(22, 22, 26));
 
         tblNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -467,8 +455,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(tabNotasLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnNota)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         tabNotasLayout.setVerticalGroup(
@@ -476,9 +464,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(tabNotasLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         tabbedMaterias.addTab("Notas", tabNotas);
@@ -490,7 +478,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlMisMateriasLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         pnlMisMateriasLayout.setVerticalGroup(
             pnlMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,15 +492,206 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pnlReportes.setBackground(new java.awt.Color(22, 22, 26));
 
+        jPanel1.setBackground(new java.awt.Color(22, 22, 26));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 2, true));
+
+        lblTituloSeccionGeneral.setBackground(new java.awt.Color(114, 117, 126));
+        lblTituloSeccionGeneral.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTituloSeccionGeneral.setForeground(new java.awt.Color(114, 117, 126));
+        lblTituloSeccionGeneral.setText("Situacion general");
+
+        lblPromedioTag.setBackground(new java.awt.Color(114, 117, 126));
+        lblPromedioTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPromedioTag.setForeground(new java.awt.Color(114, 117, 126));
+        lblPromedioTag.setText("Promedio general:");
+
+        lblRegularesTag.setBackground(new java.awt.Color(114, 117, 126));
+        lblRegularesTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblRegularesTag.setForeground(new java.awt.Color(114, 117, 126));
+        lblRegularesTag.setText("Materias regulares:");
+
+        lblLibresTag.setBackground(new java.awt.Color(114, 117, 126));
+        lblLibresTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLibresTag.setForeground(new java.awt.Color(114, 117, 126));
+        lblLibresTag.setText("Materias libres:");
+
+        lblRiesgoTag.setBackground(new java.awt.Color(114, 117, 126));
+        lblRiesgoTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblRiesgoTag.setForeground(new java.awt.Color(114, 117, 126));
+        lblRiesgoTag.setText("Materias en riesgo:");
+
+        lblPromedio.setBackground(new java.awt.Color(114, 117, 126));
+        lblPromedio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPromedio.setForeground(new java.awt.Color(114, 117, 126));
+        lblPromedio.setText("0.0");
+
+        lblRegulares.setBackground(new java.awt.Color(114, 117, 126));
+        lblRegulares.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblRegulares.setForeground(new java.awt.Color(114, 117, 126));
+        lblRegulares.setText("0");
+
+        lblLibres.setBackground(new java.awt.Color(114, 117, 126));
+        lblLibres.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLibres.setForeground(new java.awt.Color(114, 117, 126));
+        lblLibres.setText("0");
+
+        lblRiesgo.setBackground(new java.awt.Color(114, 117, 126));
+        lblRiesgo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblRiesgo.setForeground(new java.awt.Color(114, 117, 126));
+        lblRiesgo.setText("0");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloSeccionGeneral)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPromedioTag)
+                            .addComponent(lblRegularesTag)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblLibresTag)
+                                .addGap(5, 5, 5)
+                                .addComponent(lblLibres))
+                            .addComponent(lblRiesgoTag))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPromedio)
+                            .addComponent(lblRegulares)
+                            .addComponent(lblRiesgo))))
+                .addContainerGap(220, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(lblTituloSeccionGeneral)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblPromedioTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblRegularesTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLibresTag)
+                            .addComponent(lblLibres))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblRiesgoTag))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblPromedio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblRegulares)
+                        .addGap(32, 32, 32)
+                        .addComponent(lblRiesgo)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(22, 22, 26));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 2, true));
+
+        lblTituloEstadisticas.setBackground(new java.awt.Color(114, 117, 126));
+        lblTituloEstadisticas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTituloEstadisticas.setForeground(new java.awt.Color(114, 117, 126));
+        lblTituloEstadisticas.setText("Estadística de aprobados");
+
+        lblMaxTag.setBackground(new java.awt.Color(114, 117, 126));
+        lblMaxTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMaxTag.setForeground(new java.awt.Color(114, 117, 126));
+        lblMaxTag.setText("Nota máxima:");
+
+        lblMax.setBackground(new java.awt.Color(114, 117, 126));
+        lblMax.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMax.setForeground(new java.awt.Color(114, 117, 126));
+        lblMax.setText("0.0");
+
+        lblMinTag.setBackground(new java.awt.Color(114, 117, 126));
+        lblMinTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMinTag.setForeground(new java.awt.Color(114, 117, 126));
+        lblMinTag.setText("Nota mínima:");
+
+        lblMin.setBackground(new java.awt.Color(114, 117, 126));
+        lblMin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblMin.setForeground(new java.awt.Color(114, 117, 126));
+        lblMin.setText("0");
+
+        lblPromedioStatsTag.setBackground(new java.awt.Color(114, 117, 126));
+        lblPromedioStatsTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPromedioStatsTag.setForeground(new java.awt.Color(114, 117, 126));
+        lblPromedioStatsTag.setText("Promedio");
+
+        lblPromedioStats.setBackground(new java.awt.Color(114, 117, 126));
+        lblPromedioStats.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPromedioStats.setForeground(new java.awt.Color(114, 117, 126));
+        lblPromedioStats.setText("0");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTituloEstadisticas)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMaxTag)
+                            .addComponent(lblMinTag)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblPromedioStatsTag)
+                                .addGap(5, 5, 5)
+                                .addComponent(lblPromedioStats)))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMax)
+                            .addComponent(lblMin))))
+                .addContainerGap(204, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(lblTituloEstadisticas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblMaxTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMinTag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPromedioStatsTag)
+                            .addComponent(lblPromedioStats))
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblMax)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMin)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
         javax.swing.GroupLayout pnlReportesLayout = new javax.swing.GroupLayout(pnlReportes);
         pnlReportes.setLayout(pnlReportesLayout);
         pnlReportesLayout.setHorizontalGroup(
             pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGroup(pnlReportesLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         pnlReportesLayout.setVerticalGroup(
             pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(pnlReportesLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlReportes, "panelReportes");
@@ -526,9 +705,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnInscribirActionPerformed
 
-    private void btnDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarDeBajaActionPerformed
+    private void btnDarBajaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaMateriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDarDeBajaActionPerformed
+    }//GEN-LAST:event_btnDarBajaMateriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -557,10 +736,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsistencia;
-    private javax.swing.JButton btnDarDeBaja;
+    private javax.swing.JButton btnDarBajaMateria;
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnNota;
     private javax.swing.JPanel cardperfil;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -570,22 +751,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblCarreraTag;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblInicio;
+    private javax.swing.JLabel lblLibres;
+    private javax.swing.JLabel lblLibresTag;
+    private javax.swing.JLabel lblMax;
+    private javax.swing.JLabel lblMaxTag;
+    private javax.swing.JLabel lblMin;
+    private javax.swing.JLabel lblMinTag;
     private javax.swing.JLabel lblMisMaterias;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreTag;
+    private javax.swing.JLabel lblPromedio;
+    private javax.swing.JLabel lblPromedioStats;
+    private javax.swing.JLabel lblPromedioStatsTag;
+    private javax.swing.JLabel lblPromedioTag;
+    private javax.swing.JLabel lblRegulares;
+    private javax.swing.JLabel lblRegularesTag;
     private javax.swing.JLabel lblReportes;
+    private javax.swing.JLabel lblRiesgo;
+    private javax.swing.JLabel lblRiesgoTag;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JLabel lblTituloAprobadas;
     private javax.swing.JLabel lblTituloDesaprobadas;
+    private javax.swing.JLabel lblTituloEstadisticas;
     private javax.swing.JLabel lblTituloPerfil;
+    private javax.swing.JLabel lblTituloSeccionGeneral;
     private javax.swing.JList<String> listaMaterias;
-    private javax.swing.JList<String> listaMaterias1;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JPanel pnlInicio;
     private javax.swing.JPanel pnlMisMaterias;
     private javax.swing.JPanel pnlReportes;
     private javax.swing.JPanel pnlSidebar;
-    private javax.swing.JScrollPane scpMateriasAprobadas;
     private javax.swing.JScrollPane scpMateriasDesaprobadas;
     private javax.swing.JSeparator sep1;
     private javax.swing.JSeparator sep2;
