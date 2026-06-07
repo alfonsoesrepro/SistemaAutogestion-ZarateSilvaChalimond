@@ -20,6 +20,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        tblAsistencia.getTableHeader().setBackground(new java.awt.Color(30, 30, 36));
+        tblAsistencia.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+        tblMaterias.getTableHeader().setBackground(new java.awt.Color(30, 30, 36));
+        tblMaterias.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+        tblNotas.getTableHeader().setBackground(new java.awt.Color(30, 30, 36));
+        tblNotas.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+
         CardLayout cl = (CardLayout) pnlCentral.getLayout();
         cl.show(pnlCentral, "inicio");
 
@@ -73,7 +80,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblCarrera = new javax.swing.JLabel();
         lblAnio = new javax.swing.JLabel();
         lblAnioTag = new javax.swing.JLabel();
-        lblTituloPerfil = new javax.swing.JLabel();
         scpMateriasDesaprobadas = new javax.swing.JScrollPane();
         listaMaterias = new javax.swing.JList<>();
         lblTituloDesaprobadas = new javax.swing.JLabel();
@@ -88,12 +94,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAsistencia = new javax.swing.JTable();
         btnAsistencia = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         tabNotas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblNotas = new javax.swing.JTable();
         btnNota = new javax.swing.JButton();
         pnlReportes = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlSituacionGeneral = new javax.swing.JPanel();
         lblTituloSeccionGeneral = new javax.swing.JLabel();
         lblPromedioTag = new javax.swing.JLabel();
         lblRegularesTag = new javax.swing.JLabel();
@@ -103,7 +112,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblRegulares = new javax.swing.JLabel();
         lblLibres = new javax.swing.JLabel();
         lblRiesgo = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        pnlEstadisticaAprobados = new javax.swing.JPanel();
         lblTituloEstadisticas = new javax.swing.JLabel();
         lblMaxTag = new javax.swing.JLabel();
         lblMax = new javax.swing.JLabel();
@@ -111,6 +120,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblMin = new javax.swing.JLabel();
         lblPromedioStatsTag = new javax.swing.JLabel();
         lblPromedioStats = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de autogestión estudiantil");
@@ -204,7 +214,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblReportes)
                 .addGap(18, 18, 18)
                 .addComponent(sep3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
                 .addComponent(sep4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCerrar)
@@ -221,7 +231,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pnlInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 2, true));
 
         cardperfil.setBackground(new java.awt.Color(22, 22, 26));
-        cardperfil.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        cardperfil.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mi perfil", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 16), new java.awt.Color(113, 78, 218))); // NOI18N
         cardperfil.setForeground(new java.awt.Color(22, 22, 26));
 
         lblNombreTag.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -287,11 +297,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblTituloPerfil.setBackground(new java.awt.Color(255, 255, 254));
-        lblTituloPerfil.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTituloPerfil.setForeground(new java.awt.Color(114, 117, 126));
-        lblTituloPerfil.setText("Mi perfil");
-
         listaMaterias.setBackground(new java.awt.Color(22, 22, 26));
         listaMaterias.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -310,29 +315,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pnlInicioLayout.setHorizontalGroup(
             pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInicioLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(17, 17, 17)
                 .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloPerfil)
-                    .addGroup(pnlInicioLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTituloDesaprobadas)
-                            .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(lblTituloDesaprobadas)
+                    .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         pnlInicioLayout.setVerticalGroup(
             pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInicioLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(lblTituloPerfil)
-                .addGap(3, 3, 3)
+                .addGap(61, 61, 61)
                 .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTituloDesaprobadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlInicio, "panelInicio");
@@ -344,6 +343,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tabMaterias.setBackground(new java.awt.Color(22, 22, 26));
         tabMaterias.setLayout(null);
 
+        tblMaterias.setBackground(new java.awt.Color(22, 22, 26));
         tblMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -376,7 +376,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tabbedMaterias.addTab("Materias", tabMaterias);
 
         tabAsistencia.setBackground(new java.awt.Color(22, 22, 26));
+        tabAsistencia.setLayout(null);
 
+        tblAsistencia.setBackground(new java.awt.Color(22, 22, 26));
         tblAsistencia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -396,35 +398,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblAsistencia.setSelectionBackground(new java.awt.Color(22, 22, 26));
         jScrollPane1.setViewportView(tblAsistencia);
 
-        btnAsistencia.setText("+ Registrar asistencia");
+        tabAsistencia.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 80, 410, 266);
 
-        javax.swing.GroupLayout tabAsistenciaLayout = new javax.swing.GroupLayout(tabAsistencia);
-        tabAsistencia.setLayout(tabAsistenciaLayout);
-        tabAsistenciaLayout.setHorizontalGroup(
-            tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabAsistenciaLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAsistencia))
-                .addContainerGap())
-        );
-        tabAsistenciaLayout.setVerticalGroup(
-            tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabAsistenciaLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        btnAsistencia.setText("+ Registrar asistencia");
+        tabAsistencia.add(btnAsistencia);
+        btnAsistencia.setBounds(300, 350, 141, 36);
+
+        txtBuscar.setText("Ingrese nombre o código");
+        tabAsistencia.add(txtBuscar);
+        txtBuscar.setBounds(10, 30, 210, 40);
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
+        tabAsistencia.add(btnBuscar);
+        btnBuscar.setBounds(230, 30, 90, 40);
+
+        jLabel2.setText("Ingresar por materia");
+        tabAsistencia.add(jLabel2);
+        jLabel2.setBounds(10, 10, 110, 16);
 
         tabbedMaterias.addTab("Asistencia", tabAsistencia);
 
         tabNotas.setBackground(new java.awt.Color(22, 22, 26));
 
+        tblNotas.setBackground(new java.awt.Color(22, 22, 26));
         tblNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -466,7 +467,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         tabbedMaterias.addTab("Notas", tabNotas);
@@ -484,20 +485,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             pnlMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMisMateriasLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlMisMaterias, "panelMisMaterias");
 
         pnlReportes.setBackground(new java.awt.Color(22, 22, 26));
 
-        jPanel1.setBackground(new java.awt.Color(22, 22, 26));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 2, true));
+        pnlSituacionGeneral.setBackground(new java.awt.Color(22, 22, 26));
+        pnlSituacionGeneral.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 1, true));
 
         lblTituloSeccionGeneral.setBackground(new java.awt.Color(114, 117, 126));
         lblTituloSeccionGeneral.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTituloSeccionGeneral.setForeground(new java.awt.Color(114, 117, 126));
+        lblTituloSeccionGeneral.setForeground(new java.awt.Color(242, 242, 242));
         lblTituloSeccionGeneral.setText("Situacion general");
 
         lblPromedioTag.setBackground(new java.awt.Color(114, 117, 126));
@@ -540,48 +541,48 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblRiesgo.setForeground(new java.awt.Color(114, 117, 126));
         lblRiesgo.setText("0");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlSituacionGeneralLayout = new javax.swing.GroupLayout(pnlSituacionGeneral);
+        pnlSituacionGeneral.setLayout(pnlSituacionGeneralLayout);
+        pnlSituacionGeneralLayout.setHorizontalGroup(
+            pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSituacionGeneralLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloSeccionGeneral)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlSituacionGeneralLayout.createSequentialGroup()
+                        .addGroup(pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPromedioTag)
                             .addComponent(lblRegularesTag)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(pnlSituacionGeneralLayout.createSequentialGroup()
                                 .addComponent(lblLibresTag)
                                 .addGap(5, 5, 5)
                                 .addComponent(lblLibres))
                             .addComponent(lblRiesgoTag))
                         .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPromedio)
                             .addComponent(lblRegulares)
                             .addComponent(lblRiesgo))))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlSituacionGeneralLayout.setVerticalGroup(
+            pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSituacionGeneralLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(lblTituloSeccionGeneral)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlSituacionGeneralLayout.createSequentialGroup()
                         .addComponent(lblPromedioTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblRegularesTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblLibresTag)
                             .addComponent(lblLibres))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblRiesgoTag))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(pnlSituacionGeneralLayout.createSequentialGroup()
                         .addComponent(lblPromedio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblRegulares)
@@ -590,12 +591,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(22, 22, 26));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 2, true));
+        pnlEstadisticaAprobados.setBackground(new java.awt.Color(22, 22, 26));
+        pnlEstadisticaAprobados.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 1, true));
 
-        lblTituloEstadisticas.setBackground(new java.awt.Color(114, 117, 126));
+        lblTituloEstadisticas.setBackground(new java.awt.Color(22, 22, 26));
         lblTituloEstadisticas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        lblTituloEstadisticas.setForeground(new java.awt.Color(114, 117, 126));
+        lblTituloEstadisticas.setForeground(new java.awt.Color(242, 242, 242));
         lblTituloEstadisticas.setText("Estadística de aprobados");
 
         lblMaxTag.setBackground(new java.awt.Color(114, 117, 126));
@@ -628,50 +629,53 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblPromedioStats.setForeground(new java.awt.Color(114, 117, 126));
         lblPromedioStats.setText("0");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlEstadisticaAprobadosLayout = new javax.swing.GroupLayout(pnlEstadisticaAprobados);
+        pnlEstadisticaAprobados.setLayout(pnlEstadisticaAprobadosLayout);
+        pnlEstadisticaAprobadosLayout.setHorizontalGroup(
+            pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTituloEstadisticas)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
+                        .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMaxTag)
                             .addComponent(lblMinTag)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
                                 .addComponent(lblPromedioStatsTag)
                                 .addGap(5, 5, 5)
                                 .addComponent(lblPromedioStats)))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(5, 5, 5)
+                        .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMax)
                             .addComponent(lblMin))))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlEstadisticaAprobadosLayout.setVerticalGroup(
+            pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(lblTituloEstadisticas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
                         .addComponent(lblMaxTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMinTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPromedioStatsTag)
                             .addComponent(lblPromedioStats))
                         .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
                         .addComponent(lblMax)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMin)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel1.setText("Mis reportes");
 
         javax.swing.GroupLayout pnlReportesLayout = new javax.swing.GroupLayout(pnlReportes);
         pnlReportes.setLayout(pnlReportesLayout);
@@ -680,18 +684,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlReportesLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addGroup(pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         pnlReportesLayout.setVerticalGroup(
             pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReportesLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlReportes, "panelReportes");
@@ -708,6 +716,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnDarBajaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaMateriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDarBajaMateriaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -736,12 +748,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsistencia;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnDarBajaMateria;
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnNota;
     private javax.swing.JPanel cardperfil;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -772,14 +785,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTituloDesaprobadas;
     private javax.swing.JLabel lblTituloEstadisticas;
-    private javax.swing.JLabel lblTituloPerfil;
     private javax.swing.JLabel lblTituloSeccionGeneral;
     private javax.swing.JList<String> listaMaterias;
     private javax.swing.JPanel pnlCentral;
+    private javax.swing.JPanel pnlEstadisticaAprobados;
     private javax.swing.JPanel pnlInicio;
     private javax.swing.JPanel pnlMisMaterias;
     private javax.swing.JPanel pnlReportes;
     private javax.swing.JPanel pnlSidebar;
+    private javax.swing.JPanel pnlSituacionGeneral;
     private javax.swing.JScrollPane scpMateriasDesaprobadas;
     private javax.swing.JSeparator sep1;
     private javax.swing.JSeparator sep2;
@@ -792,5 +806,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tblAsistencia;
     private javax.swing.JTable tblMaterias;
     private javax.swing.JTable tblNotas;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
