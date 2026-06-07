@@ -20,22 +20,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        CardLayout cl = (CardLayout) panelCentral.getLayout();
-        cl.show(panelCentral, "inicio");
+        CardLayout cl = (CardLayout) pnlCentral.getLayout();
+        cl.show(pnlCentral, "inicio");
 
         lblInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ((CardLayout) panelCentral.getLayout()).show(panelCentral, "panelInicio");
+                ((CardLayout) pnlCentral.getLayout()).show(pnlCentral, "panelInicio");
             }
         });
         lblMisMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ((CardLayout) panelCentral.getLayout()).show(panelCentral, "panelMisMaterias");
+                ((CardLayout) pnlCentral.getLayout()).show(pnlCentral, "panelMisMaterias");
             }
         });
         lblReportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ((CardLayout) panelCentral.getLayout()).show(panelCentral, "panelReportes");
+                ((CardLayout) pnlCentral.getLayout()).show(pnlCentral, "panelReportes");
             }
         });
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -54,18 +54,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelSidebar = new javax.swing.JPanel();
+        pnlSidebar = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         lblInicio = new javax.swing.JLabel();
-        separador1 = new javax.swing.JSeparator();
+        sep1 = new javax.swing.JSeparator();
         lblMisMaterias = new javax.swing.JLabel();
-        separador2 = new javax.swing.JSeparator();
+        sep2 = new javax.swing.JSeparator();
         lblReportes = new javax.swing.JLabel();
-        separador3 = new javax.swing.JSeparator();
-        separador4 = new javax.swing.JSeparator();
+        sep3 = new javax.swing.JSeparator();
+        sep4 = new javax.swing.JSeparator();
         lblCerrar = new javax.swing.JLabel();
-        panelCentral = new javax.swing.JPanel();
-        panelInicio = new javax.swing.JPanel();
+        pnlCentral = new javax.swing.JPanel();
+        pnlInicio = new javax.swing.JPanel();
         cardperfil = new javax.swing.JPanel();
         lblNombreTag = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -74,22 +74,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblAnio = new javax.swing.JLabel();
         lblAnioTag = new javax.swing.JLabel();
         lblTituloPerfil = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scpMateriasDesaprobadas = new javax.swing.JScrollPane();
         listaMaterias = new javax.swing.JList<>();
         lblTituloDesaprobadas = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        scpMateriasAprobadas = new javax.swing.JScrollPane();
         listaMaterias1 = new javax.swing.JList<>();
         lblTituloAprobadas = new javax.swing.JLabel();
-        panelMisMaterias = new javax.swing.JPanel();
-        panelReportes = new javax.swing.JPanel();
+        pnlMisMaterias = new javax.swing.JPanel();
+        tabbedMaterias = new javax.swing.JTabbedPane();
+        tabMaterias = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblMaterias = new javax.swing.JTable();
+        btnInscribir = new javax.swing.JButton();
+        btnDarDeBaja = new javax.swing.JButton();
+        tabAsistencia = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAsistencia = new javax.swing.JTable();
+        btnAsistencia = new javax.swing.JButton();
+        tabNotas = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblNotas = new javax.swing.JTable();
+        btnNota = new javax.swing.JButton();
+        pnlReportes = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de autogestión estudiantil");
 
-        panelSidebar.setBackground(new java.awt.Color(22, 22, 26));
-        panelSidebar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelSidebar.setForeground(new java.awt.Color(40, 40, 40));
-        panelSidebar.setPreferredSize(new java.awt.Dimension(180, 600));
+        pnlSidebar.setBackground(new java.awt.Color(22, 22, 26));
+        pnlSidebar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlSidebar.setForeground(new java.awt.Color(40, 40, 40));
+        pnlSidebar.setPreferredSize(new java.awt.Dimension(180, 600));
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,95 +115,95 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblInicio.setText("Inicio");
         lblInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        separador1.setBackground(new java.awt.Color(127, 90, 240));
-        separador1.setForeground(new java.awt.Color(40, 40, 40));
-        separador1.setToolTipText("");
+        sep1.setBackground(new java.awt.Color(127, 90, 240));
+        sep1.setForeground(new java.awt.Color(40, 40, 40));
+        sep1.setToolTipText("");
 
         lblMisMaterias.setBackground(new java.awt.Color(255, 255, 254));
         lblMisMaterias.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         lblMisMaterias.setText("Mis materias");
         lblMisMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        separador2.setBackground(new java.awt.Color(148, 161, 178));
-        separador2.setForeground(new java.awt.Color(40, 40, 40));
+        sep2.setBackground(new java.awt.Color(148, 161, 178));
+        sep2.setForeground(new java.awt.Color(40, 40, 40));
 
         lblReportes.setBackground(new java.awt.Color(255, 255, 254));
         lblReportes.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         lblReportes.setText("Reportes");
         lblReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        separador3.setBackground(new java.awt.Color(148, 161, 178));
-        separador3.setForeground(new java.awt.Color(40, 40, 40));
+        sep3.setBackground(new java.awt.Color(148, 161, 178));
+        sep3.setForeground(new java.awt.Color(40, 40, 40));
 
-        separador4.setForeground(new java.awt.Color(40, 40, 40));
+        sep4.setForeground(new java.awt.Color(40, 40, 40));
 
         lblCerrar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblCerrar.setForeground(new java.awt.Color(114, 117, 126));
         lblCerrar.setText("Cerrar sesión");
         lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout panelSidebarLayout = new javax.swing.GroupLayout(panelSidebar);
-        panelSidebar.setLayout(panelSidebarLayout);
-        panelSidebarLayout.setHorizontalGroup(
-            panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(separador1)
-            .addComponent(separador2)
-            .addComponent(separador4, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSidebarLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlSidebarLayout = new javax.swing.GroupLayout(pnlSidebar);
+        pnlSidebar.setLayout(pnlSidebarLayout);
+        pnlSidebarLayout.setHorizontalGroup(
+            pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sep1)
+            .addComponent(sep2)
+            .addComponent(sep4, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSidebarLayout.createSequentialGroup()
+                .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
                         .addComponent(lblCerrar)
                         .addGap(55, 55, 55))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSidebarLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
                         .addComponent(lblMisMaterias)
                         .addGap(48, 48, 48))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSidebarLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSidebarLayout.createSequentialGroup()
                         .addComponent(lblReportes)
                         .addGap(61, 61, 61))))
-            .addGroup(panelSidebarLayout.createSequentialGroup()
-                .addGroup(panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelSidebarLayout.createSequentialGroup()
+            .addGroup(pnlSidebarLayout.createSequentialGroup()
+                .addGroup(pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlSidebarLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(lblInicio))
-                    .addGroup(panelSidebarLayout.createSequentialGroup()
+                    .addGroup(pnlSidebarLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(lblTitulo)))
                 .addContainerGap(17, Short.MAX_VALUE))
-            .addComponent(separador3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(sep3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        panelSidebarLayout.setVerticalGroup(
-            panelSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSidebarLayout.createSequentialGroup()
+        pnlSidebarLayout.setVerticalGroup(
+            pnlSidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSidebarLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblTitulo)
                 .addGap(49, 49, 49)
                 .addComponent(lblInicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(separador1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sep1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMisMaterias)
                 .addGap(16, 16, 16)
-                .addComponent(separador2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sep2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblReportes)
                 .addGap(18, 18, 18)
-                .addComponent(separador3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sep3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
-                .addComponent(separador4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sep4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCerrar)
                 .addGap(14, 14, 14))
         );
 
-        getContentPane().add(panelSidebar, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(pnlSidebar, java.awt.BorderLayout.LINE_START);
 
-        panelCentral.setBackground(new java.awt.Color(36, 38, 41));
-        panelCentral.setToolTipText("");
-        panelCentral.setLayout(new java.awt.CardLayout());
+        pnlCentral.setBackground(new java.awt.Color(36, 38, 41));
+        pnlCentral.setToolTipText("");
+        pnlCentral.setLayout(new java.awt.CardLayout());
 
-        panelInicio.setBackground(new java.awt.Color(22, 22, 26));
-        panelInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 2, true));
+        pnlInicio.setBackground(new java.awt.Color(22, 22, 26));
+        pnlInicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(127, 90, 240), 2, true));
 
         cardperfil.setBackground(new java.awt.Color(22, 22, 26));
         cardperfil.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -268,7 +282,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(listaMaterias);
+        scpMateriasDesaprobadas.setViewportView(listaMaterias);
 
         lblTituloDesaprobadas.setBackground(new java.awt.Color(255, 255, 254));
         lblTituloDesaprobadas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -280,84 +294,241 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(listaMaterias1);
+        scpMateriasAprobadas.setViewportView(listaMaterias1);
 
         lblTituloAprobadas.setBackground(new java.awt.Color(255, 255, 254));
         lblTituloAprobadas.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         lblTituloAprobadas.setForeground(new java.awt.Color(255, 255, 254));
         lblTituloAprobadas.setText("Materias aprobadas");
 
-        javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
-        panelInicio.setLayout(panelInicioLayout);
-        panelInicioLayout.setHorizontalGroup(
-            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
-                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        javax.swing.GroupLayout pnlInicioLayout = new javax.swing.GroupLayout(pnlInicio);
+        pnlInicio.setLayout(pnlInicioLayout);
+        pnlInicioLayout.setHorizontalGroup(
+            pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInicioLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblTituloAprobadas)
                     .addComponent(lblTituloPerfil)
-                    .addGroup(panelInicioLayout.createSequentialGroup()
+                    .addGroup(pnlInicioLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblTituloDesaprobadas)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1))
-                .addGap(45, 45, 45))
+                    .addComponent(scpMateriasAprobadas)
+                    .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
-        panelInicioLayout.setVerticalGroup(
-            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInicioLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
+        pnlInicioLayout.setVerticalGroup(
+            pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlInicioLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addComponent(lblTituloPerfil)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTituloDesaprobadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloAprobadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addComponent(scpMateriasAprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
-        panelCentral.add(panelInicio, "panelInicio");
+        pnlCentral.add(pnlInicio, "panelInicio");
 
-        panelMisMaterias.setBackground(new java.awt.Color(22, 22, 26));
+        pnlMisMaterias.setBackground(new java.awt.Color(22, 22, 26));
 
-        javax.swing.GroupLayout panelMisMateriasLayout = new javax.swing.GroupLayout(panelMisMaterias);
-        panelMisMaterias.setLayout(panelMisMateriasLayout);
-        panelMisMateriasLayout.setHorizontalGroup(
-            panelMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        tblMaterias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Condicion"
+            }
+        ));
+        jScrollPane3.setViewportView(tblMaterias);
+
+        btnInscribir.setBackground(new java.awt.Color(127, 90, 240));
+        btnInscribir.setText("+ Inscribirse a una materia");
+        btnInscribir.addActionListener(this::btnInscribirActionPerformed);
+
+        btnDarDeBaja.setText("Dar de baja una materia");
+        btnDarDeBaja.setBorderPainted(false);
+        btnDarDeBaja.addActionListener(this::btnDarDeBajaActionPerformed);
+
+        javax.swing.GroupLayout tabMateriasLayout = new javax.swing.GroupLayout(tabMaterias);
+        tabMaterias.setLayout(tabMateriasLayout);
+        tabMateriasLayout.setHorizontalGroup(
+            tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabMateriasLayout.createSequentialGroup()
+                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabMateriasLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnInscribir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDarDeBaja))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabMateriasLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        tabMateriasLayout.setVerticalGroup(
+            tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabMateriasLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDarDeBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(btnInscribir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        tabbedMaterias.addTab("Materias", tabMaterias);
+
+        tblAsistencia.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Asistencia %"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblAsistencia);
+
+        btnAsistencia.setText("+ Registrar asistencia");
+
+        javax.swing.GroupLayout tabAsistenciaLayout = new javax.swing.GroupLayout(tabAsistencia);
+        tabAsistencia.setLayout(tabAsistenciaLayout);
+        tabAsistenciaLayout.setHorizontalGroup(
+            tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabAsistenciaLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAsistencia)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        tabAsistenciaLayout.setVerticalGroup(
+            tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabAsistenciaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        tabbedMaterias.addTab("Asistencia", tabAsistencia);
+
+        tblNotas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Promedio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblNotas);
+
+        btnNota.setText("+ Registrar nota");
+
+        javax.swing.GroupLayout tabNotasLayout = new javax.swing.GroupLayout(tabNotas);
+        tabNotas.setLayout(tabNotasLayout);
+        tabNotasLayout.setHorizontalGroup(
+            tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabNotasLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnNota)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        tabNotasLayout.setVerticalGroup(
+            tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabNotasLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
+        tabbedMaterias.addTab("Notas", tabNotas);
+
+        javax.swing.GroupLayout pnlMisMateriasLayout = new javax.swing.GroupLayout(pnlMisMaterias);
+        pnlMisMaterias.setLayout(pnlMisMateriasLayout);
+        pnlMisMateriasLayout.setHorizontalGroup(
+            pnlMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMisMateriasLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        pnlMisMateriasLayout.setVerticalGroup(
+            pnlMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMisMateriasLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(172, Short.MAX_VALUE))
+        );
+
+        pnlCentral.add(pnlMisMaterias, "panelMisMaterias");
+
+        pnlReportes.setBackground(new java.awt.Color(22, 22, 26));
+
+        javax.swing.GroupLayout pnlReportesLayout = new javax.swing.GroupLayout(pnlReportes);
+        pnlReportes.setLayout(pnlReportesLayout);
+        pnlReportesLayout.setHorizontalGroup(
+            pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 533, Short.MAX_VALUE)
         );
-        panelMisMateriasLayout.setVerticalGroup(
-            panelMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlReportesLayout.setVerticalGroup(
+            pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
         );
 
-        panelCentral.add(panelMisMaterias, "panelMisMaterias");
+        pnlCentral.add(pnlReportes, "panelReportes");
 
-        panelReportes.setBackground(new java.awt.Color(22, 22, 26));
-
-        javax.swing.GroupLayout panelReportesLayout = new javax.swing.GroupLayout(panelReportes);
-        panelReportes.setLayout(panelReportesLayout);
-        panelReportesLayout.setHorizontalGroup(
-            panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
-        );
-        panelReportesLayout.setVerticalGroup(
-            panelReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-
-        panelCentral.add(panelReportes, "panelReportes");
-
-        getContentPane().add(panelCentral, java.awt.BorderLayout.CENTER);
+        getContentPane().add(pnlCentral, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInscribirActionPerformed
+
+    private void btnDarDeBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarDeBajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDarDeBajaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,9 +556,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAsistencia;
+    private javax.swing.JButton btnDarDeBaja;
+    private javax.swing.JButton btnInscribir;
+    private javax.swing.JButton btnNota;
     private javax.swing.JPanel cardperfil;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblAnio;
     private javax.swing.JLabel lblAnioTag;
     private javax.swing.JLabel lblCarrera;
@@ -404,14 +580,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTituloPerfil;
     private javax.swing.JList<String> listaMaterias;
     private javax.swing.JList<String> listaMaterias1;
-    private javax.swing.JPanel panelCentral;
-    private javax.swing.JPanel panelInicio;
-    private javax.swing.JPanel panelMisMaterias;
-    private javax.swing.JPanel panelReportes;
-    private javax.swing.JPanel panelSidebar;
-    private javax.swing.JSeparator separador1;
-    private javax.swing.JSeparator separador2;
-    private javax.swing.JSeparator separador3;
-    private javax.swing.JSeparator separador4;
+    private javax.swing.JPanel pnlCentral;
+    private javax.swing.JPanel pnlInicio;
+    private javax.swing.JPanel pnlMisMaterias;
+    private javax.swing.JPanel pnlReportes;
+    private javax.swing.JPanel pnlSidebar;
+    private javax.swing.JScrollPane scpMateriasAprobadas;
+    private javax.swing.JScrollPane scpMateriasDesaprobadas;
+    private javax.swing.JSeparator sep1;
+    private javax.swing.JSeparator sep2;
+    private javax.swing.JSeparator sep3;
+    private javax.swing.JSeparator sep4;
+    private javax.swing.JPanel tabAsistencia;
+    private javax.swing.JPanel tabMaterias;
+    private javax.swing.JPanel tabNotas;
+    private javax.swing.JTabbedPane tabbedMaterias;
+    private javax.swing.JTable tblAsistencia;
+    private javax.swing.JTable tblMaterias;
+    private javax.swing.JTable tblNotas;
     // End of variables declaration//GEN-END:variables
 }
