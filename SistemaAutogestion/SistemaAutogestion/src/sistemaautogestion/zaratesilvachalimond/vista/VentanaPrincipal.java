@@ -33,23 +33,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ((CardLayout) pnlCentral.getLayout()).show(pnlCentral, "panelInicio");
+                resaltarMenu(lblInicio);
             }
         });
         lblMisMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ((CardLayout) pnlCentral.getLayout()).show(pnlCentral, "panelMisMaterias");
+                resaltarMenu(lblMisMaterias);
             }
         });
         lblReportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ((CardLayout) pnlCentral.getLayout()).show(pnlCentral, "panelReportes");
+                resaltarMenu(lblReportes);
             }
         });
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 System.exit(0);
             }
-        });
+        }
+        );
+        resaltarMenu(lblInicio);
+    }
+
+    private void resaltarMenu(javax.swing.JLabel seleccionado) {
+        java.awt.Color normal = new java.awt.Color(148, 161, 178);
+        java.awt.Color activo = new java.awt.Color(127,90,240);
+
+        lblInicio.setForeground(normal);
+        lblMisMaterias.setForeground(normal);
+        lblReportes.setForeground(normal);
+
+        seleccionado.setForeground(activo);
     }
 
     /**
@@ -90,17 +106,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tblMaterias = new javax.swing.JTable();
         btnInscribir = new javax.swing.JButton();
         btnDarBajaMateria = new javax.swing.JButton();
+        lblIngresarPorMateria1 = new javax.swing.JLabel();
+        txtBuscar1 = new javax.swing.JTextField();
+        btnBuscar1 = new javax.swing.JButton();
         tabAsistencia = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAsistencia = new javax.swing.JTable();
         btnAsistencia = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblIngresarPorMateria2 = new javax.swing.JLabel();
+        txtBuscar2 = new javax.swing.JTextField();
+        btnBuscar2 = new javax.swing.JButton();
         tabNotas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblNotas = new javax.swing.JTable();
         btnNota = new javax.swing.JButton();
+        lblIngresarPorMateria3 = new javax.swing.JLabel();
+        btnBuscar3 = new javax.swing.JButton();
+        txtBuscar3 = new javax.swing.JTextField();
         pnlReportes = new javax.swing.JPanel();
         pnlSituacionGeneral = new javax.swing.JPanel();
         lblTituloSeccionGeneral = new javax.swing.JLabel();
@@ -214,7 +236,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblReportes)
                 .addGap(18, 18, 18)
                 .addComponent(sep3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
                 .addComponent(sep4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCerrar)
@@ -341,7 +363,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tabbedMaterias.setBackground(new java.awt.Color(22, 22, 26));
 
         tabMaterias.setBackground(new java.awt.Color(22, 22, 26));
-        tabMaterias.setLayout(null);
 
         tblMaterias.setBackground(new java.awt.Color(22, 22, 26));
         tblMaterias.setModel(new javax.swing.table.DefaultTableModel(
@@ -357,26 +378,66 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblMaterias);
 
-        tabMaterias.add(jScrollPane3);
-        jScrollPane3.setBounds(15, 20, 436, 260);
-
         btnInscribir.setBackground(new java.awt.Color(127, 90, 240));
         btnInscribir.setText("+ Inscribirse a una materia");
         btnInscribir.addActionListener(this::btnInscribirActionPerformed);
-        tabMaterias.add(btnInscribir);
-        btnInscribir.setBounds(20, 290, 240, 40);
 
         btnDarBajaMateria.setBackground(new java.awt.Color(22, 22, 26));
         btnDarBajaMateria.setText("Dar de baja una materia");
         btnDarBajaMateria.setAutoscrolls(true);
         btnDarBajaMateria.addActionListener(this::btnDarBajaMateriaActionPerformed);
-        tabMaterias.add(btnDarBajaMateria);
-        btnDarBajaMateria.setBounds(270, 290, 180, 40);
+
+        lblIngresarPorMateria1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblIngresarPorMateria1.setText("Ingresar por materia");
+
+        txtBuscar1.setText("Ingrese nombre o código");
+        txtBuscar1.addActionListener(this::txtBuscar1ActionPerformed);
+
+        btnBuscar1.setText("Buscar");
+        btnBuscar1.addActionListener(this::btnBuscar1ActionPerformed);
+
+        javax.swing.GroupLayout tabMateriasLayout = new javax.swing.GroupLayout(tabMaterias);
+        tabMaterias.setLayout(tabMateriasLayout);
+        tabMateriasLayout.setHorizontalGroup(
+            tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabMateriasLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lblIngresarPorMateria1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(tabMateriasLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(tabMateriasLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(tabMateriasLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnDarBajaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        tabMateriasLayout.setVerticalGroup(
+            tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabMateriasLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblIngresarPorMateria1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDarBajaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         tabbedMaterias.addTab("Materias", tabMaterias);
 
         tabAsistencia.setBackground(new java.awt.Color(22, 22, 26));
-        tabAsistencia.setLayout(null);
 
         tblAsistencia.setBackground(new java.awt.Color(22, 22, 26));
         tblAsistencia.setModel(new javax.swing.table.DefaultTableModel(
@@ -401,25 +462,51 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tblAsistencia.setSelectionBackground(new java.awt.Color(22, 22, 26));
         jScrollPane1.setViewportView(tblAsistencia);
 
-        tabAsistencia.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 80, 410, 266);
-
         btnAsistencia.setText("+ Registrar asistencia");
-        tabAsistencia.add(btnAsistencia);
-        btnAsistencia.setBounds(300, 350, 141, 36);
 
-        txtBuscar.setText("Ingrese nombre o código");
-        tabAsistencia.add(txtBuscar);
-        txtBuscar.setBounds(10, 30, 210, 40);
+        lblIngresarPorMateria2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblIngresarPorMateria2.setText("Ingresar por materia");
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
-        tabAsistencia.add(btnBuscar);
-        btnBuscar.setBounds(230, 30, 90, 40);
+        txtBuscar2.setText("Ingrese nombre o código");
+        txtBuscar2.addActionListener(this::txtBuscar2ActionPerformed);
 
-        jLabel2.setText("Ingresar por materia");
-        tabAsistencia.add(jLabel2);
-        jLabel2.setBounds(10, 10, 110, 16);
+        btnBuscar2.setText("Buscar");
+        btnBuscar2.addActionListener(this::btnBuscar2ActionPerformed);
+
+        javax.swing.GroupLayout tabAsistenciaLayout = new javax.swing.GroupLayout(tabAsistencia);
+        tabAsistencia.setLayout(tabAsistenciaLayout);
+        tabAsistenciaLayout.setHorizontalGroup(
+            tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabAsistenciaLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIngresarPorMateria2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(tabAsistenciaLayout.createSequentialGroup()
+                        .addComponent(txtBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabAsistenciaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        tabAsistenciaLayout.setVerticalGroup(
+            tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabAsistenciaLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblIngresarPorMateria2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         tabbedMaterias.addTab("Asistencia", tabAsistencia);
 
@@ -449,25 +536,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         btnNota.setText("+ Registrar nota");
 
+        lblIngresarPorMateria3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblIngresarPorMateria3.setText("Ingresar por materia");
+
+        btnBuscar3.setText("Buscar");
+
+        txtBuscar3.setText("Ingrese nombre o código");
+
         javax.swing.GroupLayout tabNotasLayout = new javax.swing.GroupLayout(tabNotas);
         tabNotas.setLayout(tabNotasLayout);
         tabNotasLayout.setHorizontalGroup(
             tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabNotasLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabNotasLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblIngresarPorMateria3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabNotasLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(tabNotasLayout.createSequentialGroup()
+                .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabNotasLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabNotasLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         tabNotasLayout.setVerticalGroup(
             tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabNotasLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(lblIngresarPorMateria3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tabbedMaterias.addTab("Notas", tabNotas);
@@ -563,7 +677,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(lblPromedio)
                             .addComponent(lblRegulares)
                             .addComponent(lblRiesgo))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         pnlSituacionGeneralLayout.setVerticalGroup(
             pnlSituacionGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,7 +702,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(lblRegulares)
                         .addGap(32, 32, 32)
                         .addComponent(lblRiesgo)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlEstadisticaAprobados.setBackground(new java.awt.Color(22, 22, 26));
@@ -649,7 +763,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMax)
                             .addComponent(lblMin))))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         pnlEstadisticaAprobadosLayout.setVerticalGroup(
             pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -666,7 +780,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPromedioStatsTag)
                             .addComponent(lblPromedioStats))
-                        .addContainerGap(22, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
                         .addComponent(lblMax)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -685,10 +799,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         pnlReportesLayout.setVerticalGroup(
             pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,7 +812,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlReportes, "panelReportes");
@@ -717,9 +830,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDarBajaMateriaActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_btnBuscar1ActionPerformed
+
+    private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar1ActionPerformed
+
+    private void txtBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar2ActionPerformed
+
+    private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -748,13 +873,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsistencia;
-    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscar1;
+    private javax.swing.JButton btnBuscar2;
+    private javax.swing.JButton btnBuscar3;
     private javax.swing.JButton btnDarBajaMateria;
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnNota;
     private javax.swing.JPanel cardperfil;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -763,6 +889,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblCarrera;
     private javax.swing.JLabel lblCarreraTag;
     private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblIngresarPorMateria1;
+    private javax.swing.JLabel lblIngresarPorMateria2;
+    private javax.swing.JLabel lblIngresarPorMateria3;
     private javax.swing.JLabel lblInicio;
     private javax.swing.JLabel lblLibres;
     private javax.swing.JLabel lblLibresTag;
@@ -806,6 +935,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable tblAsistencia;
     private javax.swing.JTable tblMaterias;
     private javax.swing.JTable tblNotas;
-    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscar1;
+    private javax.swing.JTextField txtBuscar2;
+    private javax.swing.JTextField txtBuscar3;
     // End of variables declaration//GEN-END:variables
 }
