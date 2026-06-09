@@ -1,7 +1,7 @@
 
-package sistemaautogestion.zaratesilvachalimond.modelos;
+package sistemaautogestion.zaratesilvachalimond.Modelos;
 
-import sistemaautogestion.zaratesilvachalimond.interfaces.*;
+import sistemaautogestion.zaratesilvachalimond.Interfaces.IConsultable;
 
 import java.util.ArrayList;
 
@@ -28,7 +28,18 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
     public void setAnioIngreso(int anioIngresoP) {this.anioIngreso = anioIngresoP;}
     public void setMaterias(ArrayList<InscripcionMateria> materiasP) {this.materias = materiasP;}
     
-    // MÃ©todos
+    // Serialización para el archivo .txt
+    public String toTexto() {
+        return getNombre() + "," + getLegajo() + "," + carrera + "," + anioIngreso;
+    }
+    public static Estudiante fromTexto(String linea) {
+        String[] partes = linea.split(",");
+        Estudiante e = new Estudiante(partes[0], partes[1], partes[2], Integer.parseInt(partes[3]));
+        
+        return e; // → regresa al DAO con el objeto reconstruido
+    }
+
+    // Metodos
     public void inscribirse(Materia m) {
         InscripcionMateria ins = new InscripcionMateria();
         

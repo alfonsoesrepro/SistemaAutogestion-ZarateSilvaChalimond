@@ -1,7 +1,8 @@
 
-package sistemaautogestion.zaratesilvachalimond.modelos;
+package sistemaautogestion.zaratesilvachalimond.Modelos;
 
-import sistemaautogestion.zaratesilvachalimond.interfaces.*;
+import sistemaautogestion.zaratesilvachalimond.Interfaces.IEvaluable;
+import sistemaautogestion.zaratesilvachalimond.Interfaces.IRankeable;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,25 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     public void setClasesAsistidas(int clasesAsistidasP) {this.clasesAsistidas = clasesAsistidasP;}
     public void setNotas(ArrayList<Double> notasP) {this.notas = notasP;}
     
-    // MÃ©todos
+    // Serialización para el archivo .txt
+    public String toTexto() {
+        return materia.getNombre() + "," +
+               materia.getCodigo() + "," +
+               materia.getCuatrimestre() + "," +
+               materia.getAnio() + "," +
+               totalClases + "," +
+               clasesAsistidas;
+    }
+    public static InscripcionMateria fromTexto(String linea) {
+        String[] partes = linea.split(",");
+        
+        Materia m = new Materia(partes[0], partes[1], Integer.parseInt(partes[2]), 
+                Integer.parseInt(partes[3]));
+        
+        return new InscripcionMateria(m, Integer.parseInt(partes[4]), Integer.parseInt(partes[5]));
+    }
+
+    // Metodos
     public void registrarAsistencia(boolean presente) {
         totalClases++;
         if (presente) clasesAsistidas++;

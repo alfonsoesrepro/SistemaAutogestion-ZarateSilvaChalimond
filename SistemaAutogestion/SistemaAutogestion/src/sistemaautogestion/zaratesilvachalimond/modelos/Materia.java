@@ -1,7 +1,7 @@
 
-package sistemaautogestion.zaratesilvachalimond.modelos;
+package sistemaautogestion.zaratesilvachalimond.Modelos;
 
-import sistemaautogestion.zaratesilvachalimond.interfaces.*;
+import sistemaautogestion.zaratesilvachalimond.Interfaces.IConsultable;
 
 
 public class Materia implements IConsultable{
@@ -49,13 +49,25 @@ public class Materia implements IConsultable{
     }
     public void setAnio(int anioP) {this.anio = anioP;}
     
-    // MÃ©todo implementado de la interface Consultable
+    // Serialización para el archivo .txt
+    public String toTexto() {
+        return nombre + "," + codigo + "," + cuatrimestre + "," + anio;
+    }
+    public static Materia fromTexto(String linea) {
+        String[] partes = linea.split(",");
+        Materia m = new Materia(partes[0], partes[1], Integer.parseInt(partes[2]), 
+                Integer.parseInt(partes[3]));
+        
+        return m; // → regresa al DAO con el objeto reconstruido
+    }
+
+    // Metodo implementado de la interface Consultable
     public @Override void mostrarResumen() { // *sonido de látigo*
         System.out.println("Materia: " + nombre + " [" + codigo + "]");
         System.out.println(" -> Dictado: Cuatrimestre " + cuatrimestre + " | Anio: " + anio);
     }
     
-    // MÃ©todo para POO Avanzada (Bonus)
+    // Metodo para POO Avanzada (Bonus)
     public double getPorcentajeRegularidad() {
         return 75.0;
     }

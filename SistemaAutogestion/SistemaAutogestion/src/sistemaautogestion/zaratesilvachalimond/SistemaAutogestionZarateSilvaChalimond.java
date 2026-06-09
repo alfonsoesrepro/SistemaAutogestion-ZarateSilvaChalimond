@@ -1,8 +1,12 @@
 package sistemaautogestion.zaratesilvachalimond;
 
-import sistemaautogestion.zaratesilvachalimond.vista.VentanaPrincipal;
-import sistemaautogestion.zaratesilvachalimond.modelos.*;
-import sistemaautogestion.zaratesilvachalimond.interfaces.*;
+import sistemaautogestion.zaratesilvachalimond.Interfaces.IConsultable;
+import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
+import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
+import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
+import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaCuatrimestral;
+import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaAnual;
+import sistemaautogestion.zaratesilvachalimond.Vista.VentanaPrincipal;
 
 import java.util.Scanner;
 import java.util.ArrayList;

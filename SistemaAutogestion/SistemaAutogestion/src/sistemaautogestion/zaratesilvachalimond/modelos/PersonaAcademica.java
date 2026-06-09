@@ -1,5 +1,4 @@
-package sistemaautogestion.zaratesilvachalimond.modelos;
-import sistemaautogestion.zaratesilvachalimond.interfaces.*;
+package sistemaautogestion.zaratesilvachalimond.Modelos;
 
 
 public abstract class PersonaAcademica { //<-- SÃ­ soy 

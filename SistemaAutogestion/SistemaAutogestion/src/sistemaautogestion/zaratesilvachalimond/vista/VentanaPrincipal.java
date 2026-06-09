@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package sistemaautogestion.zaratesilvachalimond.vista;
+package sistemaautogestion.zaratesilvachalimond.Vista;
 
 import java.awt.CardLayout;
 
@@ -165,7 +165,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblInicio.setBackground(new java.awt.Color(255, 255, 254));
         lblInicio.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         lblInicio.setText("Inicio");
-        lblInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblInicio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         sep1.setBackground(new java.awt.Color(127, 90, 240));
         sep1.setForeground(new java.awt.Color(40, 40, 40));
@@ -174,7 +174,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblMisMaterias.setBackground(new java.awt.Color(255, 255, 254));
         lblMisMaterias.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         lblMisMaterias.setText("Mis materias");
-        lblMisMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblMisMaterias.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         sep2.setBackground(new java.awt.Color(148, 161, 178));
         sep2.setForeground(new java.awt.Color(40, 40, 40));
@@ -182,7 +182,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblReportes.setBackground(new java.awt.Color(255, 255, 254));
         lblReportes.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         lblReportes.setText("Reportes");
-        lblReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         sep3.setBackground(new java.awt.Color(148, 161, 178));
         sep3.setForeground(new java.awt.Color(40, 40, 40));
@@ -192,7 +192,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblCerrar.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         lblCerrar.setForeground(new java.awt.Color(114, 117, 126));
         lblCerrar.setText("Cerrar sesión");
-        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout pnlSidebarLayout = new javax.swing.GroupLayout(pnlSidebar);
         pnlSidebar.setLayout(pnlSidebarLayout);
