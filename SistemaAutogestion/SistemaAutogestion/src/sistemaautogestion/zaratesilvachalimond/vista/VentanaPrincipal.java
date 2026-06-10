@@ -125,6 +125,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         scpMateriasDesaprobadas = new javax.swing.JScrollPane();
         listaMaterias = new javax.swing.JList<>();
         lblTituloDesaprobadas = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblMaterias1 = new javax.swing.JTable();
+        lblTituloSituacionGeneral = new javax.swing.JLabel();
         pnlMisMaterias = new javax.swing.JPanel();
         tabbedMaterias = new javax.swing.JTabbedPane();
         tabMaterias = new javax.swing.JPanel();
@@ -172,7 +175,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
-        menuItemCerrar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de autogestión estudiantil");
@@ -266,7 +268,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblReportes)
                 .addGap(18, 18, 18)
                 .addComponent(sep3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 380, Short.MAX_VALUE)
                 .addComponent(sep4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCerrar)
@@ -362,6 +364,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblTituloDesaprobadas.setForeground(new java.awt.Color(114, 117, 126));
         lblTituloDesaprobadas.setText("Materias en riesgo");
 
+        tblMaterias1.setBackground(new java.awt.Color(22, 22, 26));
+        tblMaterias1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Materia", "Condicion", "Asistencia", "Promedio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblMaterias1);
+        if (tblMaterias1.getColumnModel().getColumnCount() > 0) {
+            tblMaterias1.getColumnModel().getColumn(0).setResizable(false);
+            tblMaterias1.getColumnModel().getColumn(1).setResizable(false);
+            tblMaterias1.getColumnModel().getColumn(2).setResizable(false);
+            tblMaterias1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        lblTituloSituacionGeneral.setBackground(new java.awt.Color(255, 255, 254));
+        lblTituloSituacionGeneral.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTituloSituacionGeneral.setForeground(new java.awt.Color(114, 117, 126));
+        lblTituloSituacionGeneral.setText("Situacion general");
+
         javax.swing.GroupLayout pnlInicioLayout = new javax.swing.GroupLayout(pnlInicio);
         pnlInicio.setLayout(pnlInicioLayout);
         pnlInicioLayout.setHorizontalGroup(
@@ -369,21 +404,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlInicioLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTituloDesaprobadas)
                     .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(lblTituloDesaprobadas)
+                    .addGroup(pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTituloSituacionGeneral))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         pnlInicioLayout.setVerticalGroup(
             pnlInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInicioLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(cardperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
+                .addComponent(lblTituloSituacionGeneral)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTituloDesaprobadas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scpMateriasDesaprobadas, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlInicio, "panelInicio");
@@ -397,16 +439,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tblMaterias.setBackground(new java.awt.Color(22, 22, 26));
         tblMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Condicion"
+                "Nombre", "Codigo", "Cuatrimestre", "Año"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tblMaterias);
+        if (tblMaterias.getColumnModel().getColumnCount() > 0) {
+            tblMaterias.getColumnModel().getColumn(0).setResizable(false);
+            tblMaterias.getColumnModel().getColumn(1).setResizable(false);
+            tblMaterias.getColumnModel().getColumn(2).setResizable(false);
+            tblMaterias.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         btnInscribir.setBackground(new java.awt.Color(127, 90, 240));
         btnInscribir.setText("+ Inscribirse a una materia");
@@ -418,9 +474,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnDarBajaMateria.addActionListener(this::btnDarBajaMateriaActionPerformed);
 
         lblIngresarPorMateria1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIngresarPorMateria1.setText("Ingresar por materia");
+        lblIngresarPorMateria1.setText("Ingresar por materia o codigo");
 
-        txtBuscar1.setText("Ingrese nombre o código");
+        txtBuscar1.setToolTipText("");
         txtBuscar1.addActionListener(this::txtBuscar1ActionPerformed);
 
         btnBuscar1.setText("Buscar");
@@ -472,17 +528,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tblAsistencia.setBackground(new java.awt.Color(22, 22, 26));
         tblAsistencia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre", "Asistencia %"
+                "Nombre", "Codigo", "Asistencia %"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -491,13 +547,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         tblAsistencia.setSelectionBackground(new java.awt.Color(22, 22, 26));
         jScrollPane1.setViewportView(tblAsistencia);
+        if (tblAsistencia.getColumnModel().getColumnCount() > 0) {
+            tblAsistencia.getColumnModel().getColumn(0).setResizable(false);
+            tblAsistencia.getColumnModel().getColumn(1).setResizable(false);
+            tblAsistencia.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnAsistencia.setText("+ Registrar asistencia");
 
         lblIngresarPorMateria2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIngresarPorMateria2.setText("Ingresar por materia");
+        lblIngresarPorMateria2.setText("Ingresar por materia o codigo");
 
-        txtBuscar2.setText("Ingrese nombre o código");
         txtBuscar2.addActionListener(this::txtBuscar2ActionPerformed);
 
         btnBuscar2.setText("Buscar");
@@ -545,17 +605,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tblNotas.setBackground(new java.awt.Color(22, 22, 26));
         tblNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre", "Promedio"
+                "Nombre", "Codigo", "Promedio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -563,27 +623,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tblNotas);
+        if (tblNotas.getColumnModel().getColumnCount() > 0) {
+            tblNotas.getColumnModel().getColumn(0).setResizable(false);
+            tblNotas.getColumnModel().getColumn(1).setResizable(false);
+            tblNotas.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnNota.setText("+ Registrar nota");
 
         lblIngresarPorMateria3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblIngresarPorMateria3.setText("Ingresar por materia");
+        lblIngresarPorMateria3.setText("Ingresar por materia o codigo");
 
         btnBuscar3.setText("Buscar");
 
-        txtBuscar3.setText("Ingrese nombre o código");
+        txtBuscar3.addActionListener(this::txtBuscar3ActionPerformed);
 
         javax.swing.GroupLayout tabNotasLayout = new javax.swing.GroupLayout(tabNotas);
         tabNotas.setLayout(tabNotasLayout);
         tabNotasLayout.setHorizontalGroup(
             tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabNotasLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
                 .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIngresarPorMateria3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(tabNotasLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblIngresarPorMateria3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tabNotasLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -609,7 +672,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -623,14 +686,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlMisMateriasLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlMisMateriasLayout.setVerticalGroup(
             pnlMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMisMateriasLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlMisMaterias, "panelMisMaterias");
@@ -802,20 +865,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(lblTituloEstadisticas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlEstadisticaAprobadosLayout.createSequentialGroup()
                         .addComponent(lblMaxTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblMinTag)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlEstadisticaAprobadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPromedioStatsTag)
-                            .addComponent(lblPromedioStats))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlEstadisticaAprobadosLayout.createSequentialGroup()
+                            .addComponent(lblPromedioStats)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlEstadisticaAprobadosLayout.createSequentialGroup()
                         .addComponent(lblMax)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMin)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(lblMin)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -831,7 +893,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         pnlReportesLayout.setVerticalGroup(
             pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -842,7 +904,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlReportes, "panelReportes");
@@ -854,9 +916,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuReportes.setText("Reportes");
         jMenuBar1.add(menuReportes);
-
-        menuItemCerrar.setText("Cerrar");
-        jMenuBar1.add(menuItemCerrar);
 
         setJMenuBar(jMenuBar1);
 
@@ -941,6 +1000,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         String filtro = txtBuscar2.getText().trim();
         actualizarTablas(filtro);
     }//GEN-LAST:event_btnBuscar2ActionPerformed
+
+    private void txtBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar3ActionPerformed
 
     private void actualizarTablas(String filtro) {
         if (controlador == null) return;
@@ -1167,6 +1230,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblAnio;
     private javax.swing.JLabel lblAnioTag;
     private javax.swing.JLabel lblCarrera;
@@ -1198,9 +1262,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTituloDesaprobadas;
     private javax.swing.JLabel lblTituloEstadisticas;
     private javax.swing.JLabel lblTituloSeccionGeneral;
+    private javax.swing.JLabel lblTituloSituacionGeneral;
     private javax.swing.JList<String> listaMaterias;
     private javax.swing.JMenu menuArchivo;
-    private javax.swing.JMenu menuItemCerrar;
     private javax.swing.JMenu menuReportes;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JPanel pnlEstadisticaAprobados;
@@ -1220,6 +1284,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tabbedMaterias;
     private javax.swing.JTable tblAsistencia;
     private javax.swing.JTable tblMaterias;
+    private javax.swing.JTable tblMaterias1;
     private javax.swing.JTable tblNotas;
     private javax.swing.JTextField txtBuscar1;
     private javax.swing.JTextField txtBuscar2;
