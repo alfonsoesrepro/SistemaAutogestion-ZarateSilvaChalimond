@@ -152,6 +152,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         lblIngresarPorMateria3 = new javax.swing.JLabel();
         btnBuscar3 = new javax.swing.JButton();
         txtBuscar3 = new javax.swing.JTextField();
+        btnNota = new javax.swing.JButton();
         pnlReportes = new javax.swing.JPanel();
         pnlSituacionGeneral = new javax.swing.JPanel();
         lblTituloSeccionGeneral = new javax.swing.JLabel();
@@ -642,6 +643,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         txtBuscar3.addActionListener(this::txtBuscar3ActionPerformed);
 
+        btnNota.setText("+ Registrar nota");
+        btnNota.addActionListener(this::btnNotaActionPerformed);
+
         javax.swing.GroupLayout tabNotasLayout = new javax.swing.GroupLayout(tabNotas);
         tabNotas.setLayout(tabNotasLayout);
         tabNotasLayout.setHorizontalGroup(
@@ -660,6 +664,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(tabNotasLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabNotasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         tabNotasLayout.setVerticalGroup(
             tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -672,7 +680,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         tabbedMaterias.addTab("Notas", tabNotas);
@@ -691,7 +701,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(pnlMisMateriasLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         pnlCentral.add(pnlMisMaterias, "panelMisMaterias");
@@ -1003,6 +1013,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscar3ActionPerformed
 
+    private void btnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNotaActionPerformed
+
     private void actualizarTablas(String filtro) {
         if (controlador == null) return;
         
@@ -1221,6 +1235,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar3;
     private javax.swing.JButton btnDarBajaMateria;
     private javax.swing.JButton btnInscribir;
+    private javax.swing.JButton btnNota;
     private javax.swing.JPanel cardperfil;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
