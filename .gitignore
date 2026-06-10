@@ -19,6 +19,10 @@
 *.tar.gz
 *.rar
 
+# EXCEPCIÓN: No ignorar las librerías necesarias del proyecto
+!/SistemaAutogestion/lib/*.jar
+!lib/*.jar
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
@@ -61,3 +65,8 @@ Thumbs.db
 consignas.txt
 consignas_utf8.txt
 /SistemaAutogestion/SistemaAutogestion/nbproject/private/
+
+# IDEs adicionales (Bloquea la basura de Visual Studio / VS Code)
+.vs/
+.vscode/
+*.code-workspace
