@@ -8,7 +8,7 @@ general.
 ## Instrucciones de ejecucion
 
 1. Abrir el proyecto con **Apache NetBeans IDE 29**
-2. Requiere **JDK 25** instalado
+2. Requiere **JDK 17** instalado
 3. Abrir el proyecto desde: `SistemaAutogestion/SistemaAutogestion/`
 4. Ejecutar con **F6** o click derecho > Run
 5. Si hay problemas de compilacion: **Shift+F11** (Clean and Build)
@@ -38,39 +38,54 @@ documentacion/
 
 ## Integrantes y roles
 
-| Integrante | Rol |
-|---|---|
+| Integrante                    | Rol                                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Florencia Agustina Zarate** | Interfaz, menus e interaccion con el usuario: implemento las opciones del menu principal (ver perfil, registrar asistencia con advertencias escalonadas, registrar calificacion con validaciones), la busqueda de materias con sobrecarga de metodos, la opcion de volver (0) en todos los puntos del sistema, y se encargo de documentar todo el proceso y dejar apto el entregable final |
-| **Cesar Nicolas Chalimond** | Logica academica del sistema: implemento la gestion de materias (inscripcion, baja, listado), los reportes academicos (situacion general, materias en riesgo, aprobadas, ranking), la logica recursiva para promedios y busqueda, la herencia avanzada (MateriaAnual/Cuatrimestral) y la interfaz IRankeable |
-| **Alfonso Silva** | Modelado y base estructural del sistema: creo las clases base (PersonaAcademica, Estudiante, Materia, InscripcionMateria), las interfaces (IConsultable, IEvaluable), los constructores, getters/setters con validacion y la herencia entre clases |
+| **Cesar Nicolas Chalimond**   | Logica academica del sistema: implemento la gestion de materias (inscripcion, baja, listado), los reportes academicos (situacion general, materias en riesgo, aprobadas, ranking), la logica recursiva para promedios y busqueda, la herencia avanzada (MateriaAnual/Cuatrimestral) y la interfaz IRankeable                                                                               |
+| **Alfonso Silva**             | Modelado y base estructural del sistema: creo las clases base (PersonaAcademica, Estudiante, Materia, InscripcionMateria), las interfaces (IConsultable, IEvaluable), los constructores, getters/setters con validacion y la herencia entre clases                                                                                                                                         |
 
 ## Funcionalidades del sistema
 
 ### Menu principal
-- **Ver perfil:** muestra los datos del estudiante (nombre, legajo, carrera, anio de ingreso)
+
+- **Ver perfil:** muestra los datos del estudiante (nombre, legajo, carrera,
+  anio de ingreso)
 - **Gestion de materias:** submenu con inscripcion, baja, listado y busqueda
-- **Registrar asistencia:** registra presente/ausente, muestra porcentaje actualizado y emite advertencias si baja del 80% o alerta critica si baja del 75%
-- **Registrar calificacion:** agrega notas (rango 0-10, maximo 5 por materia), muestra promedio actualizado e indica si aprobo o no
-- **Reportes academicos:** situacion general, materias en riesgo ordenadas por asistencia, materias aprobadas con estadisticas, y ranking por puntaje
+- **Registrar asistencia:** registra presente/ausente, muestra porcentaje
+  actualizado y emite advertencias si baja del 80% o alerta critica si baja del
+  75%
+- **Registrar calificacion:** agrega notas (rango 0-10, maximo 5 por materia),
+  muestra promedio actualizado e indica si aprobo o no
+- **Reportes academicos:** situacion general, materias en riesgo ordenadas por
+  asistencia, materias aprobadas con estadisticas, y ranking por puntaje
 
 ### Busqueda de materias (sobrecarga)
-- Por nombre: busqueda parcial (ej: "prog" encuentra "Programacion I" y "Programacion II")
+
+- Por nombre: busqueda parcial (ej: "prog" encuentra "Programacion I" y
+  "Programacion II")
 - Por cuatrimestre: filtra todas las materias de un cuatrimestre especifico
 
 ### Navegacion
-- Desde cualquier punto del sistema se puede volver al menu anterior ingresando 0
+
+- Desde cualquier punto del sistema se puede volver al menu anterior ingresando
+  0
 
 ## Bonus implementados
 
-- **Herencia avanzada:** clases MateriaAnual y MateriaCuatrimestral con porcentajes de regularidad distintos (70% y 75% respectivamente)
-- **Recursividad:** calculo del promedio general y busqueda de materia por codigo de forma recursiva
-- **Interface IRankeable:** puntaje calculado como (promedio * 0.6) + (asistencia% * 0.4), con ranking ordenado de mayor a menor
+- **Herencia avanzada:** clases MateriaAnual y MateriaCuatrimestral con
+  porcentajes de regularidad distintos (70% y 75% respectivamente)
+- **Recursividad:** calculo del promedio general y busqueda de materia por
+  codigo de forma recursiva
+- **Interface IRankeable:** puntaje calculado como (promedio _ 0.6) +
+  (asistencia% _ 0.4), con ranking ordenado de mayor a menor
 
 ## Conceptos de POO aplicados
 
-- **Herencia:** Estudiante extends PersonaAcademica; MateriaAnual/Cuatrimestral extends Materia
+- **Herencia:** Estudiante extends PersonaAcademica; MateriaAnual/Cuatrimestral
+  extends Materia
 - **Polimorfismo:** List<IConsultable> con Estudiante y Materia en reportes
-- **Encapsulamiento:** atributos private, acceso por getters/setters con validacion
+- **Encapsulamiento:** atributos private, acceso por getters/setters con
+  validacion
 - **Interfaces:** IConsultable, IEvaluable, IRankeable
 - **Clases abstractas:** PersonaAcademica con metodo abstracto mostrarResumen()
 - **Sobrecarga:** buscarMateria(String) y buscarMateria(int) en Estudiante
@@ -78,20 +93,86 @@ documentacion/
 
 ## Desafios encontrados
 
-- **Primer proyecto grupal con Git:** al ser el primer proyecto que hacemos en conjunto, no teniamos claro cuando un commit impactaba en el repositorio remoto o si lo hacia. Confundiamos commit (local) con push (remoto), lo que gener籀 confusion al principio hasta que entendimos el flujo completo de trabajo con Git
-- **Configuracion de entorno:** incompatibilidades entre IDEs (Visual Studio vs NetBeans) y manejo de archivos ignorados (.vs, nbproject/private) que bloqueaban operaciones de Git
-- **Dependencias cruzadas:** cada integrante dependia de metodos implementados por otro, lo que requirio buena comunicacion para detectar y corregir bugs entre las distintas partes (por ejemplo, registrarAsistencia() tenia un error que impedia probar la opcion de asistencia)
+- **Primer proyecto grupal con Git:** al ser el primer proyecto que hacemos en
+  conjunto, no teniamos claro cuando un commit impactaba en el repositorio
+  remoto o si lo hacia. Confundiamos commit (local) con push (remoto), lo que
+  gener籀 confusion al principio hasta que entendimos el flujo completo de
+  trabajo con Git
+- **Configuracion de entorno:** incompatibilidades entre IDEs (Visual Studio vs
+  NetBeans) y manejo de archivos ignorados (.vs, nbproject/private) que
+  bloqueaban operaciones de Git
+- **Dependencias cruzadas:** cada integrante dependia de metodos implementados
+  por otro, lo que requirio buena comunicacion para detectar y corregir bugs
+  entre las distintas partes (por ejemplo, registrarAsistencia() tenia un error
+  que impedia probar la opcion de asistencia)
 
 ## Uso de IA / herramientas externas
 
-Los tres integrantes utilizaron IA como herramienta de asistencia durante el desarrollo. La documentacion individual de cada uno con los prompts utilizados se encuentra en la carpeta `documentacion/`.
+Los tres integrantes utilizaron IA como herramienta de asistencia durante el
+desarrollo. La documentacion individual de cada uno con los prompts utilizados
+se encuentra en la carpeta `documentacion/`.
 
-| Integrante | Herramientas utilizadas |
-|---|---|
-| **Florencia Agustina Zarate** | Claude Code (Anthropic) |
-| **Cesar Nicolas Chalimond** | Antigravity (IDE) y Gemini 2.5 Pro (agente) |
-| **Alfonso Silva** | ChatGPT y Claude (Anthropic) |
+| Integrante                    | Herramientas utilizadas                     |
+| ----------------------------- | ------------------------------------------- |
+| **Florencia Agustina Zarate** | Claude Code (Anthropic)                     |
+| **Cesar Nicolas Chalimond**   | Antigravity (IDE) y Gemini 2.5 Pro (agente) |
+| **Alfonso Silva**             | ChatGPT y Claude (Anthropic)                |
 
 ## Estado del proyecto
 
 Terminado.
+
+## ?? Segunda Instancia Evaluativa (IE2): Interfaz Gr芍fica y Persistencia
+
+En esta segunda etapa, el sistema fue migrado de consola a una aplicaci車n de escritorio con interfaz gr芍fica, aplicando la arquitectura **MVC + DAO** y persistiendo los datos.
+
+### Instrucciones de Ejecuci車n (Actualizaci車n IE2)
+1. Abrir el proyecto con **Apache NetBeans**.
+2. Requiere **JDK 17** o superior.
+3. **Dependencia crucial:** Para que el Bonus JDBC funcione, es necesario a?adir el driver `mysql-connector-java` (o equivalente) en las librer赤as del proyecto.
+4. Configurar la base de datos siguiendo las instrucciones de la secci車n "Configuraci車n de Base de Datos (Bonus JDBC)".
+5. Ejecutar la clase principal que lanza el primer `JFrame` de la vista.
+
+### Arquitectura del Proyecto (MVC + DAO)
+El proyecto se dividi車 estrictamente en cuatro paquetes:
+* **modelo:** Clases de la IE1 reutilizadas (`Estudiante`, `Materia`, etc.) con la l車gica de negocio intacta.
+* **vista:** Interfaces gr芍ficas dise?adas en Swing. No contienen l車gica de negocio ni manipulan datos directamente; solo capturan eventos y los env赤an al Controlador.
+* **controlador:** Puente orquestador. Recibe acciones de la Vista, procesa con el Modelo y delega el guardado al DAO. Est芍 libre de librer赤as Swing.
+* **dao:** Clases encargadas de la persistencia de datos (archivos de texto y base de datos relacional).
+
+### Integrantes y Roles (IE2)
+| Integrante | Rol en IE2 |
+| :--- | :--- |
+| **Cesar Nicolas Chalimond** | **Controlador y Persistencia JDBC (Bonus):** Desarrollo de la l車gica mediadora aislando la interfaz del modelo. Creaci車n de la base de datos MySQL y programaci車n de los DAOs exclusivos mediante `Connection`, `PreparedStatement` y `ResultSet`. |
+| **Florencia Agustina Zarate** | *[Completar: Ej. Dise?o UI/UX en Figma y maquetado Swing en NetBeans]* |
+| **Alfonso Silva** | *[Completar: Ej. Implementaci車n de persistencia en archivos de texto, ajustes de serializaci車n/toTexto]* |
+
+### ??? Configuraci車n de Base de Datos (Bonus JDBC)
+Para evaluar la implementaci車n a base de datos, ejecutar el siguiente script en MySQL antes de iniciar la aplicaci車n. Esto generar芍 la estructura requerida por los DAOs:
+
+```sql
+CREATE DATABASE IF NOT EXISTS autogestion_estudiantil;
+USE autogestion_estudiantil;
+
+CREATE TABLE estudiantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    legajo VARCHAR(50) UNIQUE NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE materias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) UNIQUE NOT NULL,
+    nombre VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE inscripciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    estudiante_id INT NOT NULL,
+    materia_id INT NOT NULL,
+    fecha_inscripcion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (estudiante_id) REFERENCES estudiantes(id) ON DELETE CASCADE,
+    FOREIGN KEY (materia_id) REFERENCES materias(id) ON DELETE CASCADE,
+    UNIQUE KEY uk_inscripcion (estudiante_id, materia_id)
+);

@@ -14,11 +14,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName());
 
+    private sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador;
+    private String legajoActual = "12345";
+
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
+    public VentanaPrincipal(sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador) {
+        this.controlador = controlador;
         initComponents();
+        
+        // Vincular manualmente eventos de botones que no estaban mapeados en NetBeans
+        if (btnAsistencia != null && btnAsistencia.getActionListeners().length == 0) {
+            btnAsistencia.addActionListener(e -> registrarAsistencia());
+        }
+        if (btnNota != null && btnNota.getActionListeners().length == 0) {
+            btnNota.addActionListener(e -> registrarNota());
+        }
+
         this.setLocationRelativeTo(null);
         tblAsistencia.getTableHeader().setBackground(new java.awt.Color(30, 30, 36));
         tblAsistencia.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
@@ -26,6 +39,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tblMaterias.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
         tblNotas.getTableHeader().setBackground(new java.awt.Color(30, 30, 36));
         tblNotas.getTableHeader().setForeground(new java.awt.Color(255, 255, 255));
+        
+        tblMaterias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblAsistencia.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblNotas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         CardLayout cl = (CardLayout) pnlCentral.getLayout();
         cl.show(pnlCentral, "inicio");
@@ -48,6 +65,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 resaltarMenu(lblReportes);
             }
         });
+        menuReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ((CardLayout) pnlCentral.getLayout()).show(pnlCentral, "panelReportes");
+                resaltarMenu(lblReportes);
+            }
+        });
+        
+        actualizarTablas("");
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 System.exit(0);
@@ -839,28 +864,269 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
-        // TODO add your handling code here:
+        if (controlador == null) return;
+        String legajo = legajoActual;
+
+        javax.swing.JPanel panel = new javax.swing.JPanel(new java.awt.GridLayout(4, 2));
+        panel.add(new javax.swing.JLabel("Nombre de la Materia:"));
+        javax.swing.JTextField txtNombre = new javax.swing.JTextField();
+        panel.add(txtNombre);
+        panel.add(new javax.swing.JLabel("Código (3-10 chars):"));
+        javax.swing.JTextField txtCodigo = new javax.swing.JTextField();
+        panel.add(txtCodigo);
+        panel.add(new javax.swing.JLabel("Cuatrimestre (1 o 2):"));
+        javax.swing.JTextField txtCuatrimestre = new javax.swing.JTextField();
+        panel.add(txtCuatrimestre);
+        panel.add(new javax.swing.JLabel("Año:"));
+        javax.swing.JTextField txtAnio = new javax.swing.JTextField();
+        panel.add(txtAnio);
+
+        int result = javax.swing.JOptionPane.showConfirmDialog(null, panel, "Inscribir Materia", javax.swing.JOptionPane.OK_CANCEL_OPTION);
+        if (result == javax.swing.JOptionPane.OK_OPTION) {
+            try {
+                int cuat = Integer.parseInt(txtCuatrimestre.getText());
+                int anio = Integer.parseInt(txtAnio.getText());
+                String msg = controlador.crearMateriaEInscribir(legajo, txtNombre.getText(), txtCodigo.getText(), cuat, anio);
+                javax.swing.JOptionPane.showMessageDialog(this, msg);
+                actualizarTablas(txtBuscar1.getText().trim());
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Cuatrimestre o Año inválidos.");
+            }
+        }
     }//GEN-LAST:event_btnInscribirActionPerformed
 
     private void btnDarBajaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaMateriaActionPerformed
-        // TODO add your handling code here:
+        if (controlador == null) return;
+        int row = tblMaterias.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione una materia de la tabla primero.");
+            return;
+        }
+        if (legajoActual.isEmpty()) return;
+        
+        String nombreMateria = (String) tblMaterias.getValueAt(row, 0);
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "¿Está seguro que desea dar de baja la materia " + nombreMateria + "?", "Confirmar Baja", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            // Find code
+            java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
+            String codigo = "";
+            for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+                if (ins.getMateria().getNombre().equals(nombreMateria)) {
+                    codigo = ins.getMateria().getCodigo();
+                    break;
+                }
+            }
+            if (!codigo.isEmpty()) {
+                String msg = controlador.darDeBajaMateria(legajoActual, codigo);
+                javax.swing.JOptionPane.showMessageDialog(this, msg);
+                actualizarTablas(txtBuscar1.getText().trim());
+            }
+        }
     }//GEN-LAST:event_btnDarBajaMateriaActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        // TODO add your handling code here:
+        String filtro = txtBuscar1.getText().trim();
+        actualizarTablas(filtro);
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
-        // TODO add your handling code here:
+        btnBuscar1ActionPerformed(evt);
     }//GEN-LAST:event_txtBuscar1ActionPerformed
 
     private void txtBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar2ActionPerformed
-        // TODO add your handling code here:
+        btnBuscar2ActionPerformed(evt);
     }//GEN-LAST:event_txtBuscar2ActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
-        // TODO add your handling code here:
+        String filtro = txtBuscar2.getText().trim();
+        actualizarTablas(filtro);
     }//GEN-LAST:event_btnBuscar2ActionPerformed
+
+    private void actualizarTablas(String filtro) {
+        if (controlador == null) return;
+        
+        // Actualizar perfil
+        sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante est = controlador.obtenerEstudiante(legajoActual);
+        if (est != null) {
+            lblNombre.setText(est.getNombre());
+            lblCarrera.setText("Carrera Asignada");
+            lblAnio.setText("2024");
+        } else {
+            lblNombre.setText("Estudiante no encontrado");
+        }
+
+        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripcionesDb = controlador.listarInscripciones(legajoActual);
+        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = new java.util.ArrayList<>();
+        
+        String f = filtro.toLowerCase();
+        boolean aplicarFiltro = !f.isEmpty() && !f.equals("ingrese nombre o código");
+        
+        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripcionesDb) {
+            if (aplicarFiltro) {
+                if (!ins.getMateria().getNombre().toLowerCase().contains(f) && !ins.getMateria().getCodigo().toLowerCase().contains(f)) {
+                    continue;
+                }
+            }
+            inscripciones.add(ins);
+        }
+        
+        javax.swing.table.DefaultTableModel modelMaterias = (javax.swing.table.DefaultTableModel) tblMaterias.getModel();
+        javax.swing.table.DefaultTableModel modelAsistencia = (javax.swing.table.DefaultTableModel) tblAsistencia.getModel();
+        javax.swing.table.DefaultTableModel modelNotas = (javax.swing.table.DefaultTableModel) tblNotas.getModel();
+        
+        modelMaterias.setRowCount(0);
+        modelAsistencia.setRowCount(0);
+        modelNotas.setRowCount(0);
+        
+        javax.swing.DefaultListModel<String> alertasModel = new javax.swing.DefaultListModel<>();
+        
+        int regulares = 0;
+        int libres = 0;
+        double sumaPromedios = 0;
+        int matConNotas = 0;
+        
+        // Calcular estadísticas con TODAS las materias (inscripcionesDb) independientemente del filtro
+        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripcionesDb) {
+            double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
+            
+            if (asistenciaPorc >= 75.0) {
+                regulares++;
+            } else {
+                libres++;
+            }
+            
+            if (asistenciaPorc >= 75.0 && asistenciaPorc < 85.0) {
+                alertasModel.addElement(ins.getMateria().getNombre() + " (" + String.format("%.2f%%", asistenciaPorc) + ")");
+            }
+            
+            if (!ins.getNotas().isEmpty()) {
+                double promedioAux = 0;
+                for (Double nota : ins.getNotas()) promedioAux += nota;
+                promedioAux /= ins.getNotas().size();
+                sumaPromedios += promedioAux;
+                matConNotas++;
+            }
+        }
+        
+        listaMaterias.setModel(alertasModel);
+        lblRegulares.setText(String.valueOf(regulares));
+        lblLibres.setText(String.valueOf(libres));
+        lblRiesgo.setText(String.valueOf(alertasModel.size()));
+        if (matConNotas > 0) {
+            lblPromedio.setText(String.format("%.2f", sumaPromedios / matConNotas));
+        } else {
+            lblPromedio.setText("0.0");
+        }
+
+        // Llenar tablas solo con materias filtradas (inscripciones)
+        if (inscripciones.isEmpty()) {
+            if (inscripcionesDb.isEmpty()) {
+                modelMaterias.addRow(new Object[]{"No hay materias inscriptas", ""});
+            } else {
+                modelMaterias.addRow(new Object[]{"No hay coincidencias de búsqueda", ""});
+            }
+            return;
+        }
+
+        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+            double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
+            String condicion = asistenciaPorc >= 75.0 ? "Regular" : "Libre";
+            
+            double promedio = 0;
+            if (!ins.getNotas().isEmpty()) {
+                for (Double nota : ins.getNotas()) promedio += nota;
+                promedio /= ins.getNotas().size();
+            }
+            
+            modelMaterias.addRow(new Object[]{ins.getMateria().getNombre(), condicion});
+            modelAsistencia.addRow(new Object[]{ins.getMateria().getNombre(), String.format("%.2f%%", asistenciaPorc)});
+            modelNotas.addRow(new Object[]{ins.getMateria().getNombre(), String.format("%.2f", promedio)});
+        }
+        
+        listaMaterias.setModel(alertasModel);
+        
+        lblRegulares.setText(String.valueOf(regulares));
+        lblLibres.setText(String.valueOf(libres));
+        lblRiesgo.setText(String.valueOf(alertasModel.size()));
+        if (matConNotas > 0) {
+            lblPromedio.setText(String.format("%.2f", sumaPromedios / matConNotas));
+        } else {
+            lblPromedio.setText("0.0");
+        }
+    }
+
+    private void registrarAsistencia() {
+        if (controlador == null) return;
+        int row = tblAsistencia.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione una materia de la tabla de Asistencia.");
+            return;
+        }
+        if (legajoActual.isEmpty()) return;
+
+        String nombreMateria = (String) tblAsistencia.getValueAt(row, 0);
+        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
+        String codigo = "";
+        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+            if (ins.getMateria().getNombre().equals(nombreMateria)) {
+                codigo = ins.getMateria().getCodigo();
+                break;
+            }
+        }
+        
+        if (!codigo.isEmpty()) {
+            Object[] options = {"Presente", "Ausente"};
+            int n = javax.swing.JOptionPane.showOptionDialog(this,
+                "¿Desea registrar Presente o Ausente para " + nombreMateria + "?",
+                "Registrar Asistencia",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+                
+            if (n == javax.swing.JOptionPane.YES_OPTION || n == javax.swing.JOptionPane.NO_OPTION) {
+                boolean presente = (n == javax.swing.JOptionPane.YES_OPTION);
+                String msg = controlador.registrarAsistencia(legajoActual, codigo, presente);
+                javax.swing.JOptionPane.showMessageDialog(this, msg);
+                actualizarTablas(txtBuscar2.getText().trim());
+            }
+        }
+    }
+    
+    private void registrarNota() {
+        if (controlador == null) return;
+        int row = tblNotas.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione una materia de la tabla de Notas.");
+            return;
+        }
+        if (legajoActual.isEmpty()) return;
+
+        String nombreMateria = (String) tblNotas.getValueAt(row, 0);
+        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
+        String codigo = "";
+        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+            if (ins.getMateria().getNombre().equals(nombreMateria)) {
+                codigo = ins.getMateria().getCodigo();
+                break;
+            }
+        }
+
+        if (!codigo.isEmpty()) {
+            String notaStr = javax.swing.JOptionPane.showInputDialog(this, "Ingrese Nota (0-10) para " + nombreMateria + ":");
+            if (notaStr != null && !notaStr.isEmpty()) {
+                try {
+                    double nota = Double.parseDouble(notaStr);
+                    String msg = controlador.agregarNotaAInscripcion(legajoActual, codigo, nota);
+                    javax.swing.JOptionPane.showMessageDialog(this, msg);
+                    actualizarTablas(txtBuscar3.getText().trim());
+                } catch (NumberFormatException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Nota inválida.");
+                }
+            }
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -884,7 +1150,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaPrincipal().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VentanaPrincipal(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

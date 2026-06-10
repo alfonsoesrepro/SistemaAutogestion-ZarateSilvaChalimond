@@ -38,7 +38,19 @@ public class SistemaAutogestionZarateSilvaChalimond {
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                try {
+                    java.sql.Connection conexion = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/autogestion_estudiantil", "root", "");
+                    sistemaautogestion.zaratesilvachalimond.dao.jdbc.EstudianteDAOMySQL estudianteDAO = new sistemaautogestion.zaratesilvachalimond.dao.jdbc.EstudianteDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.dao.jdbc.MateriaDAOMySQL materiaDAO = new sistemaautogestion.zaratesilvachalimond.dao.jdbc.MateriaDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.dao.jdbc.InscripcionDAOMySQL inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.dao.jdbc.InscripcionDAOMySQL(conexion);
+                    
+                    sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador = new sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController(estudianteDAO, materiaDAO, inscripcionDAO);
+                    
+                    new VentanaPrincipal(controlador).setVisible(true);
+                } catch (Exception e) {
+                    javax.swing.JOptionPane.showMessageDialog(null, "Error crítico conectando a la BD:\n" + e.getMessage());
+                    System.exit(1);
+                }
             }
         });
     }
