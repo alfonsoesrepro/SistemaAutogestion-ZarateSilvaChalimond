@@ -1,7 +1,7 @@
 
-package sistemaautogestion.zaratesilvachalimond.Modelos;
+package sistemaautogestion.zaratesilvachalimond.modelos;
 
-import sistemaautogestion.zaratesilvachalimond.Interfaces.IConsultable;
+import sistemaautogestion.zaratesilvachalimond.interfaces.IConsultable;
 
 
 public class Materia implements IConsultable{

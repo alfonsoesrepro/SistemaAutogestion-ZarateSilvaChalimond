@@ -1,4 +1,4 @@
-package sistemaautogestion.zaratesilvachalimond.Interfaces;
+package sistemaautogestion.zaratesilvachalimond.interfaces;
 
 public interface IRankeable {
     public double getPuntajeRanking();

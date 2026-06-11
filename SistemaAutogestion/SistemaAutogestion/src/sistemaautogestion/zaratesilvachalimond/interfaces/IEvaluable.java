@@ -1,5 +1,5 @@
 
-package sistemaautogestion.zaratesilvachalimond.Interfaces;
+package sistemaautogestion.zaratesilvachalimond.interfaces;
 
 
 public interface IEvaluable {

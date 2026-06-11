@@ -1,4 +1,4 @@
-package sistemaautogestion.zaratesilvachalimond.Modelos;
+package sistemaautogestion.zaratesilvachalimond.modelos;
 
 public class MateriaCuatrimestral extends Materia {
     

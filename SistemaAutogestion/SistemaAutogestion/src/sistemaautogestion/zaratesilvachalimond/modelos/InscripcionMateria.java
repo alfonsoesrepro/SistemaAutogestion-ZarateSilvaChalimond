@@ -1,8 +1,8 @@
 
-package sistemaautogestion.zaratesilvachalimond.Modelos;
+package sistemaautogestion.zaratesilvachalimond.modelos;
 
-import sistemaautogestion.zaratesilvachalimond.Interfaces.IEvaluable;
-import sistemaautogestion.zaratesilvachalimond.Interfaces.IRankeable;
+import sistemaautogestion.zaratesilvachalimond.interfaces.IEvaluable;
+import sistemaautogestion.zaratesilvachalimond.interfaces.IRankeable;
 
 import java.util.ArrayList;
 

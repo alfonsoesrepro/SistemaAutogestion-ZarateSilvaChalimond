@@ -1,12 +1,12 @@
 package sistemaautogestion.zaratesilvachalimond;
 
-import sistemaautogestion.zaratesilvachalimond.Interfaces.IConsultable;
-import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
-import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
-import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
-import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaCuatrimestral;
-import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaAnual;
-import sistemaautogestion.zaratesilvachalimond.Vista.AutogestionView;
+import sistemaautogestion.zaratesilvachalimond.interfaces.IConsultable;
+import sistemaautogestion.zaratesilvachalimond.modelos.Materia;
+import sistemaautogestion.zaratesilvachalimond.modelos.Estudiante;
+import sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria;
+import sistemaautogestion.zaratesilvachalimond.modelos.MateriaCuatrimestral;
+import sistemaautogestion.zaratesilvachalimond.modelos.MateriaAnual;
+import sistemaautogestion.zaratesilvachalimond.vista.AutogestionView;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -40,11 +40,11 @@ public class SistemaAutogestionZarateSilvaChalimond {
             public void run() {
                 try {
                     java.sql.Connection conexion = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/autogestion_estudiantil", "root", "");
-                    sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.EstudianteDAOMySQL estudianteDAO = new sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.EstudianteDAOMySQL(conexion);
-                    sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.MateriaDAOMySQL materiaDAO = new sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.MateriaDAOMySQL(conexion);
-                    sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.InscripcionDAOMySQL inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.InscripcionDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.EstudianteDAOMySQL estudianteDAO = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.EstudianteDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.MateriaDAOMySQL materiaDAO = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.MateriaDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.InscripcionDAOMySQL inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.InscripcionDAOMySQL(conexion);
                     
-                    sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController controlador = new sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController(estudianteDAO, materiaDAO, inscripcionDAO);
+                    sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador = new sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController(estudianteDAO, materiaDAO, inscripcionDAO);
                     
                     new AutogestionView(controlador).setVisible(true);
                 } catch (Exception e) {

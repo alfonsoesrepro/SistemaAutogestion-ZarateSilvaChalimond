@@ -1,11 +1,11 @@
-package sistemaautogestion.zaratesilvachalimond.Controlador;
+package sistemaautogestion.zaratesilvachalimond.controlador;
 
-import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
-import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
-import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
-import sistemaautogestion.zaratesilvachalimond.DAOs.BD.EstudianteDAO;
-import sistemaautogestion.zaratesilvachalimond.DAOs.BD.MateriaDAO;
-import sistemaautogestion.zaratesilvachalimond.DAOs.BD.InscripcionDAO;
+import sistemaautogestion.zaratesilvachalimond.modelos.Estudiante;
+import sistemaautogestion.zaratesilvachalimond.modelos.Materia;
+import sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria;
+import sistemaautogestion.zaratesilvachalimond.daos.bd.EstudianteDAO;
+import sistemaautogestion.zaratesilvachalimond.daos.bd.MateriaDAO;
+import sistemaautogestion.zaratesilvachalimond.daos.bd.InscripcionDAO;
 
 import java.util.List;
 
@@ -100,12 +100,12 @@ public class AutogestionController {
             return "Error: El cuatrimestre debe ser 1 o 2.";
         }
         try {
-            // Intentar crear la materia (falla si el codigo ya existe)
-            try {
-                materiaDAO.insertar(new Materia(nombre, codigo, cuatrimestre, anio));
-            } catch (Exception ex) {
-                // Si la materia ya existe, continuamos e intentamos la inscripción
+            // El código debe ser ÚNICO: si ya existe una materia con ese código, la rechazamos
+            // (antes se ignoraba el error y se inscribía a la materia vieja, mostrando su nombre anterior).
+            if (materiaDAO.obtenerPorCodigo(codigo) != null) {
+                return "Error: Ya existe una materia con ese código. Elegí otro código.";
             }
+            materiaDAO.insertar(new Materia(nombre, codigo, cuatrimestre, anio));
             boolean exito = inscripcionDAO.registrarInscripcion(legajo, codigo);
             return exito ? "Materia registrada e inscripción realizada exitosamente." : "Error: El estudiante ya está inscrito o no existe.";
         } catch (Exception e) {
