@@ -109,6 +109,9 @@ public class AutogestionController {
             boolean exito = inscripcionDAO.registrarInscripcion(legajo, codigo);
             return exito ? "Materia registrada e inscripción realizada exitosamente." : "Error: El estudiante ya está inscrito o no existe.";
         } catch (Exception e) {
+            if (e.getMessage() != null && e.getMessage().toLowerCase().contains("duplicate")) {
+                return "Error: código duplicado (materia)";
+            }
             return "Error interno en la BD: " + e.getMessage();
         }
     }

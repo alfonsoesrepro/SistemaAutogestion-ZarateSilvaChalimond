@@ -28,8 +28,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (btnAsistencia != null && btnAsistencia.getActionListeners().length == 0) {
             btnAsistencia.addActionListener(e -> registrarAsistencia());
         }
-        if (btnNota != null && btnNota.getActionListeners().length == 0) {
-            btnNota.addActionListener(e -> registrarNota());
+        
+        if (menuSalir != null) {
+            menuSalir.addActionListener(e -> System.exit(0));
         }
 
         this.setLocationRelativeTo(null);
@@ -1019,7 +1020,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscar3ActionPerformed
 
     private void btnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotaActionPerformed
-        // TODO add your handling code here:
+        if (controlador == null) return;
+        int row = tblNotas.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione una materia de la tabla de Notas.");
+            return;
+        }
+        if (legajoActual.isEmpty()) return;
+
+        String nombreMateria = (String) tblNotas.getValueAt(row, 0);
+        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
+        String codigo = "";
+        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+            if (ins.getMateria().getNombre().equals(nombreMateria)) {
+                codigo = ins.getMateria().getCodigo();
+                break;
+            }
+        }
+
+        if (!codigo.isEmpty()) {
+            String notaStr = javax.swing.JOptionPane.showInputDialog(this, "Ingrese Nota (0-10) para " + nombreMateria + ":");
+            if (notaStr != null && !notaStr.isEmpty()) {
+                try {
+                    double nota = Double.parseDouble(notaStr);
+                    String msg = controlador.agregarNotaAInscripcion(legajoActual, codigo, nota);
+                    javax.swing.JOptionPane.showMessageDialog(this, msg);
+                    actualizarTablas(txtBuscar3.getText().trim());
+                } catch (NumberFormatException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Nota inválida.");
+                }
+            }
+        }
     }//GEN-LAST:event_btnNotaActionPerformed
 
     private void actualizarTablas(String filtro) {
@@ -1053,19 +1084,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         javax.swing.table.DefaultTableModel modelMaterias = (javax.swing.table.DefaultTableModel) tblMaterias.getModel();
         javax.swing.table.DefaultTableModel modelAsistencia = (javax.swing.table.DefaultTableModel) tblAsistencia.getModel();
         javax.swing.table.DefaultTableModel modelNotas = (javax.swing.table.DefaultTableModel) tblNotas.getModel();
+        javax.swing.table.DefaultTableModel modelMaterias1 = (javax.swing.table.DefaultTableModel) tblMaterias1.getModel();
+        
+        modelMaterias.setColumnIdentifiers(new String[]{"Nombre", "Código", "Cuatrimestre", "Año"});
+        modelAsistencia.setColumnIdentifiers(new String[]{"Nombre", "Código", "Asistencia %"});
+        modelNotas.setColumnIdentifiers(new String[]{"Nombre", "Código", "Promedio"});
+        modelMaterias1.setColumnIdentifiers(new String[]{"Nombre", "Condición", "Asistencia %", "Promedio"});
         
         modelMaterias.setRowCount(0);
         modelAsistencia.setRowCount(0);
         modelNotas.setRowCount(0);
+        modelMaterias1.setRowCount(0);
         
         javax.swing.DefaultListModel<String> alertasModel = new javax.swing.DefaultListModel<>();
+        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> materiasEnRiesgo = new java.util.ArrayList<>();
         
         int regulares = 0;
         int libres = 0;
         double sumaPromedios = 0;
         int matConNotas = 0;
         
-        // Calcular estadísticas con TODAS las materias (inscripcionesDb) independientemente del filtro
+        double maxNota = -1;
+        double minNota = 11;
+        double sumaAprobadas = 0;
+        int cantAprobadas = 0;
+        
+        // Calcular estadísticas con TODAS las materias (inscripcionesDb)
         for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripcionesDb) {
             double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
             
@@ -1076,16 +1120,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             
             if (asistenciaPorc >= 75.0 && asistenciaPorc < 85.0) {
-                alertasModel.addElement(ins.getMateria().getNombre() + " (" + String.format("%.2f%%", asistenciaPorc) + ")");
+                materiasEnRiesgo.add(ins);
             }
             
+            double promedioAux = 0;
             if (!ins.getNotas().isEmpty()) {
-                double promedioAux = 0;
-                for (Double nota : ins.getNotas()) promedioAux += nota;
+                for (Double nota : ins.getNotas()) {
+                    promedioAux += nota;
+                    if (nota >= 4.0) { // Consideramos 4 como nota de aprobación mínima
+                        if (nota > maxNota) maxNota = nota;
+                        if (nota < minNota) minNota = nota;
+                        sumaAprobadas += nota;
+                        cantAprobadas++;
+                    }
+                }
                 promedioAux /= ins.getNotas().size();
                 sumaPromedios += promedioAux;
                 matConNotas++;
             }
+            
+            String condicion = asistenciaPorc >= 75.0 ? "Regular" : "Libre";
+            modelMaterias1.addRow(new Object[]{ins.getMateria().getNombre(), condicion, String.format("%.2f%%", asistenciaPorc), String.format("%.2f", promedioAux)});
+        }
+        
+        materiasEnRiesgo.sort((a, b) -> {
+            double astA = a.getTotalClases() > 0 ? (a.getClasesAsistidas() * 100.0 / a.getTotalClases()) : 0;
+            double astB = b.getTotalClases() > 0 ? (b.getClasesAsistidas() * 100.0 / b.getTotalClases()) : 0;
+            return Double.compare(astA, astB);
+        });
+        
+        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : materiasEnRiesgo) {
+            double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
+            alertasModel.addElement(ins.getMateria().getNombre() + " (" + String.format("%.2f%%", asistenciaPorc) + ")");
         }
         
         listaMaterias.setModel(alertasModel);
@@ -1097,20 +1163,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } else {
             lblPromedio.setText("0.0");
         }
+        
+        if (cantAprobadas > 0) {
+            lblMax.setText(String.format("%.2f", maxNota));
+            lblMin.setText(String.format("%.2f", minNota));
+            lblPromedioStats.setText(String.format("%.2f", sumaAprobadas / cantAprobadas));
+        } else {
+            lblMax.setText("0.0");
+            lblMin.setText("0.0");
+            lblPromedioStats.setText("0.0");
+        }
 
         // Llenar tablas solo con materias filtradas (inscripciones)
         if (inscripciones.isEmpty()) {
             if (inscripcionesDb.isEmpty()) {
-                modelMaterias.addRow(new Object[]{"No hay materias inscriptas", ""});
+                modelMaterias.addRow(new Object[]{"No hay materias inscriptas", "", "", ""});
             } else {
-                modelMaterias.addRow(new Object[]{"No hay coincidencias de búsqueda", ""});
+                modelMaterias.addRow(new Object[]{"No hay coincidencias de búsqueda", "", "", ""});
             }
             return;
         }
 
         for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
             double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
-            String condicion = asistenciaPorc >= 75.0 ? "Regular" : "Libre";
             
             double promedio = 0;
             if (!ins.getNotas().isEmpty()) {
@@ -1118,9 +1193,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 promedio /= ins.getNotas().size();
             }
             
-            modelMaterias.addRow(new Object[]{ins.getMateria().getNombre(), condicion});
-            modelAsistencia.addRow(new Object[]{ins.getMateria().getNombre(), String.format("%.2f%%", asistenciaPorc)});
-            modelNotas.addRow(new Object[]{ins.getMateria().getNombre(), String.format("%.2f", promedio)});
+            modelMaterias.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), ins.getMateria().getCuatrimestre(), ins.getMateria().getAnio()});
+            modelAsistencia.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), String.format("%.2f%%", asistenciaPorc)});
+            modelNotas.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), String.format("%.2f", promedio)});
         }
         
         listaMaterias.setModel(alertasModel);
@@ -1174,39 +1249,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
     
-    private void registrarNota() {
-        if (controlador == null) return;
-        int row = tblNotas.getSelectedRow();
-        if (row == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, seleccione una materia de la tabla de Notas.");
-            return;
-        }
-        if (legajoActual.isEmpty()) return;
-
-        String nombreMateria = (String) tblNotas.getValueAt(row, 0);
-        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
-        String codigo = "";
-        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
-            if (ins.getMateria().getNombre().equals(nombreMateria)) {
-                codigo = ins.getMateria().getCodigo();
-                break;
-            }
-        }
-
-        if (!codigo.isEmpty()) {
-            String notaStr = javax.swing.JOptionPane.showInputDialog(this, "Ingrese Nota (0-10) para " + nombreMateria + ":");
-            if (notaStr != null && !notaStr.isEmpty()) {
-                try {
-                    double nota = Double.parseDouble(notaStr);
-                    String msg = controlador.agregarNotaAInscripcion(legajoActual, codigo, nota);
-                    javax.swing.JOptionPane.showMessageDialog(this, msg);
-                    actualizarTablas(txtBuscar3.getText().trim());
-                } catch (NumberFormatException e) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Nota inválida.");
-                }
-            }
-        }
-    }
 
     /**
      * @param args the command line arguments
