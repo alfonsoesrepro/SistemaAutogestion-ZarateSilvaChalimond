@@ -39,4 +39,27 @@ public class MateriaDAO {
         }
         // → regresa al Controlador (void, sin resultado)
     }
+    
+    public boolean actualizar(Materia actualizada) {
+        ArrayList<Materia> lista = cargarMaterias();
+    
+        boolean encontrada = false;
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getCodigo().equals(actualizada.getCodigo())) {
+                lista.set(i, actualizada); // reemplazar por código (clave única)
+                encontrada = true;
+                break;
+            }
+        }
+    
+        if (encontrada) {
+            guardarMaterias(lista); // reescribir el archivo completo
+        }
+    
+        return encontrada; // → regresa al Controlador: true si se actualizó, false si no se encontró
+    }
+    
+    public ArrayList<Materia> obtenerTodas() {
+        return cargarMaterias();
+    }
 }

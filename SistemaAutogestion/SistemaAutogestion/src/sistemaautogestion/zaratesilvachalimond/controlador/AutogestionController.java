@@ -124,6 +124,30 @@ public class AutogestionController {
             return "Error interno en la BD: " + e.getMessage();
         }
     }
+    
+    public String actualizarMateria(String nombre, String codigo, int cuatrimestre, int anio) {
+        if (codigo == null || codigo.isBlank()) {
+            return "Error: El código de la materia no puede estar vacío.";
+        }
+        if (cuatrimestre != 1 && cuatrimestre != 2) {
+            return "Error: El cuatrimestre debe ser 1 o 2.";
+        }
+        try {
+            Materia actualizada = new Materia(nombre, codigo, cuatrimestre, anio);
+            boolean exito = materiaDAO.actualizar(actualizada);
+        
+            // Refrescar el cache local
+            if (exito) {
+            materiasCache = materiaDAO.obtenerTodas();
+            }
+        
+            return exito 
+                ? "Materia actualizada correctamente." 
+                : "Error: No se encontró la materia con ese código.";
+        } catch (Exception e) {
+            return "Error interno en la BD: " + e.getMessage();
+        }
+    }
 
     public List<InscripcionMateria> listarInscripciones(String legajo) {
         try {

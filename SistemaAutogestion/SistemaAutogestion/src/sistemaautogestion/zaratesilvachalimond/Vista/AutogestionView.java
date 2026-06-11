@@ -74,6 +74,22 @@ public class AutogestionView extends javax.swing.JFrame {
         });
         
         actualizarTablas("");
+        
+        // Listener de selección en tblMaterias1
+        tblMaterias1.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                cargarDatosEnFormulario();
+            }
+        });
+        
+        /* En el panel pnlInicio, agregá junto a tblMaterias1:
+
+        4 JTextField: txtEditNombre, txtEditCodigo, txtEditCuatrimestre, txtEditAnio
+        4 JLabel como etiquetas de cada campo
+        1 JButton: cmdGuardarCambios*/
+        
+        cmdGuardarCambios.addActionListener(e -> guardarCambiosMateria());
+        
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 System.exit(0);
@@ -1208,6 +1224,51 @@ public class AutogestionView extends javax.swing.JFrame {
         } else {
             lblPromedio.setText("0.0");
         }
+    }
+    
+    private void cargarDatosEnFormulario() {
+        int fila = tblMaterias1.getSelectedRow();
+        if (fila == -1) return;
+
+        // Las columnas de tblMaterias1 son: Materia | Condicion | Asistencia | Promedio
+        // Solo "Materia" es editable en este contexto
+        txtEditNombre.setText((String) tblMaterias1.getValueAt(fila, 0));
+        txtEditCodigo.setText("");        // no está en esta tabla, completar si agregás columna
+        txtEditCuatrimestre.setText("");  // ídem
+        txtEditAnio.setText("");          // ídem
+        
+        /* Nota importante: 
+        tblMaterias1 solo muestra nombre/condición/asistencia/promedio. 
+        Si necesitás editar también código, cuatrimestre y año, lo más limpio es agregar esas columnas a la tabla, 
+        o bien obtenerlos desde el controlador usando el nombre como clave.*/
+    }
+    
+    private void guardarCambiosMateria() {
+        int fila = tblMaterias1.getSelectedRow();
+        if (fila == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccioná una materia para editar.");
+            return;
+        }
+
+        String nuevoNombre = txtEditNombre.getText().trim();
+        if (nuevoNombre.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "El nombre no puede estar vacío.");
+            return;
+        }
+
+        // Actualizar la tabla visualmente
+        tblMaterias1.setValueAt(nuevoNombre, fila, 0);
+
+        // Obtener el código desde el campo de texto (clave para identificar la materia)
+        String codigo = txtEditCodigo.getText().trim();
+        String msg = controlador.actualizarMateria(
+            nuevoNombre,
+            codigo,
+            Integer.parseInt(txtEditCuatrimestre.getText().trim()),
+            Integer.parseInt(txtEditAnio.getText().trim())
+        );
+
+        javax.swing.JOptionPane.showMessageDialog(this, msg);
     }
 
     private void registrarAsistencia() {

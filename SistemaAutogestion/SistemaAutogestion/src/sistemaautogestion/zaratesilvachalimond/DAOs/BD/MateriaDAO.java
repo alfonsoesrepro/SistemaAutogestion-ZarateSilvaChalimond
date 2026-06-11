@@ -8,4 +8,5 @@ public interface MateriaDAO {
     Materia obtenerPorCodigo(String codigo) throws Exception;
     List<Materia> obtenerTodas() throws Exception;
     boolean eliminar(String codigo) throws Exception;
+    boolean actualizar(Materia materia) throws Exception;
 }
