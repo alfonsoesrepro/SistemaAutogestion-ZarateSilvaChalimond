@@ -1,0 +1,3 @@
+Programacion I,PROG1,1,2024
+Base de Datos I,BD1,1,2024
+Matematica II,MAT2,2,2024

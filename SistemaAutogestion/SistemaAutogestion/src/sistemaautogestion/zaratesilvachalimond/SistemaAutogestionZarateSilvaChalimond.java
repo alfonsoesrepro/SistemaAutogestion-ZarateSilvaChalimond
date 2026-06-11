@@ -39,16 +39,34 @@ public class SistemaAutogestionZarateSilvaChalimond {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    java.sql.Connection conexion = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/autogestion_estudiantil", "root", "");
-                    sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.EstudianteDAOMySQL estudianteDAO = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.EstudianteDAOMySQL(conexion);
-                    sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.MateriaDAOMySQL materiaDAO = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.MateriaDAOMySQL(conexion);
-                    sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.InscripcionDAOMySQL inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.InscripcionDAOMySQL(conexion);
-                    
+                    // ============================================================
+                    //  INTERRUPTOR DE PERSISTENCIA
+                    //    true  -> Base de datos MySQL  (BONUS)
+                    //    false -> Archivos de texto .txt (OBLIGATORIO)
+                    //  Cambiá solo esta línea para elegir cómo se guardan los datos.
+                    // ============================================================
+                    boolean USAR_BASE_DE_DATOS = true;
+
+                    sistemaautogestion.zaratesilvachalimond.daos.bd.EstudianteDAO estudianteDAO;
+                    sistemaautogestion.zaratesilvachalimond.daos.bd.MateriaDAO materiaDAO;
+                    sistemaautogestion.zaratesilvachalimond.daos.bd.InscripcionDAO inscripcionDAO;
+
+                    if (USAR_BASE_DE_DATOS) {
+                        java.sql.Connection conexion = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/autogestion_estudiantil", "root", "");
+                        estudianteDAO  = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.EstudianteDAOMySQL(conexion);
+                        materiaDAO     = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.MateriaDAOMySQL(conexion);
+                        inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc.InscripcionDAOMySQL(conexion);
+                    } else {
+                        estudianteDAO  = new sistemaautogestion.zaratesilvachalimond.daos.archivostxt.EstudianteDAO();
+                        materiaDAO     = new sistemaautogestion.zaratesilvachalimond.daos.archivostxt.MateriaDAO();
+                        inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.daos.archivostxt.InscripcionMateriaDAO();
+                    }
+
                     sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador = new sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController(estudianteDAO, materiaDAO, inscripcionDAO);
-                    
+
                     new AutogestionView(controlador).setVisible(true);
                 } catch (Exception e) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "Error crítico conectando a la BD:\n" + e.getMessage());
+                    javax.swing.JOptionPane.showMessageDialog(null, "Error crítico al iniciar:\n" + e.getMessage());
                     System.exit(1);
                 }
             }
