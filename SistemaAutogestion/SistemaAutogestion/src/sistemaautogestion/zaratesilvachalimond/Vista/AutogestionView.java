@@ -10,17 +10,17 @@ import java.awt.CardLayout;
  *
  * @author flore
  */
-public class VentanaPrincipal extends javax.swing.JFrame {
+public class AutogestionView extends javax.swing.JFrame {
 
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AutogestionView.class.getName());
 
-    private sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador;
+    private sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController controlador;
     private String legajoActual = "12345";
 
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal(sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador) {
+    public AutogestionView(sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController controlador) {
         this.controlador = controlador;
         initComponents();
         
@@ -1272,7 +1272,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaPrincipal(null).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new AutogestionView(null).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

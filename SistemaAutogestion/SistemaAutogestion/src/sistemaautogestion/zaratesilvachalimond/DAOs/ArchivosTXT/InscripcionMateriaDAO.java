@@ -1,15 +1,15 @@
 
-package sistemaautogestion.zaratesilvachalimond.DAOs;
+package sistemaautogestion.zaratesilvachalimond.DAOs.ArchivosTXT;
 
-import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
+import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
 import java.io.*;
 import java.util.ArrayList;
 
-public class EstudianteDAO {
-    private static final String ARCHIVO = "estudiantes.txt";
+public class InscripcionMateriaDAO {
+    private static final String ARCHIVO = "inscripciones.txt";
     
-    public ArrayList<Estudiante> cargarEstudiantes() {
-        ArrayList<Estudiante> lista = new ArrayList<>();
+    public ArrayList<InscripcionMateria> cargarInscripciones() {
+        ArrayList<InscripcionMateria> lista = new ArrayList<>();
 
         File archivo = new File(ARCHIVO);
         if (!archivo.exists()) return lista; // si no existe, lista vacía
@@ -18,7 +18,7 @@ public class EstudianteDAO {
             String linea;
             while ((linea = br.readLine()) != null) {
                 if (!linea.trim().isEmpty()) {
-                    lista.add(Estudiante.fromTexto(linea)); // → llama al Modelo
+                    lista.add(InscripcionMateria.fromTexto(linea)); // → llama al Modelo
                 }
             }
         } catch (IOException e) {
@@ -28,10 +28,10 @@ public class EstudianteDAO {
         return lista; // → regresa al Controlador con la lista completa
     }
     
-    public void guardarEstudiantes(ArrayList<Estudiante> lista) {
+    public void guardarInscripciones(ArrayList<InscripcionMateria> lista) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO))) {
-            for (Estudiante e : lista) {
-                bw.write(e.toTexto()); // → llama al Modelo
+            for (InscripcionMateria ins : lista) {
+                bw.write(ins.toTexto()); // → llama al Modelo
                 bw.newLine();
             }
         } catch (IOException e) {

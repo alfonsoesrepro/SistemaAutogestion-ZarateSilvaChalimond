@@ -1,6 +1,6 @@
-package sistemaautogestion.zaratesilvachalimond.dao.jdbc;
+package sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC;
 
-import sistemaautogestion.zaratesilvachalimond.dao.InscripcionDAO;
+import sistemaautogestion.zaratesilvachalimond.DAOs.BD.InscripcionDAO;
 import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
 import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
 

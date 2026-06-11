@@ -6,7 +6,7 @@ import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
 import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
 import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaCuatrimestral;
 import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaAnual;
-import sistemaautogestion.zaratesilvachalimond.Vista.VentanaPrincipal;
+import sistemaautogestion.zaratesilvachalimond.Vista.AutogestionView;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -40,13 +40,13 @@ public class SistemaAutogestionZarateSilvaChalimond {
             public void run() {
                 try {
                     java.sql.Connection conexion = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/autogestion_estudiantil", "root", "");
-                    sistemaautogestion.zaratesilvachalimond.dao.jdbc.EstudianteDAOMySQL estudianteDAO = new sistemaautogestion.zaratesilvachalimond.dao.jdbc.EstudianteDAOMySQL(conexion);
-                    sistemaautogestion.zaratesilvachalimond.dao.jdbc.MateriaDAOMySQL materiaDAO = new sistemaautogestion.zaratesilvachalimond.dao.jdbc.MateriaDAOMySQL(conexion);
-                    sistemaautogestion.zaratesilvachalimond.dao.jdbc.InscripcionDAOMySQL inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.dao.jdbc.InscripcionDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.EstudianteDAOMySQL estudianteDAO = new sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.EstudianteDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.MateriaDAOMySQL materiaDAO = new sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.MateriaDAOMySQL(conexion);
+                    sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.InscripcionDAOMySQL inscripcionDAO = new sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC.InscripcionDAOMySQL(conexion);
                     
-                    sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador = new sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController(estudianteDAO, materiaDAO, inscripcionDAO);
+                    sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController controlador = new sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController(estudianteDAO, materiaDAO, inscripcionDAO);
                     
-                    new VentanaPrincipal(controlador).setVisible(true);
+                    new AutogestionView(controlador).setVisible(true);
                 } catch (Exception e) {
                     javax.swing.JOptionPane.showMessageDialog(null, "Error crítico conectando a la BD:\n" + e.getMessage());
                     System.exit(1);

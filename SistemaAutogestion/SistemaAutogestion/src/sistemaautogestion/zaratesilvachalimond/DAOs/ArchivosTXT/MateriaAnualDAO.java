@@ -1,15 +1,15 @@
 
-package sistemaautogestion.zaratesilvachalimond.DAOs;
+package sistemaautogestion.zaratesilvachalimond.DAOs.ArchivosTXT;
 
-import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
+import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaAnual;
 import java.io.*;
 import java.util.ArrayList;
 
-public class MateriaDAO {
-    private static final String ARCHIVO = "materias.txt";
+public class MateriaAnualDAO {
+    private static final String ARCHIVO = "materiasAnuales.txt";
     
-    public ArrayList<Materia> cargarMaterias() {
-        ArrayList<Materia> lista = new ArrayList<>();
+    public ArrayList<MateriaAnual> cargarMateriasAnuales() {
+        ArrayList<MateriaAnual> lista = new ArrayList<>();
 
         File archivo = new File(ARCHIVO);
         if (!archivo.exists()) return lista; // si no existe, lista vacía
@@ -18,7 +18,7 @@ public class MateriaDAO {
             String linea;
             while ((linea = br.readLine()) != null) {
                 if (!linea.trim().isEmpty()) {
-                    lista.add(Materia.fromTexto(linea)); // → llama al Modelo
+                    lista.add(MateriaAnual.fromTexto(linea)); // → llama al Modelo
                 }
             }
         } catch (IOException e) {
@@ -28,9 +28,9 @@ public class MateriaDAO {
         return lista; // → regresa al Controlador con la lista completa
     }
     
-    public void guardarMaterias(ArrayList<Materia> lista) {
+    public void guardarMateriasAnuales(ArrayList<MateriaAnual> lista) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO))) {
-            for (Materia m : lista) {
+            for (MateriaAnual m : lista) {
                 bw.write(m.toTexto()); // → llama al Modelo
                 bw.newLine();
             }

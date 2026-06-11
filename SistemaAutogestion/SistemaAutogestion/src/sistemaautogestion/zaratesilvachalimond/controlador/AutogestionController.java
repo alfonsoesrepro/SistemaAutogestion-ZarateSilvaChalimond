@@ -1,11 +1,11 @@
-package sistemaautogestion.zaratesilvachalimond.controlador;
+package sistemaautogestion.zaratesilvachalimond.Controlador;
 
 import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
 import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
 import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
-import sistemaautogestion.zaratesilvachalimond.dao.EstudianteDAO;
-import sistemaautogestion.zaratesilvachalimond.dao.MateriaDAO;
-import sistemaautogestion.zaratesilvachalimond.dao.InscripcionDAO;
+import sistemaautogestion.zaratesilvachalimond.DAOs.BD.EstudianteDAO;
+import sistemaautogestion.zaratesilvachalimond.DAOs.BD.MateriaDAO;
+import sistemaautogestion.zaratesilvachalimond.DAOs.BD.InscripcionDAO;
 
 import java.util.List;
 

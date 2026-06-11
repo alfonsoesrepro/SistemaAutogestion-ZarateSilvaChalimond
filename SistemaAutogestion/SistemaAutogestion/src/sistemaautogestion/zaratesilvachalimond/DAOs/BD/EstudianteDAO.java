@@ -1,4 +1,4 @@
-package sistemaautogestion.zaratesilvachalimond.dao;
+package sistemaautogestion.zaratesilvachalimond.DAOs.BD;
 
 import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
 import java.util.List;

@@ -1,15 +1,15 @@
 
-package sistemaautogestion.zaratesilvachalimond.DAOs;
+package sistemaautogestion.zaratesilvachalimond.DAOs.ArchivosTXT;
 
-import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaAnual;
+import sistemaautogestion.zaratesilvachalimond.Modelos.MateriaCuatrimestral;
 import java.io.*;
 import java.util.ArrayList;
 
-public class MateriaAnualDAO {
-    private static final String ARCHIVO = "materiasAnuales.txt";
+public class MateriaCuatrimestralDAO {
+    private static final String ARCHIVO = "materiasCuatrimestrales.txt";
     
-    public ArrayList<MateriaAnual> cargarMateriasAnuales() {
-        ArrayList<MateriaAnual> lista = new ArrayList<>();
+    public ArrayList<MateriaCuatrimestral> cargarMateriasCuatrimestrales() {
+        ArrayList<MateriaCuatrimestral> lista = new ArrayList<>();
 
         File archivo = new File(ARCHIVO);
         if (!archivo.exists()) return lista; // si no existe, lista vacía
@@ -18,7 +18,7 @@ public class MateriaAnualDAO {
             String linea;
             while ((linea = br.readLine()) != null) {
                 if (!linea.trim().isEmpty()) {
-                    lista.add(MateriaAnual.fromTexto(linea)); // → llama al Modelo
+                    lista.add(MateriaCuatrimestral.fromTexto(linea)); // → llama al Modelo
                 }
             }
         } catch (IOException e) {
@@ -28,9 +28,9 @@ public class MateriaAnualDAO {
         return lista; // → regresa al Controlador con la lista completa
     }
     
-    public void guardarMateriasAnuales(ArrayList<MateriaAnual> lista) {
+    public void guardarMateriasCuatrimestrales(ArrayList<MateriaCuatrimestral> lista) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO))) {
-            for (MateriaAnual m : lista) {
+            for (MateriaCuatrimestral m : lista) {
                 bw.write(m.toTexto()); // → llama al Modelo
                 bw.newLine();
             }
