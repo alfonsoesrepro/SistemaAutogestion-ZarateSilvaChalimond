@@ -175,6 +175,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
+        menuSalir = new javax.swing.JMenuItem();
         menuReportes = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -920,6 +921,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(pnlCentral, java.awt.BorderLayout.CENTER);
 
         menuArchivo.setText("Archivo");
+
+        menuSalir.setText("Salir");
+        menuArchivo.add(menuSalir);
+
         jMenuBar1.add(menuArchivo);
 
         menuReportes.setText("Reportes");
@@ -1279,6 +1284,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JList<String> listaMaterias;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuReportes;
+    private javax.swing.JMenuItem menuSalir;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JPanel pnlEstadisticaAprobados;
     private javax.swing.JPanel pnlInicio;
