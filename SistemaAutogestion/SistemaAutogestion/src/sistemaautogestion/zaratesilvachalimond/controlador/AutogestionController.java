@@ -125,27 +125,37 @@ public class AutogestionController {
         }
     }
     
-    public String actualizarMateria(String nombre, String codigo, int cuatrimestre, int anio) {
-        if (codigo == null || codigo.isBlank()) {
+    public String actualizarMateria(String codigoOriginal, String nombre, String codigoNuevo, int cuatrimestre, int anio) {
+        if (codigoNuevo == null || codigoNuevo.isBlank()) {
             return "Error: El código de la materia no puede estar vacío.";
+        }
+        if (codigoNuevo.length() < 3 || codigoNuevo.length() > 10) {
+            return "Error: El código debe tener entre 3 y 10 caracteres.";
         }
         if (cuatrimestre != 1 && cuatrimestre != 2) {
             return "Error: El cuatrimestre debe ser 1 o 2.";
         }
         try {
-            Materia actualizada = new Materia(nombre, codigo, cuatrimestre, anio);
-            boolean exito = materiaDAO.actualizar(actualizada);
-        
-            // Refrescar el cache local
-            if (exito) {
-            materiasCache = materiaDAO.obtenerTodas();
+            // Si cambió el código, el nuevo no puede estar usado por otra materia
+            if (!codigoNuevo.equals(codigoOriginal) && materiaDAO.obtenerPorCodigo(codigoNuevo) != null) {
+                return "Error: Ya existe otra materia con el código " + codigoNuevo + ".";
             }
-        
-            return exito 
-                ? "Materia actualizada correctamente." 
-                : "Error: No se encontró la materia con ese código.";
+
+            Materia actualizada = new Materia(nombre, codigoNuevo, cuatrimestre, anio);
+            boolean exito = materiaDAO.actualizar(codigoOriginal, actualizada);
+            if (!exito) {
+                return "Error: No se encontró la materia con el código " + codigoOriginal + ".";
+            }
+
+            // Si cambió el código, propagamos el cambio a las inscripciones (en BD es automático)
+            if (!codigoNuevo.equals(codigoOriginal)) {
+                inscripcionDAO.cambiarCodigoMateria(codigoOriginal, codigoNuevo);
+            }
+
+            materiasCache = materiaDAO.obtenerTodas();
+            return "Materia actualizada correctamente.";
         } catch (Exception e) {
-            return "Error interno en la BD: " + e.getMessage();
+            return "Error interno: " + e.getMessage();
         }
     }
 
