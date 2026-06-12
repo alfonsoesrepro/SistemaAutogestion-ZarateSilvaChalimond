@@ -5,6 +5,10 @@ Permite registrar materias, gestionar asistencias y calificaciones, conocer la
 condicion academica (regular o libre) y obtener reportes de situacion academica
 general.
 
+**Repositorio:** https://github.com/alfonsoesrepro/SistemaAutogestion-ZarateSilvaChalimond
+
+**Video explicativo:** _(completar con el link de Drive/YouTube una vez subido)_
+
 ## Instrucciones de ejecucion
 
 1. Abrir el proyecto con **Apache NetBeans IDE 29**
