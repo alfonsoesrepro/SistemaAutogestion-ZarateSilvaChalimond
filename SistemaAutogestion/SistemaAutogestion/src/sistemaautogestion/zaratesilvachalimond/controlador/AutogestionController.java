@@ -14,9 +14,6 @@ public class AutogestionController {
     private final EstudianteDAO estudianteDAO;
     private final MateriaDAO materiaDAO;
     private final InscripcionDAO inscripcionDAO;
-    
-    private List<Estudiante> estudiantesCache;
-    private List<Materia> materiasCache;
 
     public AutogestionController(EstudianteDAO estudianteDAO, MateriaDAO materiaDAO, InscripcionDAO inscripcionDAO) {
         this.estudianteDAO = estudianteDAO;
@@ -28,10 +25,11 @@ public class AutogestionController {
 
     private void inicializarSistema() {
         try {
-            this.estudiantesCache = estudianteDAO.obtenerTodos();
-            this.materiasCache = materiaDAO.obtenerTodas();
+            // Carga inicial: se leen los datos al arrancar y se valida que la fuente responda.
+            estudianteDAO.obtenerTodos();
+            materiaDAO.obtenerTodas();
         } catch (Exception e) {
-            throw new RuntimeException("Error crítico en carga inicial desde la Base de Datos: " + e.getMessage());
+            throw new RuntimeException("Error crítico en carga inicial desde la fuente de datos: " + e.getMessage());
         }
     }
 
@@ -152,7 +150,6 @@ public class AutogestionController {
                 inscripcionDAO.cambiarCodigoMateria(codigoOriginal, codigoNuevo);
             }
 
-            materiasCache = materiaDAO.obtenerTodas();
             return "Materia actualizada correctamente.";
         } catch (Exception e) {
             return "Error interno: " + e.getMessage();
