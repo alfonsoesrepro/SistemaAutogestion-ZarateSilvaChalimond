@@ -75,13 +75,18 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     }
     
     public @Override String getCondicion() {
+        // Sin clases registradas todavía: la materia arranca Regular (no se faltó a nada aún)
+        if (totalClases <= 0) {
+            return "Regular";
+        }
+
         double asistencia = getPorcentajeAsistencia();
-        
+
         if (asistencia >= materia.getPorcentajeRegularidad()) {
             return "Regular";
         }
         else {
-            return "Libre"; 
+            return "Libre";
         }
     }
     
