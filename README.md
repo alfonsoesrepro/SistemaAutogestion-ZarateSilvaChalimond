@@ -7,7 +7,7 @@ general.
 
 **Repositorio:** https://github.com/alfonsoesrepro/SistemaAutogestion-ZarateSilvaChalimond
 
-**Video explicativo:** _(completar con el link de Drive/YouTube una vez subido)_
+**Video explicativo:** se incluye como archivo en la carpeta `documentacion/`.
 
 ## Instrucciones de ejecucion
 
