@@ -123,9 +123,97 @@ y recien despues se paso a la siguiente.
 
 ---
 
-## Herramienta utilizada
+## Herramienta utilizada (IE1)
 
 - **Claude Code** (Anthropic) - Asistente de desarrollo con acceso directo al
   codigo del proyecto. Se uso para implementacion guiada paso a paso,
   explicacion de conceptos de POO, deteccion de bugs en codigo de companeros
   y resolucion de problemas de configuracion de Git/IDE.
+
+---
+
+# IE2 - Interfaz Grafica y Persistencia
+
+**Integrante:** Florencia Agustina Zarate
+**Herramienta:** Claude Code (Anthropic) - conversacion completa disponible en el historial de la sesion
+
+---
+
+### Prompt IE2-1: Comprension de la arquitectura MVC+DAO del proyecto
+
+> **Mi Prompt:** "Necesito entender la estructura que armaron mis companeros antes
+> de empezar. Lees el README y el schema.sql y me explicás como esta dividido el
+> proyecto en capas, que hace cada paquete y qué me toca implementar a mi en la
+> Vista?"
+>
+> **Resumen de la respuesta de la IA:** Leyo el README.md y schema.sql del proyecto,
+> explico la separacion en capas (modelos, vista, controlador, daos), identifico que
+> mi responsabilidad era `AutogestionView.java` y describio como la vista se comunica
+> con el controlador sin tocar directamente la BD ni los modelos.
+
+---
+
+### Prompt IE2-2: Diseno de la interfaz en Figma
+
+> **Mi Prompt:** "Necesito disenar la interfaz del sistema en Figma antes de
+> implementarla en Swing. Quiero una app oscura estilo Dracula con una barra lateral
+> de navegacion, una seccion de perfil y pestanas para materias, asistencia y notas.
+> Como estructuro los frames y el flow de navegacion?"
+>
+> **Resumen de la respuesta de la IA:** Ayudo a pensar la estructura de frames
+> (Frame principal, Mis materias-Materias, Mis materias-Asistencia, Mis materias-Notas,
+> Reportes, modales para agregar/dar de baja). Sugiry el uso de componentes de Figma
+> para mantener consistencia en botones y colores del tema Dracula a lo largo de todos
+> los frames.
+
+---
+
+### Prompt IE2-3: Implementar listener de seleccion en JTable y cargarDatosEnFormulario
+
+> **Mi Prompt:** "Quiero que cuando el usuario haga click en una fila de la tabla de
+> materias, los campos de texto de abajo se llenen automaticamente con los datos de
+> esa fila. Como agrego un ListSelectionListener a una JTable en Swing y como accedo
+> al valor de cada columna de la fila seleccionada?"
+>
+> **Resumen de la respuesta de la IA:** Explico como obtener el `ListSelectionModel`
+> de la tabla, agregar el listener con `addListSelectionListener`, y recuperar el valor
+> de cada celda con `tblMaterias.getValueAt(fila, columna)`. Guio la implementacion de
+> `cargarDatosEnFormulario()` que populaba los JTextField de nombre, codigo,
+> cuatrimestre y anio al seleccionar una fila.
+
+---
+
+### Prompt IE2-4: Implementar guardarCambiosMateria y actualizar la tabla
+
+> **Mi Prompt:** "Tengo el boton Actualizar que debe leer los campos de texto,
+> llamar al controlador para persistir los cambios y luego refrescar la tabla.
+> Como implemento guardarCambiosMateria() y como recargo los datos en la JTable
+> despues de guardar sin que se desincronice con la BD?"
+>
+> **Resumen de la respuesta de la IA:** Mostro como leer los valores de los JTextField,
+> validar que no esten vacios, llamar a `controlador.actualizarMateria()` y usar
+> `DefaultTableModel.setValueAt()` para actualizar la fila en pantalla sin recargar
+> toda la tabla, o bien llamar a `actualizarTablas()` para recargar desde la BD.
+
+---
+
+### Prompt IE2-5: Depuracion de tablas que no cargaban datos correctamente
+
+> **Mi Prompt:** "Las tablas no me estan cargando los datos. Solo carga la primera
+> materia que ingreso, las demas no aparecen. Y cuando selecciono una fila para
+> editar, los campos de texto no se llenan con el nombre y codigo correctos."
+>
+> **Resumen de la respuesta de la IA:** Reviso el codigo de `AutogestionView.java`
+> y el `AutogestionController` para identificar donde se perdia la sincronizacion.
+> Analizo el metodo `actualizarTablas()`, el cache del controlador y la logica de
+> `cargarDatosEnFormulario()`. Se identificaron y corrigieron varios problemas
+> relacionados con el orden de llamadas y el filtrado incorrecto de datos.
+
+---
+
+## Herramienta utilizada (IE2)
+
+- **Claude Code** (Anthropic) - Asistente de desarrollo con acceso directo al
+  codigo del proyecto. Se uso para implementacion de la Vista Swing, diseno del
+  flow de Figma, depuracion de la sincronizacion entre la JTable y la BD, y
+  documentacion del proyecto.

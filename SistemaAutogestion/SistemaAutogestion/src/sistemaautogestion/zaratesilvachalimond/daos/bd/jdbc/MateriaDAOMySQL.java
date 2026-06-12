@@ -1,7 +1,7 @@
-package sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC;
+package sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc;
 
-import sistemaautogestion.zaratesilvachalimond.DAOs.BD.MateriaDAO;
-import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
+import sistemaautogestion.zaratesilvachalimond.daos.bd.MateriaDAO;
+import sistemaautogestion.zaratesilvachalimond.modelos.Materia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,11 +18,12 @@ public class MateriaDAOMySQL implements MateriaDAO {
 
     @Override
     public boolean insertar(Materia materia) throws Exception {
-        String sql = "INSERT INTO materias (codigo, nombre, cuatrimestre) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO materias (codigo, nombre, cuatrimestre, anio) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setString(1, materia.getCodigo());
             ps.setString(2, materia.getNombre());
             ps.setInt(3, materia.getCuatrimestre());
+            ps.setInt(4, materia.getAnio());
             return ps.executeUpdate() > 0;
         }
     }
@@ -34,7 +35,7 @@ public class MateriaDAOMySQL implements MateriaDAO {
             ps.setString(1, codigo);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), 1);
+                    return new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), rs.getInt("anio"));
                 }
             }
         }
@@ -48,7 +49,7 @@ public class MateriaDAOMySQL implements MateriaDAO {
         try (PreparedStatement ps = conexion.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), 1));
+                lista.add(new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), rs.getInt("anio")));
             }
         }
         return lista;
@@ -64,12 +65,15 @@ public class MateriaDAOMySQL implements MateriaDAO {
     }
     
     @Override
-    public boolean actualizar(Materia materia) throws Exception {
-        String sql = "UPDATE materias SET nombre = ?, cuatrimestre = ? WHERE codigo = ?";
+    public boolean actualizar(String codigoOriginal, Materia materia) throws Exception {
+        // Se busca por el código ORIGINAL, así también se puede cambiar el código.
+        String sql = "UPDATE materias SET codigo = ?, nombre = ?, cuatrimestre = ?, anio = ? WHERE codigo = ?";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
-            ps.setString(1, materia.getNombre());
-            ps.setInt(2, materia.getCuatrimestre());
-            ps.setString(3, materia.getCodigo());
+            ps.setString(1, materia.getCodigo());
+            ps.setString(2, materia.getNombre());
+            ps.setInt(3, materia.getCuatrimestre());
+            ps.setInt(4, materia.getAnio());
+            ps.setString(5, codigoOriginal);
             return ps.executeUpdate() > 0;
         }
     }

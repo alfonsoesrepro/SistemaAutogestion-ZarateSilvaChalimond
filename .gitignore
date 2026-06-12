@@ -19,6 +19,9 @@
 *.tar.gz
 *.rar
 
+# Videos (muy pesados para Git / superan el límite de 100MB de GitHub; subir a Drive/YouTube y linkear)
+*.mp4
+
 # EXCEPCIÓN: No ignorar las librerías necesarias del proyecto
 !/SistemaAutogestion/lib/*.jar
 !lib/*.jar
@@ -39,6 +42,7 @@ nbdist/
 bin/
 tmp/
 *.tmp
+*.tmp.*
 *.bak
 *.swp
 *~.nib

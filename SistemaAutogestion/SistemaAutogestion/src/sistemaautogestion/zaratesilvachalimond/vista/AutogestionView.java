@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package sistemaautogestion.zaratesilvachalimond.Vista;
+package sistemaautogestion.zaratesilvachalimond.vista;
 
 import java.awt.CardLayout;
 
@@ -14,13 +14,14 @@ public class AutogestionView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AutogestionView.class.getName());
 
-    private sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController controlador;
+    private sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador;
     private String legajoActual = "12345";
+    private String codigoMateriaOriginal = ""; // código de la materia seleccionada (clave para actualizar)
 
     /**
      * Creates new form VentanaPrincipal
      */
-    public AutogestionView(sistemaautogestion.zaratesilvachalimond.Controlador.AutogestionController controlador) {
+    public AutogestionView(sistemaautogestion.zaratesilvachalimond.controlador.AutogestionController controlador) {
         this.controlador = controlador;
         initComponents();
         
@@ -73,23 +74,21 @@ public class AutogestionView extends javax.swing.JFrame {
             }
         });
         
-        actualizarTablas("");
+        actualizarTablas();
         
-        // Listener de selección en tblMaterias1
-        tblMaterias1.getSelectionModel().addListSelectionListener(e -> {
+        // Al seleccionar una materia en la tabla de la pestaña "Materias",
+        // se cargan sus datos en el formulario de edición.
+        tblMaterias.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 cargarDatosEnFormulario();
             }
         });
-        
-        /* En el panel pnlInicio, agregá junto a tblMaterias1:
 
-        4 JTextField: txtEditNombre, txtEditCodigo, txtEditCuatrimestre, txtEditAnio
-        4 JLabel como etiquetas de cada campo
-        1 JButton: cmdGuardarCambios*/
-        
-        cmdGuardarCambios.addActionListener(e -> guardarCambiosMateria());
-        
+        btnActualizar.addActionListener(e -> guardarCambiosMateria());
+
+        // El botón del tercer buscador no quedó conectado en el diseñador, lo enganchamos acá
+        btnBuscar3.addActionListener(this::btnBuscar3ActionPerformed);
+
         lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 System.exit(0);
@@ -155,7 +154,16 @@ public class AutogestionView extends javax.swing.JFrame {
         lblIngresarPorMateria1 = new javax.swing.JLabel();
         txtBuscar1 = new javax.swing.JTextField();
         btnBuscar1 = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
+        txtEditCodigo = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
+        txtEditAnio = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtEditCuatrimestre = new javax.swing.JTextField();
+        lblCuatrimestre = new javax.swing.JLabel();
+        txtEditMateria = new javax.swing.JTextField();
+        lblMateria = new javax.swing.JLabel();
+        btnActualizar = new javax.swing.JButton();
         tabAsistencia = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAsistencia = new javax.swing.JTable();
@@ -189,7 +197,7 @@ public class AutogestionView extends javax.swing.JFrame {
         lblMin = new javax.swing.JLabel();
         lblPromedioStatsTag = new javax.swing.JLabel();
         lblPromedioStats = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblTituloReportes = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
@@ -403,6 +411,7 @@ public class AutogestionView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblMaterias1.setSelectionBackground(new java.awt.Color(51, 51, 255));
         jScrollPane4.setViewportView(tblMaterias1);
         if (tblMaterias1.getColumnModel().getColumnCount() > 0) {
             tblMaterias1.getColumnModel().getColumn(0).setResizable(false);
@@ -449,6 +458,7 @@ public class AutogestionView extends javax.swing.JFrame {
         pnlCentral.add(pnlInicio, "panelInicio");
 
         pnlMisMaterias.setBackground(new java.awt.Color(22, 22, 26));
+        pnlMisMaterias.setLayout(null);
 
         tabbedMaterias.setBackground(new java.awt.Color(22, 22, 26));
 
@@ -474,6 +484,7 @@ public class AutogestionView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblMaterias.setSelectionBackground(new java.awt.Color(51, 51, 255));
         jScrollPane3.setViewportView(tblMaterias);
         if (tblMaterias.getColumnModel().getColumnCount() > 0) {
             tblMaterias.getColumnModel().getColumn(0).setResizable(false);
@@ -500,50 +511,117 @@ public class AutogestionView extends javax.swing.JFrame {
         btnBuscar1.setText("Buscar");
         btnBuscar1.addActionListener(this::btnBuscar1ActionPerformed);
 
+        jPanel1.setBackground(new java.awt.Color(22, 22, 26));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar materia"));
+
+        lblCodigo.setText("Codigo:");
+
+        jLabel5.setText("Anio:");
+
+        lblCuatrimestre.setText("Cuatrimestre:");
+
+        lblMateria.setText("Materia:");
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setMaximumSize(new java.awt.Dimension(120, 35));
+        btnActualizar.setMinimumSize(new java.awt.Dimension(120, 35));
+        btnActualizar.setPreferredSize(new java.awt.Dimension(120, 35));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblMateria)
+                        .addGap(5, 5, 5)
+                        .addComponent(txtEditMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(lblCodigo)
+                        .addGap(5, 5, 5)
+                        .addComponent(txtEditCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCuatrimestre)
+                        .addGap(5, 5, 5)
+                        .addComponent(txtEditCuatrimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel5)
+                        .addGap(5, 5, 5)
+                        .addComponent(txtEditAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMateria)
+                        .addComponent(txtEditMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblCodigo)
+                        .addComponent(txtEditCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lblCuatrimestre))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEditCuatrimestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtEditAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+        );
+
         javax.swing.GroupLayout tabMateriasLayout = new javax.swing.GroupLayout(tabMaterias);
         tabMaterias.setLayout(tabMateriasLayout);
         tabMateriasLayout.setHorizontalGroup(
             tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabMateriasLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(lblIngresarPorMateria1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(tabMateriasLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(tabMateriasLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(tabMateriasLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(btnDarBajaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabMateriasLayout.createSequentialGroup()
+                            .addGap(11, 11, 11)
+                            .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10)
+                            .addComponent(btnDarBajaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblIngresarPorMateria1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(tabMateriasLayout.createSequentialGroup()
+                        .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(103, 103, 103))
         );
         tabMateriasLayout.setVerticalGroup(
             tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabMateriasLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(12, 12, 12)
                 .addComponent(lblIngresarPorMateria1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabMateriasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDarBajaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(tabMateriasLayout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addComponent(txtBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tabMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDarBajaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         tabbedMaterias.addTab("Materias", tabMaterias);
@@ -570,7 +648,7 @@ public class AutogestionView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblAsistencia.setSelectionBackground(new java.awt.Color(22, 22, 26));
+        tblAsistencia.setSelectionBackground(new java.awt.Color(51, 51, 255));
         jScrollPane1.setViewportView(tblAsistencia);
         if (tblAsistencia.getColumnModel().getColumnCount() > 0) {
             tblAsistencia.getColumnModel().getColumn(0).setResizable(false);
@@ -610,13 +688,13 @@ public class AutogestionView extends javax.swing.JFrame {
         tabAsistenciaLayout.setVerticalGroup(
             tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabAsistenciaLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(12, 12, 12)
                 .addComponent(lblIngresarPorMateria2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabAsistenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -647,6 +725,7 @@ public class AutogestionView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblNotas.setSelectionBackground(new java.awt.Color(51, 51, 255));
         jScrollPane2.setViewportView(tblNotas);
         if (tblNotas.getColumnModel().getColumnCount() > 0) {
             tblNotas.getColumnModel().getColumn(0).setResizable(false);
@@ -675,8 +754,8 @@ public class AutogestionView extends javax.swing.JFrame {
                         .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIngresarPorMateria3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(tabNotasLayout.createSequentialGroup()
-                                .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
+                                .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(tabNotasLayout.createSequentialGroup()
@@ -690,37 +769,23 @@ public class AutogestionView extends javax.swing.JFrame {
         tabNotasLayout.setVerticalGroup(
             tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabNotasLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(11, 11, 11)
                 .addComponent(lblIngresarPorMateria3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNota, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         tabbedMaterias.addTab("Notas", tabNotas);
 
-        javax.swing.GroupLayout pnlMisMateriasLayout = new javax.swing.GroupLayout(pnlMisMaterias);
-        pnlMisMaterias.setLayout(pnlMisMateriasLayout);
-        pnlMisMateriasLayout.setHorizontalGroup(
-            pnlMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMisMateriasLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-        );
-        pnlMisMateriasLayout.setVerticalGroup(
-            pnlMisMateriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMisMateriasLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(tabbedMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
-        );
+        pnlMisMaterias.add(tabbedMaterias);
+        tabbedMaterias.setBounds(20, 51, 465, 590);
 
         pnlCentral.add(pnlMisMaterias, "panelMisMaterias");
 
@@ -906,8 +971,8 @@ public class AutogestionView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel1.setText("Mis reportes");
+        lblTituloReportes.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTituloReportes.setText("Mis reportes");
 
         javax.swing.GroupLayout pnlReportesLayout = new javax.swing.GroupLayout(pnlReportes);
         pnlReportes.setLayout(pnlReportesLayout);
@@ -916,7 +981,7 @@ public class AutogestionView extends javax.swing.JFrame {
             .addGroup(pnlReportesLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(lblTituloReportes)
                     .addComponent(pnlEstadisticaAprobados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
@@ -925,7 +990,7 @@ public class AutogestionView extends javax.swing.JFrame {
             pnlReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReportesLayout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jLabel1)
+                .addComponent(lblTituloReportes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlSituacionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -977,7 +1042,7 @@ public class AutogestionView extends javax.swing.JFrame {
                 int anio = Integer.parseInt(txtAnio.getText());
                 String msg = controlador.crearMateriaEInscribir(legajo, txtNombre.getText(), txtCodigo.getText(), cuat, anio);
                 javax.swing.JOptionPane.showMessageDialog(this, msg);
-                actualizarTablas(txtBuscar1.getText().trim());
+                actualizarTablas();
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Cuatrimestre o Año inválidos.");
             }
@@ -994,12 +1059,18 @@ public class AutogestionView extends javax.swing.JFrame {
         if (legajoActual.isEmpty()) return;
         
         String nombreMateria = (String) tblMaterias.getValueAt(row, 0);
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "¿Está seguro que desea dar de baja la materia " + nombreMateria + "?", "Confirmar Baja", javax.swing.JOptionPane.YES_NO_OPTION);
-        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+        Object[] opciones = {"Aceptar", "Cancelar"};
+        int confirm = javax.swing.JOptionPane.showOptionDialog(this,
+                "¿Está seguro que desea dar de baja la materia " + nombreMateria + "?",
+                "Confirmar Baja",
+                javax.swing.JOptionPane.OK_CANCEL_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE,
+                null, opciones, opciones[0]);
+        if (confirm == 0) { // 0 = "Aceptar"
             // Find code
-            java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
+            java.util.List<sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
             String codigo = "";
-            for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+            for (sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria ins : inscripciones) {
                 if (ins.getMateria().getNombre().equals(nombreMateria)) {
                     codigo = ins.getMateria().getCodigo();
                     break;
@@ -1008,14 +1079,13 @@ public class AutogestionView extends javax.swing.JFrame {
             if (!codigo.isEmpty()) {
                 String msg = controlador.darDeBajaMateria(legajoActual, codigo);
                 javax.swing.JOptionPane.showMessageDialog(this, msg);
-                actualizarTablas(txtBuscar1.getText().trim());
+                actualizarTablas();
             }
         }
     }//GEN-LAST:event_btnDarBajaMateriaActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        String filtro = txtBuscar1.getText().trim();
-        actualizarTablas(filtro);
+        buscarYResaltar(tblMaterias, txtBuscar1.getText());
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void txtBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar1ActionPerformed
@@ -1027,13 +1097,16 @@ public class AutogestionView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscar2ActionPerformed
 
     private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
-        String filtro = txtBuscar2.getText().trim();
-        actualizarTablas(filtro);
+        buscarYResaltar(tblAsistencia, txtBuscar2.getText());
     }//GEN-LAST:event_btnBuscar2ActionPerformed
 
     private void txtBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscar3ActionPerformed
-        // TODO add your handling code here:
+        btnBuscar3ActionPerformed(evt);
     }//GEN-LAST:event_txtBuscar3ActionPerformed
+
+    private void btnBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {
+        buscarYResaltar(tblNotas, txtBuscar3.getText());
+    }
 
     private void btnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotaActionPerformed
         if (controlador == null) return;
@@ -1045,9 +1118,9 @@ public class AutogestionView extends javax.swing.JFrame {
         if (legajoActual.isEmpty()) return;
 
         String nombreMateria = (String) tblNotas.getValueAt(row, 0);
-        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
+        java.util.List<sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
         String codigo = "";
-        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+        for (sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria ins : inscripciones) {
             if (ins.getMateria().getNombre().equals(nombreMateria)) {
                 codigo = ins.getMateria().getCodigo();
                 break;
@@ -1061,7 +1134,7 @@ public class AutogestionView extends javax.swing.JFrame {
                     double nota = Double.parseDouble(notaStr);
                     String msg = controlador.agregarNotaAInscripcion(legajoActual, codigo, nota);
                     javax.swing.JOptionPane.showMessageDialog(this, msg);
-                    actualizarTablas(txtBuscar3.getText().trim());
+                    actualizarTablas();
                 } catch (NumberFormatException e) {
                     javax.swing.JOptionPane.showMessageDialog(this, "Nota inválida.");
                 }
@@ -1069,34 +1142,23 @@ public class AutogestionView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNotaActionPerformed
 
-    private void actualizarTablas(String filtro) {
+    private void actualizarTablas() {
         if (controlador == null) return;
-        
-        // Actualizar perfil
-        sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante est = controlador.obtenerEstudiante(legajoActual);
+
+        // Perfil del estudiante (datos reales que provee el Modelo)
+        sistemaautogestion.zaratesilvachalimond.modelos.Estudiante est = controlador.obtenerEstudiante(legajoActual);
         if (est != null) {
             lblNombre.setText(est.getNombre());
-            lblCarrera.setText("Carrera Asignada");
-            lblAnio.setText("2024");
+            lblCarrera.setText(est.getCarrera());
+            lblAnio.setText(String.valueOf(est.getAnioIngreso()));
         } else {
             lblNombre.setText("Estudiante no encontrado");
+            lblCarrera.setText("");
+            lblAnio.setText("");
         }
 
-        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripcionesDb = controlador.listarInscripciones(legajoActual);
-        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = new java.util.ArrayList<>();
-        
-        String f = filtro.toLowerCase();
-        boolean aplicarFiltro = !f.isEmpty() && !f.equals("ingrese nombre o código");
-        
-        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripcionesDb) {
-            if (aplicarFiltro) {
-                if (!ins.getMateria().getNombre().toLowerCase().contains(f) && !ins.getMateria().getCodigo().toLowerCase().contains(f)) {
-                    continue;
-                }
-            }
-            inscripciones.add(ins);
-        }
-        
+        java.util.List<sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria> inscripcionesDb = controlador.listarInscripciones(legajoActual);
+
         javax.swing.table.DefaultTableModel modelMaterias = (javax.swing.table.DefaultTableModel) tblMaterias.getModel();
         javax.swing.table.DefaultTableModel modelAsistencia = (javax.swing.table.DefaultTableModel) tblAsistencia.getModel();
         javax.swing.table.DefaultTableModel modelNotas = (javax.swing.table.DefaultTableModel) tblNotas.getModel();
@@ -1113,7 +1175,7 @@ public class AutogestionView extends javax.swing.JFrame {
         modelMaterias1.setRowCount(0);
         
         javax.swing.DefaultListModel<String> alertasModel = new javax.swing.DefaultListModel<>();
-        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> materiasEnRiesgo = new java.util.ArrayList<>();
+        java.util.List<sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria> materiasEnRiesgo = new java.util.ArrayList<>();
         
         int regulares = 0;
         int libres = 0;
@@ -1126,10 +1188,10 @@ public class AutogestionView extends javax.swing.JFrame {
         int cantAprobadas = 0;
         
         // Calcular estadísticas con TODAS las materias (inscripcionesDb)
-        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripcionesDb) {
-            double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
+        for (sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria ins : inscripcionesDb) {
+            double asistenciaPorc = ins.getPorcentajeAsistencia();
             
-            if (asistenciaPorc >= 75.0) {
+            if (ins.getCondicion().equals("Regular")) {
                 regulares++;
             } else {
                 libres++;
@@ -1139,34 +1201,31 @@ public class AutogestionView extends javax.swing.JFrame {
                 materiasEnRiesgo.add(ins);
             }
             
-            double promedioAux = 0;
+            double promedioAux = ins.getPromedio();
             if (!ins.getNotas().isEmpty()) {
-                for (Double nota : ins.getNotas()) {
-                    promedioAux += nota;
-                    if (nota >= 4.0) { // Consideramos 4 como nota de aprobación mínima
-                        if (nota > maxNota) maxNota = nota;
-                        if (nota < minNota) minNota = nota;
-                        sumaAprobadas += nota;
-                        cantAprobadas++;
-                    }
-                }
-                promedioAux /= ins.getNotas().size();
                 sumaPromedios += promedioAux;
                 matConNotas++;
             }
+
+            // Reporte de materias APROBADAS: nota máxima, mínima y promedio sobre
+            // TODAS las notas de las materias aprobadas (el conjunto completo, no una sola).
+            if (ins.estaAprobada()) {
+                for (Double nota : ins.getNotas()) {
+                    if (nota > maxNota) maxNota = nota;
+                    if (nota < minNota) minNota = nota;
+                    sumaAprobadas += nota;
+                    cantAprobadas++;
+                }
+            }
             
-            String condicion = asistenciaPorc >= 75.0 ? "Regular" : "Libre";
+            String condicion = ins.getCondicion();
             modelMaterias1.addRow(new Object[]{ins.getMateria().getNombre(), condicion, String.format("%.2f%%", asistenciaPorc), String.format("%.2f", promedioAux)});
         }
         
-        materiasEnRiesgo.sort((a, b) -> {
-            double astA = a.getTotalClases() > 0 ? (a.getClasesAsistidas() * 100.0 / a.getTotalClases()) : 0;
-            double astB = b.getTotalClases() > 0 ? (b.getClasesAsistidas() * 100.0 / b.getTotalClases()) : 0;
-            return Double.compare(astA, astB);
-        });
+        materiasEnRiesgo.sort((a, b) -> Double.compare(a.getPorcentajeAsistencia(), b.getPorcentajeAsistencia()));
         
-        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : materiasEnRiesgo) {
-            double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
+        for (sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria ins : materiasEnRiesgo) {
+            double asistenciaPorc = ins.getPorcentajeAsistencia();
             alertasModel.addElement(ins.getMateria().getNombre() + " (" + String.format("%.2f%%", asistenciaPorc) + ")");
         }
         
@@ -1190,85 +1249,90 @@ public class AutogestionView extends javax.swing.JFrame {
             lblPromedioStats.setText("0.0");
         }
 
-        // Llenar tablas solo con materias filtradas (inscripciones)
-        if (inscripciones.isEmpty()) {
-            if (inscripcionesDb.isEmpty()) {
-                modelMaterias.addRow(new Object[]{"No hay materias inscriptas", "", "", ""});
-            } else {
-                modelMaterias.addRow(new Object[]{"No hay coincidencias de búsqueda", "", "", ""});
-            }
-            return;
+        // Las 3 pestañas muestran TODAS las materias. La búsqueda resalta (no filtra).
+        for (sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria ins : inscripcionesDb) {
+            modelMaterias.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), ins.getMateria().getCuatrimestre(), ins.getMateria().getAnio()});
+            modelAsistencia.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), String.format("%.2f%%", ins.getPorcentajeAsistencia())});
+            modelNotas.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), String.format("%.2f", ins.getPromedio())});
         }
 
-        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
-            double asistenciaPorc = ins.getTotalClases() > 0 ? (ins.getClasesAsistidas() * 100.0 / ins.getTotalClases()) : 0;
-            
-            double promedio = 0;
-            if (!ins.getNotas().isEmpty()) {
-                for (Double nota : ins.getNotas()) promedio += nota;
-                promedio /= ins.getNotas().size();
+        // Estado vacío
+        if (inscripcionesDb.isEmpty()) {
+            modelMaterias.addRow(new Object[]{"No hay materias inscriptas", "", "", ""});
+            modelAsistencia.addRow(new Object[]{"No hay materias inscriptas", "", ""});
+            modelNotas.addRow(new Object[]{"No hay materias inscriptas", "", ""});
+        }
+    }
+
+    // Busca en la tabla la primera materia que coincida (por nombre o código) y la resalta.
+    // Muestra todas las filas; solo selecciona/marca la coincidencia (no filtra).
+    private void buscarYResaltar(javax.swing.JTable tabla, String texto) {
+        String f = texto.toLowerCase().trim();
+        if (f.isEmpty()) {
+            tabla.clearSelection();
+            return;
+        }
+        for (int fila = 0; fila < tabla.getRowCount(); fila++) {
+            String nombre = String.valueOf(tabla.getValueAt(fila, 0)).toLowerCase();
+            String codigo = String.valueOf(tabla.getValueAt(fila, 1)).toLowerCase();
+            if (nombre.contains(f) || codigo.contains(f)) {
+                tabla.setRowSelectionInterval(fila, fila);
+                tabla.scrollRectToVisible(tabla.getCellRect(fila, 0, true));
+                return;
             }
-            
-            modelMaterias.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), ins.getMateria().getCuatrimestre(), ins.getMateria().getAnio()});
-            modelAsistencia.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), String.format("%.2f%%", asistenciaPorc)});
-            modelNotas.addRow(new Object[]{ins.getMateria().getNombre(), ins.getMateria().getCodigo(), String.format("%.2f", promedio)});
         }
-        
-        listaMaterias.setModel(alertasModel);
-        
-        lblRegulares.setText(String.valueOf(regulares));
-        lblLibres.setText(String.valueOf(libres));
-        lblRiesgo.setText(String.valueOf(alertasModel.size()));
-        if (matConNotas > 0) {
-            lblPromedio.setText(String.format("%.2f", sumaPromedios / matConNotas));
-        } else {
-            lblPromedio.setText("0.0");
-        }
+        javax.swing.JOptionPane.showMessageDialog(this, "No se encontró ninguna materia que coincida con \"" + texto + "\".");
+        tabla.clearSelection();
     }
     
     private void cargarDatosEnFormulario() {
-        int fila = tblMaterias1.getSelectedRow();
+        int fila = tblMaterias.getSelectedRow();
         if (fila == -1) return;
 
-        // Las columnas de tblMaterias1 son: Materia | Condicion | Asistencia | Promedio
-        // Solo "Materia" es editable en este contexto
-        txtEditNombre.setText((String) tblMaterias1.getValueAt(fila, 0));
-        txtEditCodigo.setText("");        // no está en esta tabla, completar si agregás columna
-        txtEditCuatrimestre.setText("");  // ídem
-        txtEditAnio.setText("");          // ídem
-        
-        /* Nota importante: 
-        tblMaterias1 solo muestra nombre/condición/asistencia/promedio. 
-        Si necesitás editar también código, cuatrimestre y año, lo más limpio es agregar esas columnas a la tabla, 
-        o bien obtenerlos desde el controlador usando el nombre como clave.*/
+        // tblMaterias tiene las columnas: Nombre | Código | Cuatrimestre | Año.
+        // Cargamos los 4 campos directamente desde la fila seleccionada.
+        txtEditMateria.setText(String.valueOf(tblMaterias.getValueAt(fila, 0)));
+        txtEditCodigo.setText(String.valueOf(tblMaterias.getValueAt(fila, 1)));
+        txtEditCuatrimestre.setText(String.valueOf(tblMaterias.getValueAt(fila, 2)));
+        txtEditAnio.setText(String.valueOf(tblMaterias.getValueAt(fila, 3)));
+
+        // Guardamos el código original: es la clave para actualizar (por si el usuario lo cambia)
+        codigoMateriaOriginal = String.valueOf(tblMaterias.getValueAt(fila, 1));
     }
     
     private void guardarCambiosMateria() {
-        int fila = tblMaterias1.getSelectedRow();
+        int fila = tblMaterias.getSelectedRow();
         if (fila == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccioná una materia para editar.");
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccioná una materia de la tabla para editar.");
             return;
         }
 
-        String nuevoNombre = txtEditNombre.getText().trim();
+        String nuevoNombre = txtEditMateria.getText().trim();
         if (nuevoNombre.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "El nombre no puede estar vacío.");
             return;
         }
 
-        // Actualizar la tabla visualmente
-        tblMaterias1.setValueAt(nuevoNombre, fila, 0);
+        // El código que escribió el usuario (puede haberlo cambiado)
+        String codigoNuevo = txtEditCodigo.getText().trim();
 
-        // Obtener el código desde el campo de texto (clave para identificar la materia)
-        String codigo = txtEditCodigo.getText().trim();
-        String msg = controlador.actualizarMateria(
-            nuevoNombre,
-            codigo,
-            Integer.parseInt(txtEditCuatrimestre.getText().trim()),
-            Integer.parseInt(txtEditAnio.getText().trim())
-        );
+        // Cuatrimestre y año tienen que ser números, validamos antes de convertir
+        int cuatrimestre;
+        int anio;
+        try {
+            cuatrimestre = Integer.parseInt(txtEditCuatrimestre.getText().trim());
+            anio = Integer.parseInt(txtEditAnio.getText().trim());
+        } catch (NumberFormatException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Cuatrimestre y año deben ser números.");
+            return;
+        }
 
+        // Se actualiza buscando por el código ORIGINAL (así el código también se puede cambiar)
+        String msg = controlador.actualizarMateria(codigoMateriaOriginal, nuevoNombre, codigoNuevo, cuatrimestre, anio);
         javax.swing.JOptionPane.showMessageDialog(this, msg);
+
+        // Refrescar las tablas para que se vea el cambio
+        actualizarTablas();
     }
 
     private void registrarAsistencia() {
@@ -1281,9 +1345,9 @@ public class AutogestionView extends javax.swing.JFrame {
         if (legajoActual.isEmpty()) return;
 
         String nombreMateria = (String) tblAsistencia.getValueAt(row, 0);
-        java.util.List<sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
+        java.util.List<sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria> inscripciones = controlador.listarInscripciones(legajoActual);
         String codigo = "";
-        for (sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria ins : inscripciones) {
+        for (sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria ins : inscripciones) {
             if (ins.getMateria().getNombre().equals(nombreMateria)) {
                 codigo = ins.getMateria().getCodigo();
                 break;
@@ -1305,7 +1369,7 @@ public class AutogestionView extends javax.swing.JFrame {
                 boolean presente = (n == javax.swing.JOptionPane.YES_OPTION);
                 String msg = controlador.registrarAsistencia(legajoActual, codigo, presente);
                 javax.swing.JOptionPane.showMessageDialog(this, msg);
-                actualizarTablas(txtBuscar2.getText().trim());
+                actualizarTablas();
             }
         }
     }
@@ -1337,6 +1401,7 @@ public class AutogestionView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAsistencia;
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnBuscar2;
@@ -1345,24 +1410,27 @@ public class AutogestionView extends javax.swing.JFrame {
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnNota;
     private javax.swing.JPanel cardperfil;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblAnio;
     private javax.swing.JLabel lblAnioTag;
     private javax.swing.JLabel lblCarrera;
     private javax.swing.JLabel lblCarreraTag;
     private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblCuatrimestre;
     private javax.swing.JLabel lblIngresarPorMateria1;
     private javax.swing.JLabel lblIngresarPorMateria2;
     private javax.swing.JLabel lblIngresarPorMateria3;
     private javax.swing.JLabel lblInicio;
     private javax.swing.JLabel lblLibres;
     private javax.swing.JLabel lblLibresTag;
+    private javax.swing.JLabel lblMateria;
     private javax.swing.JLabel lblMax;
     private javax.swing.JLabel lblMaxTag;
     private javax.swing.JLabel lblMin;
@@ -1382,6 +1450,7 @@ public class AutogestionView extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTituloDesaprobadas;
     private javax.swing.JLabel lblTituloEstadisticas;
+    private javax.swing.JLabel lblTituloReportes;
     private javax.swing.JLabel lblTituloSeccionGeneral;
     private javax.swing.JLabel lblTituloSituacionGeneral;
     private javax.swing.JList<String> listaMaterias;
@@ -1411,5 +1480,9 @@ public class AutogestionView extends javax.swing.JFrame {
     private javax.swing.JTextField txtBuscar1;
     private javax.swing.JTextField txtBuscar2;
     private javax.swing.JTextField txtBuscar3;
+    private javax.swing.JTextField txtEditAnio;
+    private javax.swing.JTextField txtEditCodigo;
+    private javax.swing.JTextField txtEditCuatrimestre;
+    private javax.swing.JTextField txtEditMateria;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,7 @@
-package sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC;
+package sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc;
 
-import sistemaautogestion.zaratesilvachalimond.DAOs.BD.EstudianteDAO;
-import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
+import sistemaautogestion.zaratesilvachalimond.daos.bd.EstudianteDAO;
+import sistemaautogestion.zaratesilvachalimond.modelos.Estudiante;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,11 +18,12 @@ public class EstudianteDAOMySQL implements EstudianteDAO {
 
     @Override
     public boolean insertar(Estudiante estudiante) throws Exception {
-        String sql = "INSERT INTO estudiantes (legajo, nombre, apellido) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO estudiantes (legajo, nombre, carrera, anio_ingreso) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = conexion.prepareStatement(sql)) {
             ps.setString(1, estudiante.getLegajo());
             ps.setString(2, estudiante.getNombre());
-            ps.setString(3, estudiante.getCarrera()); // Usamos carrera en lugar de apellido
+            ps.setString(3, estudiante.getCarrera());
+            ps.setInt(4, estudiante.getAnioIngreso());
             return ps.executeUpdate() > 0;
         }
     }
@@ -34,7 +35,7 @@ public class EstudianteDAOMySQL implements EstudianteDAO {
             ps.setString(1, legajo);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new Estudiante(rs.getString("nombre"), rs.getString("legajo"), rs.getString("apellido"), 2023);
+                    return new Estudiante(rs.getString("nombre"), rs.getString("legajo"), rs.getString("carrera"), rs.getInt("anio_ingreso"));
                 }
             }
         }
@@ -48,7 +49,7 @@ public class EstudianteDAOMySQL implements EstudianteDAO {
         try (PreparedStatement ps = conexion.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Estudiante(rs.getString("nombre"), rs.getString("legajo"), rs.getString("apellido"), 2023));
+                lista.add(new Estudiante(rs.getString("nombre"), rs.getString("legajo"), rs.getString("carrera"), rs.getInt("anio_ingreso")));
             }
         }
         return lista;

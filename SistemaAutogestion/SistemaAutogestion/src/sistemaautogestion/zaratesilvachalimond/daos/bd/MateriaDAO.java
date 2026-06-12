@@ -1,6 +1,6 @@
-package sistemaautogestion.zaratesilvachalimond.DAOs.BD;
+package sistemaautogestion.zaratesilvachalimond.daos.bd;
 
-import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
+import sistemaautogestion.zaratesilvachalimond.modelos.Materia;
 import java.util.List;
 
 public interface MateriaDAO {
@@ -8,5 +8,5 @@ public interface MateriaDAO {
     Materia obtenerPorCodigo(String codigo) throws Exception;
     List<Materia> obtenerTodas() throws Exception;
     boolean eliminar(String codigo) throws Exception;
-    boolean actualizar(Materia materia) throws Exception;
+    boolean actualizar(String codigoOriginal, Materia materia) throws Exception;
 }

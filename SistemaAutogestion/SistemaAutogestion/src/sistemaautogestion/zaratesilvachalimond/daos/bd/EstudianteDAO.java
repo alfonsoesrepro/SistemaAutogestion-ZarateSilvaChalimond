@@ -1,6 +1,6 @@
-package sistemaautogestion.zaratesilvachalimond.DAOs.BD;
+package sistemaautogestion.zaratesilvachalimond.daos.bd;
 
-import sistemaautogestion.zaratesilvachalimond.Modelos.Estudiante;
+import sistemaautogestion.zaratesilvachalimond.modelos.Estudiante;
 import java.util.List;
 
 public interface EstudianteDAO {

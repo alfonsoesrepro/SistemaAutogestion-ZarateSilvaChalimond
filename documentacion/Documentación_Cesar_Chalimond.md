@@ -75,3 +75,64 @@ un asistente de consulta técnica y revisión de código.
 >
 > **Resumen de la respuesta de la IA:** Validó que el fragmento era correcto y
 > que la sintaxis y los tipos de retorno (`double`) coincidían perfectamente.
+
+---
+
+# IE2 - Interfaz Grafica y Persistencia
+
+**Integrante:** Cesar Nicolas Chalimond
+**Herramienta:** Antigravity (IDE) + Gemini 2.5 Pro (agente)
+
+---
+
+### Prompt IE2-1: PreparedStatement con RETURN_GENERATED_KEYS
+
+> **Mi Prompt:** "Escribe la estructura base del codigo en JDBC para hacer un
+> PreparedStatement que inserte un registro en la tabla estudiantes y recupere
+> el ID autogenerado usando Statement.RETURN_GENERATED_KEYS. Solo necesito la
+> estructura del try-catch con recursos."
+>
+> **Resumen de la respuesta de la IA:** Genero la estructura del try-with-resources
+> pasando `Statement.RETURN_GENERATED_KEYS` como segundo parametro de
+> `prepareStatement()`, y mostro como recuperar el ID generado con
+> `ps.getGeneratedKeys()` y `rs.getLong(1)` dentro de un segundo try-with-resources.
+
+---
+
+### Prompt IE2-2: Mapear ResultSet de INNER JOIN a lista de InscripcionDTO
+
+> **Mi Prompt:** "Genera un metodo en Java que reciba un ResultSet proveniente
+> de un INNER JOIN entre Estudiantes y Materias, y mapee esos datos a una lista
+> de objetos InscripcionDTO."
+>
+> **Resumen de la respuesta de la IA:** Mostro como iterar el ResultSet con
+> `while (rs.next())`, acceder a las columnas del JOIN por nombre
+> (`rs.getString("nombre")`, `rs.getString("codigo")`, etc.) y construir objetos
+> `InscripcionDTO` que encapsulan los datos combinados de ambas tablas en una lista.
+
+---
+
+### Prompt IE2-3: Expresion regular para validar el campo Legajo
+
+> **Mi Prompt:** "Proporciona una expresion regular en Java para validar desde la
+> Vista que el campo 'Legajo' tenga el formato correcto antes de enviar la peticion
+> al Controlador. Debe aceptar exactamente 5 numeros."
+>
+> **Resumen de la respuesta de la IA:** Proporciono el patron `"\\d{5}"` y mostro
+> como usarlo con `legajo.matches("\\d{5}")` desde la Vista para validar el input
+> antes de llamar al controlador, manteniendo la logica de validacion de formato en
+> la capa correcta.
+
+---
+
+### Prompt IE2-4: JComboBox con Materia: toString vs ListCellRenderer
+
+> **Mi Prompt:** "Para cargar un JComboBox con objetos de la clase Materia en mi
+> interfaz grafica, me conviene sobrescribir el metodo toString() de la entidad o
+> es mas escalable implementar un ListCellRenderer?"
+>
+> **Resumen de la respuesta de la IA:** Explico que sobrescribir `toString()` es
+> mas simple y suficiente para la mayoria de los casos academicos, pero que
+> `ListCellRenderer` es preferible cuando se necesita mostrar texto diferente al
+> que imprime `toString()` en otros contextos del sistema (logs, debugs, etc.).
+> Recomendo `toString()` para este proyecto dado el alcance.

@@ -1,8 +1,8 @@
-package sistemaautogestion.zaratesilvachalimond.DAOs.BD.JDBC;
+package sistemaautogestion.zaratesilvachalimond.daos.bd.jdbc;
 
-import sistemaautogestion.zaratesilvachalimond.DAOs.BD.InscripcionDAO;
-import sistemaautogestion.zaratesilvachalimond.Modelos.InscripcionMateria;
-import sistemaautogestion.zaratesilvachalimond.Modelos.Materia;
+import sistemaautogestion.zaratesilvachalimond.daos.bd.InscripcionDAO;
+import sistemaautogestion.zaratesilvachalimond.modelos.InscripcionMateria;
+import sistemaautogestion.zaratesilvachalimond.modelos.Materia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,11 +29,6 @@ public class InscripcionDAOMySQL implements InscripcionDAO {
             ps.setString(2, codigoMateria);
             return ps.executeUpdate() > 0;
         }
-    }
-
-    @Override
-    public List<Materia> obtenerMateriasPorEstudiante(String legajoEstudiante) throws Exception {
-        return new ArrayList<>();
     }
 
     @Override
@@ -77,7 +72,7 @@ public class InscripcionDAOMySQL implements InscripcionDAO {
 
     @Override
     public InscripcionMateria obtenerInscripcion(String legajoEstudiante, String codigoMateria) throws Exception {
-        String sql = "SELECT i.total_clases, i.clases_asistidas, i.notas, m.nombre, m.codigo, m.cuatrimestre " + 
+        String sql = "SELECT i.total_clases, i.clases_asistidas, i.notas, m.nombre, m.codigo, m.cuatrimestre, m.anio " +
                      "FROM inscripciones i " +
                      "JOIN estudiantes e ON i.estudiante_id = e.id " +
                      "JOIN materias m ON i.materia_id = m.id " +
@@ -87,7 +82,7 @@ public class InscripcionDAOMySQL implements InscripcionDAO {
             ps.setString(2, codigoMateria);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    Materia m = new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), 1);
+                    Materia m = new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), rs.getInt("anio"));
                     InscripcionMateria ins = new InscripcionMateria(m, rs.getInt("total_clases"), rs.getInt("clases_asistidas"));
                     
                     String notasStr = rs.getString("notas");
@@ -109,7 +104,7 @@ public class InscripcionDAOMySQL implements InscripcionDAO {
     @Override
     public List<InscripcionMateria> obtenerInscripcionesPorEstudiante(String legajoEstudiante) throws Exception {
         List<InscripcionMateria> lista = new ArrayList<>();
-        String sql = "SELECT i.total_clases, i.clases_asistidas, i.notas, m.nombre, m.codigo, m.cuatrimestre " + 
+        String sql = "SELECT i.total_clases, i.clases_asistidas, i.notas, m.nombre, m.codigo, m.cuatrimestre, m.anio " +
                      "FROM inscripciones i " +
                      "JOIN estudiantes e ON i.estudiante_id = e.id " +
                      "JOIN materias m ON i.materia_id = m.id " +
@@ -118,7 +113,7 @@ public class InscripcionDAOMySQL implements InscripcionDAO {
             ps.setString(1, legajoEstudiante);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Materia m = new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), 1);
+                    Materia m = new Materia(rs.getString("nombre"), rs.getString("codigo"), rs.getInt("cuatrimestre"), rs.getInt("anio"));
                     InscripcionMateria ins = new InscripcionMateria(m, rs.getInt("total_clases"), rs.getInt("clases_asistidas"));
                     
                     String notasStr = rs.getString("notas");
@@ -135,5 +130,11 @@ public class InscripcionDAOMySQL implements InscripcionDAO {
             }
         }
         return lista;
+    }
+
+    @Override
+    public void cambiarCodigoMateria(String codigoViejo, String codigoNuevo) throws Exception {
+        // En la base de datos las inscripciones referencian la materia por su id interno,
+        // así que cambiar el código de la materia no requiere tocar las inscripciones.
     }
 }
