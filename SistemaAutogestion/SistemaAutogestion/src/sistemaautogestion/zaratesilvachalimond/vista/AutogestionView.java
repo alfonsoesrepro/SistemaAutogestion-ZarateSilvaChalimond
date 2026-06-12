@@ -532,7 +532,7 @@ public class AutogestionView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblMateria)
@@ -546,7 +546,7 @@ public class AutogestionView extends javax.swing.JFrame {
                         .addComponent(lblCuatrimestre)
                         .addGap(5, 5, 5)
                         .addComponent(txtEditCuatrimestre, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addGap(32, 32, 32)
                         .addComponent(jLabel5)
                         .addGap(5, 5, 5)
                         .addComponent(txtEditAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
