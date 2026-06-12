@@ -129,8 +129,8 @@ public class Estudiante extends PersonaAcademica implements IConsultable {
         return materiasRiesgo;
     }
     
-    public @Override void mostrarResumen() {
-        System.out.println("Estudiante: " + getNombre() + " [Legajo: " + getLegajo() + "]");
-        System.out.println(" -> Carrera: " + carrera + " | Ingreso: " + anioIngreso);
+    public @Override String mostrarResumen() {
+        return "Estudiante: " + getNombre() + " [Legajo: " + getLegajo() + "]"
+             + " -> Carrera: " + carrera + " | Ingreso: " + anioIngreso;
     }
 }

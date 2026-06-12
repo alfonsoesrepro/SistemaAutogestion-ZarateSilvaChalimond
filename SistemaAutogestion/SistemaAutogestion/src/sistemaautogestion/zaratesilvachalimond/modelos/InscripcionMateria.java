@@ -62,11 +62,8 @@ public class InscripcionMateria implements IEvaluable, IRankeable {
     }
     
     public void agregarNota(double nota) {
-        if (nota >= 0 && nota <= 10 && notas.size() < 5) { 
+        if (nota >= 0 && nota <= 10 && notas.size() < 5) {
             notas.add(nota);
-        }
-        else {
-            System.out.println("Nota invalida o lÃ­mite de notas (5) alcanzado."); 
         }
     }
     

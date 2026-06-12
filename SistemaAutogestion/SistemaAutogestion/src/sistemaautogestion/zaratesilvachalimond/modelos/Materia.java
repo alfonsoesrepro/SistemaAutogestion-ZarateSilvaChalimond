@@ -32,19 +32,11 @@ public class Materia implements IConsultable{
     public int getAnio() {return anio;}
     public void setNombre(String nombreP) {this.nombre = nombreP;}
     public void setCodigo(String codigoP) {
-        if (codigoP.equals(codigo)) {
-            System.out.println("Codigo ya existente.");
-        }
-        else {
-            this.codigo = codigoP;
-        }
+        this.codigo = codigoP;
     }
     public void setCuatrimestre(int cuatrimestreP) {
         if (cuatrimestreP == 1 || cuatrimestreP == 2) {
             this.cuatrimestre = cuatrimestreP;
-        }
-        else {
-            System.out.println("Numero de cuatrimestre invalido.");
         }
     }
     public void setAnio(int anioP) {this.anio = anioP;}
@@ -62,9 +54,9 @@ public class Materia implements IConsultable{
     }
 
     // Metodo implementado de la interface Consultable
-    public @Override void mostrarResumen() { // *sonido de látigo*
-        System.out.println("Materia: " + nombre + " [" + codigo + "]");
-        System.out.println(" -> Dictado: Cuatrimestre " + cuatrimestre + " | Anio: " + anio);
+    public @Override String mostrarResumen() {
+        return "Materia: " + nombre + " [" + codigo + "]"
+             + " -> Dictado: Cuatrimestre " + cuatrimestre + " | Anio: " + anio;
     }
     
     // Metodo para POO Avanzada (Bonus)

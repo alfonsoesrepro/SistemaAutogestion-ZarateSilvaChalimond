@@ -4,7 +4,7 @@ package sistemaautogestion.zaratesilvachalimond.interfaces;
 
 public interface IConsultable {
     // MÃ©todo
-    public void mostrarResumen(); 
+    public String mostrarResumen();
 }
 
 

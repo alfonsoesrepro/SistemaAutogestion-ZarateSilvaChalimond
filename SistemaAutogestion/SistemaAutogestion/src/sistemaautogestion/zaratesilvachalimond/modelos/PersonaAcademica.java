@@ -33,5 +33,5 @@ public abstract class PersonaAcademica { //<-- SÃ­ soy
     public void setLegajo(String legajoP) {this.legajo = legajoP;}
     
     // MÃ©todo abstracto
-    public abstract void mostrarResumen(); 
+    public abstract String mostrarResumen();
 }

@@ -9,8 +9,7 @@ public interface IEvaluable {
     public boolean estaAprobada();
     
     // MÃ©todo default
-    public default void mostrarEstadoAcademico() {
-        System.out.println(getCondicion());
-        System.out.println(getPromedio());
+    public default String mostrarEstadoAcademico() {
+        return getCondicion() + " | Promedio: " + getPromedio();
     }
 }
